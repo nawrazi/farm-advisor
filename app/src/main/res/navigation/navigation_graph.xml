@@ -16,6 +16,16 @@
         android:label="OnBoarding1Fragment"
         tools:layout="@layout/fragment_onboarding1" />
     <fragment
+        android:id="@+id/firstTimeFragment"
+        android:name="com.enterprise.agino.ui.first_time.FirstTimeFragment"
+        android:label="FirstTimeFragment"
+        tools:layout="@layout/fragment_first_time_user" />
+    <fragment
+        android:id="@+id/newFarmFragment"
+        android:name="com.enterprise.agino.ui.first_time.farm.NewFarmFragment"
+        android:label="NewFarmFragment"
+        tools:layout="@layout/fragment_new_farm" />
+    <fragment
         android:id="@+id/onBoarding2Fragment"
         android:name="com.enterprise.agino.ui.onboarding.onboarding2.OnBoarding2Fragment"
         android:label="OnBoarding2Fragment"

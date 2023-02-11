@@ -19,6 +19,13 @@
     <string name="fragment_onboarding1_sign_up_with_agino">sign up with agino</string>
     <string name="fragment_onboarding1_already_have_an_account">Already have an account?</string>
     <string name="fragment_onboarding1_log_in">Log In</string>
+    <string name="add_a_field">Add a field</string>
+    <string name="add_my_first_field">Add my first field</string>
+    <string name="field_name">Field Name</string>
+    <string name="enter_field_name">Enter field name</string>
+    <string name="altitude_above_sea_level">Altitude Above Sea Level</string>
+    <string name="enter_in_meters">Enter in meters</string>
+    <string name="create_new_field">Create New Field</string>
     <string name="fragment_onboarding2_terms_and_conditions"><![CDATA[Terms & Conditions]]></string>
     <string name="fragment_onboarding2_agree_to_terms_amp_conditions_btn"><![CDATA[AGREE TO TERMS & CONDITIONS]]></string>
     <string name="fragment_onboarding2_content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id pellentesque nulla. Donec porta pretium risus vitae ultrices. Proin a eros id neque placerat feugiat tincidunt et ipsum. Praesent ut nisi ipsum. Praesent sed lectus mauris. Integer ullamcorper enim ac odio placerat mollis. Donec eu justo fermentum, varius erat a, accumsan dui. Praesent iaculis blandit neque vitae fermentum. Vivamus elit turpis, tincidunt vel justo semper, rutrum luctus ipsum. Ut a massa eu lorem malesuada aliquam ut id sem. Duis eu mollis eros. Mauris in ante vel magna eleifend scelerisque. Proin posuere ex eu porttitor ornare. Donec congue et nulla nec tincidunt. Fusce urna sapien, semper vel nulla sed, viverra imperdiet sapien. Phasellus rhoncus dolor vel blandit eleifend. Integer et rutrum ipsum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut commodo, nisl quis efficitur tristique, lorem metus commodo erat, a porta massa magna ut risus. Ut congue quam odio, ut tempus nibh maximus at. Integer laoreet sem neque, vel lobortis sapien aliquam eget. Phasellus non magna et elit porttitor vehicula sit amet at nisl. Quisque facilisis placerat commodo. Maecenas interdum, libero pharetra blandit pharetra, urna mauris fermentum lorem, eget mollis velit felis id dolor. Donec eu laoreet diam. Aliquam sed purus id urna convallis mollis non vestibulum libero. Fusce aliquet, turpis eu ultricies bibendum, enim mi mattis enim, eu laoreet nunc tellus quis enim. Ut faucibus convallis tortor sed viverra. Aenean facilisis, sem a convallis blandit, massa ante volutpat velit, sit amet consequat ante leo et leo. Vivamus consectetur bibendum metus nec iaculis. Vivamus eget nibh nunc.</string>
