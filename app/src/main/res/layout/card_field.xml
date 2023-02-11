@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/field_round_corner"
-    android:elevation="@dimen/cardview_default_elevation"
+    android:background="@drawable/round_corner_with_stroke"
     android:layout_marginTop="5dp"
     android:layout_marginBottom="5dp"
     android:clipToPadding="false">
