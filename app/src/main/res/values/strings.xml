@@ -39,4 +39,5 @@
     <string name="to_cutting">To Cutting</string>
     <string name="goal_gdd">Goal GDD</string>
     <string name="current_gdd">Current GDD</string>
+    <string name="days">days</string>
 </resources>
