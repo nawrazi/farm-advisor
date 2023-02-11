@@ -35,4 +35,8 @@
     <string name="fragment_phone_number_signup_continue_btn">continue</string>
     <string name="fragment_verification_code_hint">Enter your verification code</string>
     <string name="fragment_verification_code_header">Verification Code</string>
+    <string name="_127m_above_sea_level">127m above sea level</string>
+    <string name="to_cutting">To Cutting</string>
+    <string name="goal_gdd">Goal GDD</string>
+    <string name="current_gdd">Current GDD</string>
 </resources>
