@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/addNewSensorFragment">
+    app:startDestination="@id/resetSensorFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -55,4 +55,9 @@
         android:name="com.enterprise.agino.ui.addnewsensor.AddNewSensorFragment"
         android:label="AddNewSensorFragment"
         tools:layout="@layout/fragment_add_new_sensor" />
+    <fragment
+        android:id="@+id/resetSensorFragment"
+        android:name="com.enterprise.agino.ui.resetsensor.ResetSensorFragment"
+        android:label="ResetSensorFragment"
+        tools:layout="@layout/fragment_reset_sensor" />
 </navigation>
