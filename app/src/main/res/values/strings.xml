@@ -58,4 +58,6 @@
 
 
     <string name="fragment_help_title">Help</string>
+    <string name="fragment_signin_title">Sign In</string>
+    <string name="fragment_signin_header">Sign in with your phone number</string>
 </resources>
