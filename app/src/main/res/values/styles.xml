@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Button Style -->
+    <style name="ButtonTextAppearance" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="SolidButton" parent="@style/Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:height">52dp</item>
+        <item name="android:textAppearance">@style/ButtonTextAppearance</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="OutlinedButton" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:height">52dp</item>
+        <item name="android:textAppearance">@style/ButtonTextAppearance</item>
+        <item name="strokeColor">?attr/colorPrimary</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:elevation">0dp</item>
+    </style>
+
+    <style name="TextButtonTextAppearance" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextButton" parent="@style/Widget.MaterialComponents.Button.TextButton">
+        <item name="android:height">42dp</item>
+        <item name="android:textAppearance">@style/TextButtonTextAppearance</item>
+        <item name="android:layout_height">42dp</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+</resources>
