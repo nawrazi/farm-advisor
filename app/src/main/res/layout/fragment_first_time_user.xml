@@ -44,7 +44,6 @@
         android:id="@+id/create_farm_button"
         style="@style/SolidButton"
         android:text="@string/create_my_first_farm"
-        android:textAllCaps="true"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="40dp"
