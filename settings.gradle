@@ -13,8 +13,8 @@ dependencyResolutionManagement {
         mavenCentral()
         maven {
             url "https://jitpack.io"
-            url "https://repositories.tomtom.com/artifactory/maven"
         }
+        maven { url "https://repositories.tomtom.com/artifactory/maven" }
     }
 }
 rootProject.name = "Agino"
