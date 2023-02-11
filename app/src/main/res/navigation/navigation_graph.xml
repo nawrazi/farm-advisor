@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/onBoarding1Fragment">
+    app:startDestination="@id/phoneNumberSignUpFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -25,4 +25,14 @@
         android:name="com.enterprise.agino.ui.first_time.farm.NewFarmFragment"
         android:label="NewFarmFragment"
         tools:layout="@layout/fragment_new_farm" />
+    <fragment
+        android:id="@+id/onBoarding2Fragment"
+        android:name="com.enterprise.agino.ui.onboarding.onboarding2.OnBoarding2Fragment"
+        android:label="OnBoarding2Fragment"
+        tools:layout="@layout/fragment_onboarding2" />
+    <fragment
+        android:id="@+id/phoneNumberSignUpFragment"
+        android:name="com.enterprise.agino.ui.onboarding.phonenumbersignup.PhoneNumberSignUpFragment"
+        android:label="PhoneNumberSignUpFragment"
+        tools:layout="@layout/fragment_phone_number_signup" />
 </navigation>
