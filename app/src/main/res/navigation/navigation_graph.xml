@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/verificationCodeFragment">
+    app:startDestination="@id/graphFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -40,4 +40,9 @@
         android:name="com.enterprise.agino.ui.onboarding.verificationcode.VerificationCodeFragment"
         android:label="VerificationCodeFragment"
         tools:layout="@layout/fragment_verfication_code" />
+    <fragment
+        android:id="@+id/graphFragment"
+        android:name="com.enterprise.agino.ui.home.dashboard.GraphFragment"
+        android:label="VerificationCodeFragment"
+        tools:layout="@layout/fragment_graph_screen" />
 </navigation>
