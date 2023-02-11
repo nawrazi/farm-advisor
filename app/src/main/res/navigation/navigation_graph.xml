@@ -19,14 +19,14 @@
     </fragment>
     <fragment
         android:id="@+id/onBoarding1Fragment"
-        android:name="com.enterprise.agino.ui.onboarding.onboarding1.OnBoarding1Fragment"
+        android:name="com.enterprise.agino.ui.onboarding.onboarding.OnBoardingFragment"
         android:label="OnBoarding1Fragment"
-        tools:layout="@layout/fragment_onboarding1">
+        tools:layout="@layout/fragment_onboarding">
         <action
-            android:id="@+id/action_onBoarding1Fragment_to_signInFragment"
+            android:id="@+id/action_onBoardingFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
         <action
-            android:id="@+id/action_onBoarding1Fragment_to_phoneNumberSignUpFragment"
+            android:id="@+id/action_onBoardingFragment_to_phoneNumberSignUpFragment"
             app:destination="@id/phoneNumberSignUpFragment" />
     </fragment>
     <fragment
