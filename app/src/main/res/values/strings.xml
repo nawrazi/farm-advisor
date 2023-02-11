@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">Agino</string>
+    <string name="welcome_to_agino">Welcome to Agino</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id pellentesque nulla. Donec porta pretium risus vitae ultrices.</string>
+    <string name="create_my_first_farm">create my first farm</string>
+    <string name="enter_farm_name">Enter farm name</string>
+    <string name="farm_name">Farm Name</string>
+    <string name="search_location">Search location</string>
+    <string name="location">Location</string>
+    <string name="create_new_farm">Create New Farm</string>
+
+    <!-- OnBoarding 1-->
+    <string name="fragment_onboarding_1_slide_1_title">Smart Farming</string>
+    <string name="fragment_onboarding_1_slide_1_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id pellentesque nulla. Donec porta pretium risus vitae ultrices. </string>
+    <string name="fragment_onboarding_1_slide_2_title">Smart Farming</string>
+    <string name="fragment_onboarding_1_slide_2_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id pellentesque nulla. Donec porta pretium risus vitae ultrices. </string>
+    <string name="fragment_onboarding_1_slide_3_title">Smart Farming</string>
+    <string name="fragment_onboarding_1_slide_3_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id pellentesque nulla. Donec porta pretium risus vitae ultrices. </string>
+    <string name="fragment_onboarding1_sign_up_with_agino">sign up with agino</string>
+    <string name="fragment_onboarding1_already_have_an_account">Already have an account?</string>
+    <string name="fragment_onboarding1_log_in">Log In</string>
 </resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/onBoarding1Fragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.enterprise.agino.ui.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/onBoarding1Fragment"
+        android:name="com.enterprise.agino.ui.onboarding.onboarding1.OnBoarding1Fragment"
+        android:label="OnBoarding1Fragment"
+        tools:layout="@layout/fragment_onboarding1" />
+</navigation>
