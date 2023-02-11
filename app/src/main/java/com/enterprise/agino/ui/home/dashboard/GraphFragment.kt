@@ -1,12 +1,17 @@
 package com.enterprise.agino.ui.home.dashboard
 
 import android.os.Bundle
+import android.text.InputType
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.util.component1
+import androidx.core.util.component2
 import androidx.fragment.app.Fragment
 import com.enterprise.agino.R
 import com.enterprise.agino.databinding.FragmentGraphScreenBinding
+import com.enterprise.agino.utils.millisToDateString
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend
@@ -14,6 +19,9 @@ import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.google.android.material.datepicker.*
+import com.google.android.material.textfield.TextInputEditText
+import java.util.*
 
 class GraphFragment : Fragment() {
     private var _binding: FragmentGraphScreenBinding? = null
@@ -25,12 +33,17 @@ class GraphFragment : Fragment() {
     ): View {
         _binding = FragmentGraphScreenBinding.inflate(inflater, container, false)
 
-        setData(binding.chart1)
-        setData(binding.chart2)
+        binding.dateInput.apply {
+            inputType = InputType.TYPE_NULL
+            setOnClickListener { showDatePicker(this) }
+        }
+
+        setGraphData(binding.chart1)
+        setGraphData(binding.chart2)
         return binding.root
     }
 
-    private fun setData(chartLayout: Any) {
+    private fun setGraphData(chartLayout: Any) {
         val entries = mutableListOf<BarEntry>()
         val days = mutableListOf<String>()
         val daysOfWeek = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
@@ -83,6 +96,39 @@ class GraphFragment : Fragment() {
         // set data
         chart.data = data
         chart.setVisibleXRangeMaximum(7f)
+    }
+
+    private fun showDatePicker(editText: TextInputEditText) {
+        val constraintsBuilder =
+            CalendarConstraints.Builder()
+                .setValidator(
+                    CompositeDateValidator.allOf(
+                        listOf(
+                            DateValidatorPointForward.now(),
+                            DateValidatorPointBackward.before(
+                                Calendar.getInstance().also {
+                                    it.add(Calendar.MONTH, 3)
+                                }.timeInMillis
+                            )
+                        )
+                    )
+                )
+                .build()
+
+        val datePicker = MaterialDatePicker.Builder.dateRangePicker()
+            .setCalendarConstraints(constraintsBuilder)
+            .build()
+
+        datePicker.addOnPositiveButtonClickListener {
+            val (startDate, endDate) = it
+            editText.setText(
+                resources.getString(
+                    R.string.date_range, millisToDateString(startDate), millisToDateString(endDate)
+                )
+            )
+        }
+
+        datePicker.show(requireActivity().supportFragmentManager, null)
     }
 
     override fun onDestroyView() {

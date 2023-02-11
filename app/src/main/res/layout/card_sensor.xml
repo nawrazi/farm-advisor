@@ -3,20 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="190dp"
-    android:layout_height="150dp"
+    android:layout_margin="6dp"
+    android:layout_width="178dp"
+    android:layout_height="118dp"
     android:background="@drawable/round_corner_with_stroke">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <ImageView
             android:id="@+id/sensorImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_active_sensor" />
@@ -25,18 +26,18 @@
             android:id="@+id/imageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_marginEnd="10dp"
             android:background="@android:color/transparent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/sensorImage"
+            app:layout_constraintBottom_toBottomOf="@id/sensorImage"
             app:srcCompat="@drawable/ic_more_vert" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="8dp"
             android:textAppearance="?attr/textAppearanceBody2"
             app:layout_constraintStart_toStartOf="@+id/sensorImage"
             app:layout_constraintTop_toBottomOf="@+id/sensorImage"
