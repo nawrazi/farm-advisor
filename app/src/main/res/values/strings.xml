@@ -33,4 +33,6 @@
     <string name="fragment_phone_number_signup_header">Sign up with your phone number</string>
     <string name="fragment_phone_number_signup_phone_number_hint">Enter your phone number</string>
     <string name="fragment_phone_number_signup_continue_btn">continue</string>
+    <string name="fragment_verification_code_hint">Enter your verification code</string>
+    <string name="fragment_verification_code_header">Verification Code</string>
 </resources>

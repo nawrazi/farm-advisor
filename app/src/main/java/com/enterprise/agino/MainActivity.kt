@@ -48,7 +48,8 @@ class MainActivity : AppCompatActivity() {
 
         val fragmentsWithoutAppbar = setOf(
             R.id.onBoarding2Fragment,
-            R.id.phoneNumberSignUpFragment
+            R.id.phoneNumberSignUpFragment,
+            R.id.verificationCodeFragment
         )
         navController.addOnDestinationChangedListener { _: NavController, destination: NavDestination, _: Bundle? ->
             if (fragmentsWithoutAppbar.contains(destination.id)) binding.toolbar.gone()
