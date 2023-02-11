@@ -51,6 +51,11 @@
         android:label="AddFirstSensorFragment"
         tools:layout="@layout/fragment_add_first_sensor" />
     <fragment
+        android:id="@+id/addNewSensorFragment"
+        android:name="com.enterprise.agino.ui.addnewsensor.AddNewSensorFragment"
+        android:label="AddNewSensorFragment"
+        tools:layout="@layout/fragment_add_new_sensor" />
+    <fragment
         android:id="@+id/resetSensorFragment"
         android:name="com.enterprise.agino.ui.resetsensor.ResetSensorFragment"
         android:label="ResetSensorFragment"
