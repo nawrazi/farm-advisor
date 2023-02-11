@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.enterprise.agino.R
 import com.enterprise.agino.databinding.FragmentGraphScreenBinding
+import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -23,15 +25,20 @@ class GraphFragment : Fragment() {
     ): View {
         _binding = FragmentGraphScreenBinding.inflate(inflater, container, false)
 
-        // test the graph
-        setData()
+        setData(binding.chart1)
+        setData(binding.chart2)
         return binding.root
     }
 
-    private fun setData() {
+    private fun setData(chartLayout: Any) {
         val entries = mutableListOf<BarEntry>()
         val days = mutableListOf<String>()
         val daysOfWeek = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+
+        val chart = when(chartLayout) {
+            is BarChart -> chartLayout
+            else -> chartLayout as LineChart
+        }
 
         // create a dummy list of entries for each day of the week
         for (i in 0..100) {
@@ -52,33 +59,31 @@ class GraphFragment : Fragment() {
         )
 
         // add the name of the days on top of x-axis
-        binding.chart1.xAxis.valueFormatter = IndexAxisValueFormatter(days)
+        chart.xAxis.valueFormatter = IndexAxisValueFormatter(days)
 
         // create a data object with the data sets
         val data = BarData(set1)
 
-        // remove the vertical lines from the grid
-        binding.chart1.xAxis.setDrawGridLines(false)
-
-        // aesthetics related changes
-        binding.chart1.xAxis.textSize = 15f
-        binding.chart1.extraTopOffset = 20f
-        binding.chart1.extraBottomOffset = 20f
-        binding.chart1.axisLeft.axisLineColor = resources.getColor(R.color.light_grey, null)
-        binding.chart1.xAxis.setDrawAxisLine(false)
-        binding.chart1.axisLeft.setDrawAxisLine(false)
-        binding.chart1.axisRight.isEnabled = false
-        binding.chart1.axisLeft.textColor = resources.getColor(android.R.color.darker_gray, null)
-        binding.chart1.description.isEnabled = false
-        binding.chart1.legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
-        binding.chart1.xAxis.granularity = 1f  // set the minimum distance between labels
-        binding.chart1.legend.yOffset = 10f  // move the legend up a bit
+        chart.apply {
+            xAxis.setDrawGridLines(false)
+            xAxis.textSize = 15f
+            extraTopOffset = 20f
+            extraBottomOffset = 20f
+            axisLeft.axisLineColor = resources.getColor(R.color.light_grey, null)
+            xAxis.setDrawAxisLine(false)
+            axisLeft.setDrawAxisLine(false)
+            axisRight.isEnabled = false
+            axisLeft.textColor = resources.getColor(android.R.color.darker_gray, null)
+            description.isEnabled = false
+            legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
+            xAxis.granularity = 1f  // set the minimum distance between labels
+            legend.yOffset = 10f  // move the legend up a bit
+        }
 
         // set data
-        binding.chart1.data = data
-        binding.chart1.setVisibleXRangeMaximum(7f)
+        chart.data = data
+        chart.setVisibleXRangeMaximum(7f)
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
