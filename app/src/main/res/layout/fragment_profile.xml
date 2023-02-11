@@ -101,8 +101,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="0dp"
-        android:layout_height="32dp"
-        android:layout_margin="8dp"
+        android:layout_height="40dp"
         android:background="@drawable/round_corner_with_stroke"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
