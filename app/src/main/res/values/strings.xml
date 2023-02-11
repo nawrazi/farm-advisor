@@ -49,4 +49,7 @@
     <string name="fragment_add_new_sensor_last_cutting_date_label">Last Cutting Date At This Field</string>
     <string name="fragment_add_new_sensor_last_cutting_date_hint">Select last cutting date</string>
     <string name="fragment_add_new_sensor_map_guide">Locate the sensor on the field by moving the pin around</string>
+
+
+    <string name="fragment_help_title">Help</string>
 </resources>
