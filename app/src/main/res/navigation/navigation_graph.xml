@@ -143,4 +143,9 @@
             android:id="@+id/action_fieldDetailsScreen_to_addNewSensorFragment"
             app:destination="@id/addNewSensorFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/graphFragment"
+        android:name="com.enterprise.agino.ui.home.dashboard.GraphFragment"
+        android:label="VerificationCodeFragment"
+        tools:layout="@layout/fragment_graph_screen" />
 </navigation>
