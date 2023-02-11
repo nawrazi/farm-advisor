@@ -230,10 +230,23 @@
                     android:layout_height="match_parent" />
 
                 <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:elevation="2dp"
+                    android:scaleType="centerInside"
+                    android:scaleX="4"
+                    android:scaleY="4"
+                    app:srcCompat="@drawable/shape_default_slide_dot"
+                    app:tint="@color/white" />
+
+                <ImageView
                     android:id="@+id/imageView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
+                    android:translationZ="3dp"
                     app:srcCompat="@drawable/ic_outline_location_on"
                     app:tint="?attr/colorSecondary" />
 
