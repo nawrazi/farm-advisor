@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/onBoarding1Fragment">
+    app:startDestination="@id/onBoarding2Fragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -15,4 +15,9 @@
         android:name="com.enterprise.agino.ui.onboarding.onboarding1.OnBoarding1Fragment"
         android:label="OnBoarding1Fragment"
         tools:layout="@layout/fragment_onboarding1" />
+    <fragment
+        android:id="@+id/onBoarding2Fragment"
+        android:name="com.enterprise.agino.ui.onboarding.onboarding2.OnBoarding2Fragment"
+        android:label="OnBoarding2Fragment"
+        tools:layout="@layout/fragment_onboarding2" />
 </navigation>
