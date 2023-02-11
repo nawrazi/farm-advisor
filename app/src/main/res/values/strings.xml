@@ -38,4 +38,8 @@
     <string name="fragment_add_first_sensor_header">Add a sensor</string>
     <string name="fragment_add_first_sensor_description">A field can have multiple sensors, but needs at least one to calculate the GDD and ideal cutting day. Add your first sensor to get started.</string>
     <string name="fragment_add_first_sensor_btn">ADD my first SENSOR</string>
+
+    <string name="fragment_profile_title">Profile</string>
+    <string name="fragment_profile_phone">Phone</string>
+    <string name="fragment_profile_sample_phone">+ 47 384 943 38</string>
 </resources>
