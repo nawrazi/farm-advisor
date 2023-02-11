@@ -3,4 +3,9 @@
     <string name="welcome_to_agino">Welcome to Agino</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id pellentesque nulla. Donec porta pretium risus vitae ultrices.</string>
     <string name="create_my_first_farm">create my first farm</string>
+    <string name="enter_farm_name">Enter farm name</string>
+    <string name="farm_name">Farm Name</string>
+    <string name="search_location">Search location</string>
+    <string name="location">Location</string>
+    <string name="create_new_farm">Create New Farm</string>
 </resources>

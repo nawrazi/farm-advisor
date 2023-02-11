@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="forest_green">#275342</color>
+    <color name="silver">#FFCACACA</color>
+    <color name="grey_background">#F7F7F7</color>
 </resources>
