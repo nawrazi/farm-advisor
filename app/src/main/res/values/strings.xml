@@ -35,4 +35,7 @@
     <string name="fragment_phone_number_signup_continue_btn">continue</string>
     <string name="fragment_verification_code_hint">Enter your verification code</string>
     <string name="fragment_verification_code_header">Verification Code</string>
+    <string name="fragment_add_first_sensor_header">Add a sensor</string>
+    <string name="fragment_add_first_sensor_description">A field can have multiple sensors, but needs at least one to calculate the GDD and ideal cutting day. Add your first sensor to get started.</string>
+    <string name="fragment_add_first_sensor_btn">ADD my first SENSOR</string>
 </resources>
