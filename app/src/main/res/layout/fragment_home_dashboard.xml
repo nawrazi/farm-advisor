@@ -89,6 +89,17 @@
         app:layout_constraintTop_toBottomOf="@+id/alertRv"
         tools:text="Fields" />
 
+    <ImageView
+        android:id="@+id/addFieldButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/fieldLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/fieldLabel"
+        app:srcCompat="@drawable/ic_add" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fieldRv"
         android:layout_width="match_parent"
