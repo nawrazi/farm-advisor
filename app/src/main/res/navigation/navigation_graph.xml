@@ -3,61 +3,144 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/resetSensorFragment">
+    app:startDestination="@id/onBoarding1Fragment">
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.enterprise.agino.ui.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_fieldDetailsScreen"
+            app:destination="@id/fieldDetailsScreen" />
+        <action
+            android:id="@+id/action_homeFragment_to_newFieldFragment2"
+            app:destination="@id/newFieldFragment" />
+    </fragment>
     <fragment
         android:id="@+id/onBoarding1Fragment"
-        android:name="com.enterprise.agino.ui.onboarding.onboarding1.OnBoarding1Fragment"
+        android:name="com.enterprise.agino.ui.onboarding.onboarding.OnBoardingFragment"
         android:label="OnBoarding1Fragment"
-        tools:layout="@layout/fragment_onboarding1" />
+        tools:layout="@layout/fragment_onboarding">
+        <action
+            android:id="@+id/action_onBoardingFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_onBoardingFragment_to_phoneNumberSignUpFragment"
+            app:destination="@id/phoneNumberSignUpFragment" />
+    </fragment>
     <fragment
         android:id="@+id/firstTimeFragment"
         android:name="com.enterprise.agino.ui.first_time.FirstTimeFragment"
         android:label="FirstTimeFragment"
-        tools:layout="@layout/fragment_first_time_user" />
+        tools:layout="@layout/fragment_first_time_user">
+        <action
+            android:id="@+id/action_firstTimeFragment_to_newFarmFragment"
+            app:destination="@id/newFarmFragment" />
+    </fragment>
     <fragment
         android:id="@+id/newFarmFragment"
         android:name="com.enterprise.agino.ui.first_time.farm.NewFarmFragment"
         android:label="NewFarmFragment"
-        tools:layout="@layout/fragment_new_farm" />
+        tools:layout="@layout/fragment_new_farm">
+        <action
+            android:id="@+id/action_newFarmFragment_to_addFieldFragment"
+            app:destination="@id/addFieldFragment" />
+    </fragment>
     <fragment
         android:id="@+id/onBoarding2Fragment"
         android:name="com.enterprise.agino.ui.onboarding.onboarding2.OnBoarding2Fragment"
         android:label="OnBoarding2Fragment"
-        tools:layout="@layout/fragment_onboarding2" />
+        tools:layout="@layout/fragment_onboarding2">
+        <action
+            android:id="@+id/action_onBoarding2Fragment_to_verificationCodeFragment"
+            app:destination="@id/verificationCodeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/phoneNumberSignUpFragment"
         android:name="com.enterprise.agino.ui.onboarding.phonenumbersignup.PhoneNumberSignUpFragment"
         android:label="PhoneNumberSignUpFragment"
-        tools:layout="@layout/fragment_phone_number_signup" />
+        tools:layout="@layout/fragment_phone_number_signup">
+        <action
+            android:id="@+id/action_phoneNumberSignUpFragment_to_onBoarding2Fragment"
+            app:destination="@id/onBoarding2Fragment" />
+    </fragment>
     <fragment
         android:id="@+id/verificationCodeFragment"
         android:name="com.enterprise.agino.ui.onboarding.verificationcode.VerificationCodeFragment"
         android:label="VerificationCodeFragment"
-        tools:layout="@layout/fragment_verfication_code" />
+        tools:layout="@layout/fragment_verfication_code">
+        <action
+            android:id="@+id/action_verificationCodeFragment_to_firstTimeFragment"
+            app:destination="@id/firstTimeFragment" />
+        <action
+            android:id="@+id/action_verificationCodeFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addFieldFragment"
         android:name="com.enterprise.agino.ui.first_time.field.AddFieldFragment"
         android:label="AddFieldFragment"
-        tools:layout="@layout/fragment_add_field" />
+        tools:layout="@layout/fragment_add_field">
+        <action
+            android:id="@+id/action_addFieldFragment_to_newFieldFragment"
+            app:destination="@id/newFieldFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addFirstSensorFragment"
         android:name="com.enterprise.agino.ui.first_time.sensor.AddFirstSensorFragment"
         android:label="AddFirstSensorFragment"
-        tools:layout="@layout/fragment_add_first_sensor" />
+        tools:layout="@layout/fragment_add_first_sensor">
+        <action
+            android:id="@+id/action_addFirstSensorFragment_to_addNewSensorFragment"
+            app:destination="@id/addNewSensorFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addNewSensorFragment"
         android:name="com.enterprise.agino.ui.addnewsensor.AddNewSensorFragment"
         android:label="AddNewSensorFragment"
-        tools:layout="@layout/fragment_add_new_sensor" />
+        tools:layout="@layout/fragment_add_new_sensor">
+        <action
+            android:id="@+id/action_addNewSensorFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/resetSensorFragment"
         android:name="com.enterprise.agino.ui.resetsensor.ResetSensorFragment"
         android:label="ResetSensorFragment"
         tools:layout="@layout/fragment_reset_sensor" />
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="com.enterprise.agino.ui.help.HelpFragment"
+        android:label="HelpFragment"
+        tools:layout="@layout/fragment_help" />
+    <fragment
+        android:id="@+id/newFieldFragment"
+        android:name="com.enterprise.agino.ui.first_time.field.NewFieldFragment"
+        android:label="NewFieldFragment"
+        tools:layout="@layout/fragment_new_field">
+        <action
+            android:id="@+id/action_newFieldFragment_to_addFirstSensorFragment"
+            app:destination="@id/addFirstSensorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.enterprise.agino.ui.signin.SignInFragment"
+        tools:layout="@layout/fragment_sign_in">
+        <action
+            android:id="@+id/action_signInFragment_to_verificationCodeFragment"
+            app:destination="@id/verificationCodeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fieldDetailsScreen"
+        android:name="com.enterprise.agino.ui.fielddetails.FieldDetailsScreen"
+        android:label="FieldDetailsScreen"
+        tools:layout="@layout/fragment_field_details" >
+        <action
+            android:id="@+id/action_fieldDetailsScreen_to_resetSensorFragment"
+            app:destination="@id/resetSensorFragment" />
+        <action
+            android:id="@+id/action_fieldDetailsScreen_to_addNewSensorFragment"
+            app:destination="@id/addNewSensorFragment" />
+    </fragment>
 </navigation>

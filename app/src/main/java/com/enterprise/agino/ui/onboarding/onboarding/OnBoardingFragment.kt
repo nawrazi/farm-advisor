@@ -1,25 +1,42 @@
-package com.enterprise.agino.ui.onboarding.onboarding1
+package com.enterprise.agino.ui.onboarding.onboarding
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.ViewPager
+import androidx.navigation.fragment.findNavController
 import com.enterprise.agino.R
-import com.enterprise.agino.databinding.FragmentOnboarding1Binding
-import com.google.android.material.tabs.TabLayout
+import com.enterprise.agino.databinding.FragmentOnboardingBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
-class OnBoarding1Fragment : Fragment() {
-    private var _binding: FragmentOnboarding1Binding? = null
+class OnBoardingFragment : Fragment() {
+    private var _binding: FragmentOnboardingBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentOnboarding1Binding.inflate(inflater, container, false)
+        _binding = FragmentOnboardingBinding.inflate(inflater, container, false)
+        setupViewPager()
+        setupListeners()
+
+        return binding.root
+    }
+
+    private fun setupListeners() {
+        binding.apply {
+            signUpBtn.setOnClickListener {
+                findNavController().navigate(OnBoardingFragmentDirections.actionOnBoardingFragmentToPhoneNumberSignUpFragment())
+            }
+            logInBtn.setOnClickListener {
+                findNavController().navigate(OnBoardingFragmentDirections.actionOnBoardingFragmentToSignInFragment())
+            }
+        }
+    }
+
+    private fun setupViewPager() {
         val viewPager2 = binding.pager
         val tabLayout = binding.tabLayout
 
@@ -46,9 +63,6 @@ class OnBoarding1Fragment : Fragment() {
         TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
             viewPager2.currentItem = position
         }.attach()
-
-
-        return binding.root
     }
 
     override fun onDestroyView() {

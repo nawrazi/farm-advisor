@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.enterprise.agino.R
 import com.enterprise.agino.databinding.FragmentAddNewSensorBinding
 import com.enterprise.agino.ui.view.OnScrollMapViewWrapperTouchListener
@@ -62,6 +63,20 @@ class AddNewSensorFragment : Fragment(), OnScrollMapViewWrapperTouchListener {
     ): View {
         _binding = FragmentAddNewSensorBinding.inflate(inflater, container, false)
 
+        setupMap()
+        setupListeners()
+        return binding.root
+    }
+
+    private fun setupListeners() {
+        binding.apply {
+            addNewSensorButton.setOnClickListener {
+                findNavController().navigate(AddNewSensorFragmentDirections.actionAddNewSensorFragmentToHomeFragment())
+            }
+        }
+    }
+
+    private fun setupMap() {
         val mapOptions = MapOptions(
             mapKey = "QKG5sZdSQCFSitlPKDsIHZ9FV7ZGZg4g",
         )
@@ -78,28 +93,7 @@ class AddNewSensorFragment : Fragment(), OnScrollMapViewWrapperTouchListener {
                 }
             })
 
-
-            val androidLocationProviderConfig = AndroidLocationProviderConfig(
-                minTimeInterval = 250L.milliseconds,
-                minDistance = Distance.meters(20.0)
-            )
-            val locationProvider: LocationProvider = AndroidLocationProvider(
-                context = requireContext().applicationContext,
-                config = androidLocationProviderConfig
-            )
-
-            tomtomMap.setLocationProvider(locationProvider)
-            locationProvider.enable()
-
-            val currentLocation: GeoLocation? = tomtomMap.currentLocation
-            currentLocation?.let {
-                tomtomMap.moveCamera(
-                    CameraOptions(
-                        position = it.position,
-                        zoom = 10.0,
-                    )
-                )
-            }
+            setupLocationProvider(tomtomMap)
         }
 
         parentFragmentManager.beginTransaction()
@@ -107,7 +101,30 @@ class AddNewSensorFragment : Fragment(), OnScrollMapViewWrapperTouchListener {
             .commit()
 
         binding.frameLayout.mListener = this
-        return binding.root
+    }
+
+    private fun setupLocationProvider(tomtomMap: TomTomMap) {
+        val androidLocationProviderConfig = AndroidLocationProviderConfig(
+            minTimeInterval = 250L.milliseconds,
+            minDistance = Distance.meters(20.0)
+        )
+        val locationProvider: LocationProvider = AndroidLocationProvider(
+            context = requireContext().applicationContext,
+            config = androidLocationProviderConfig
+        )
+
+        tomtomMap.setLocationProvider(locationProvider)
+        locationProvider.enable()
+
+        val currentLocation: GeoLocation? = tomtomMap.currentLocation
+        currentLocation?.let {
+            tomtomMap.moveCamera(
+                CameraOptions(
+                    position = it.position,
+                    zoom = 10.0,
+                )
+            )
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
