@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/field_round_corner"
-    android:elevation="@dimen/cardview_default_elevation"
+    android:background="@drawable/round_corner_with_stroke"
     android:layout_marginTop="5dp"
     android:layout_marginBottom="5dp"
     android:clipToPadding="false">
@@ -38,6 +37,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
             android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textColor="?android:attr/textColorPrimary"
             app:layout_constraintStart_toEndOf="@+id/fieldPicture"
             app:layout_constraintTop_toTopOf="@+id/fieldPicture"
             tools:text="Field Name One" />
@@ -46,6 +46,7 @@
             android:id="@+id/gddField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="?android:attr/textColorSecondary"
             android:layout_marginTop="4dp"
             tools:text="Current GDD - 379"
             app:layout_constraintStart_toStartOf="@+id/fieldName"
@@ -58,6 +59,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp"
             android:textAppearance="?attr/textAppearanceBody1"
+            android:textColor="?android:attr/textColorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/fieldPicture"
             app:layout_constraintTop_toBottomOf="@+id/gddField"

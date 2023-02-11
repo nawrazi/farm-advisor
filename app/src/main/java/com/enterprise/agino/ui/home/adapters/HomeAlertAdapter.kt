@@ -4,13 +4,13 @@ package com.enterprise.agino.ui.home.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.enterprise.agino.databinding.AlertCardBinding
+import com.enterprise.agino.databinding.CardAlertBinding
 
 // TODO: change this to your model class later
 class HomeAlertAdapter(private val dataset: List<Int>) :
     RecyclerView.Adapter<HomeAlertAdapter.ViewHolder>() {
 
-    class ViewHolder(private val binding: AlertCardBinding) :
+    class ViewHolder(private val binding: CardAlertBinding) :
         RecyclerView.ViewHolder(binding.root) {
         val image = binding.alertPicture
         val date = binding.alertDate
@@ -19,7 +19,7 @@ class HomeAlertAdapter(private val dataset: List<Int>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(
-            AlertCardBinding.inflate(
+            CardAlertBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false

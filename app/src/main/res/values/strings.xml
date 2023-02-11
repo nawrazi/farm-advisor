@@ -41,4 +41,10 @@
     <string name="fragment_reset_sensor_reset_from">Reset from</string>
     <string name="fragment_reset_sensor_title">RESET GDD</string>
     <string name="fragment_reset_sensor_btn_label">Reset GDD</string>
+    <string name="fragment_add_first_sensor_header">Add a sensor</string>
+    <string name="fragment_add_first_sensor_description">A field can have multiple sensors, but needs at least one to calculate the GDD and ideal cutting day. Add your first sensor to get started.</string>
+    <string name="fragment_add_first_sensor_btn">ADD my first SENSOR</string>
+
+
+    <string name="fragment_help_title">Help</string>
 </resources>

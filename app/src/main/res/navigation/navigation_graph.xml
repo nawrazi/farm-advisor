@@ -41,6 +41,16 @@
         android:label="VerificationCodeFragment"
         tools:layout="@layout/fragment_verfication_code" />
     <fragment
+        android:id="@+id/addFieldFragment"
+        android:name="com.enterprise.agino.ui.first_time.field.AddFieldFragment"
+        android:label="AddFieldFragment"
+        tools:layout="@layout/fragment_add_field" />
+    <fragment
+        android:id="@+id/addFirstSensorFragment"
+        android:name="com.enterprise.agino.ui.first_time.sensor.AddFirstSensorFragment"
+        android:label="AddFirstSensorFragment"
+        tools:layout="@layout/fragment_add_first_sensor" />
+    <fragment
         android:id="@+id/resetSensorFragment"
         android:name="com.enterprise.agino.ui.resetsensor.ResetSensorFragment"
         android:label="ResetSensorFragment"

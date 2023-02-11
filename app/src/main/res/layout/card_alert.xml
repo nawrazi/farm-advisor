@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/field_round_corner"
-    android:elevation="@dimen/cardview_default_elevation"
+    android:background="@drawable/round_corner_with_stroke"
     android:layout_marginTop="5dp"
     android:layout_marginBottom="5dp">
 
@@ -22,6 +21,7 @@
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="12dp"
             android:textAppearance="?attr/textAppearanceBody1"
+            android:textColor="?android:attr/textColorPrimary"
             app:layout_constraintBottom_toTopOf="@+id/alertDate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/alertPicture"
@@ -52,6 +52,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginBottom="15dp"
             android:textAppearance="?attr/textAppearanceBody2"
+            android:textColor="?android:attr/textColorSecondary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/alertPicture"
             tools:text="Today" />

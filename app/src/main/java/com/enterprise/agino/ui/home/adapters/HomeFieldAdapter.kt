@@ -4,13 +4,13 @@ package com.enterprise.agino.ui.home.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.enterprise.agino.databinding.FieldCardBinding
+import com.enterprise.agino.databinding.CardFieldBinding
 
 
 class HomeFieldAdapter(private val dataset: List<Int>) :
     RecyclerView.Adapter<HomeFieldAdapter.ViewHolder>() {
 
-    class ViewHolder(private val binding: FieldCardBinding) :
+    class ViewHolder(private val binding: CardFieldBinding) :
         RecyclerView.ViewHolder(binding.root) {
         val image = binding.fieldPicture
         val name = binding.fieldName
@@ -21,7 +21,7 @@ class HomeFieldAdapter(private val dataset: List<Int>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(
-            FieldCardBinding.inflate(
+            CardFieldBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false

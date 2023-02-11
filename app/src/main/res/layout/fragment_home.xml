@@ -76,7 +76,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/alertLabel"
         tools:itemCount="2"
-        tools:listitem="@layout/alert_card"/>
+        tools:listitem="@layout/card_alert"/>
 
     <TextView
         android:id="@+id/fieldLabel"
@@ -112,7 +112,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fieldLabel"
-        tools:listitem="@layout/field_card" />
+        tools:listitem="@layout/card_field" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
