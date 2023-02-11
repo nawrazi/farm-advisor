@@ -38,6 +38,10 @@ android {
         viewBinding true
         dataBinding true
     }
+
+    packagingOptions {
+        jniLibs.pickFirsts.add("lib/**/libc++_shared.so")
+    }
 }
 
 dependencies {
@@ -78,7 +82,11 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.14.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
 
+    // Maps
+    implementation "com.tomtom.sdk.maps:map-display:0.3.1547"
+    implementation "com.tomtom.sdk.location:provider-android:0.3.1547"
+    implementation "com.tomtom.sdk.location:provider-gms:0.3.1547"
+
     // Third Party Library
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
-
 }

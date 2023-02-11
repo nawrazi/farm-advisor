@@ -5,6 +5,7 @@ pluginManagement {
         mavenCentral()
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -12,6 +13,7 @@ dependencyResolutionManagement {
         mavenCentral()
         maven {
             url "https://jitpack.io"
+            url "https://repositories.tomtom.com/artifactory/maven"
         }
     }
 }

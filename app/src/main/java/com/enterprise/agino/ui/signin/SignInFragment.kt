@@ -1,4 +1,4 @@
-package com.enterprise.agino.ui.home
+package com.enterprise.agino.ui.signin
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,26 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.enterprise.agino.databinding.FragmentHomeBinding
+import com.enterprise.agino.databinding.FragmentSignInBinding
 
-class HomeFragment : Fragment() {
-    private var _binding: FragmentHomeBinding? = null
+class SignInFragment : Fragment() {
+    private var _binding: FragmentSignInBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-
+        _binding = FragmentSignInBinding.inflate(inflater, container, false)
         setupListeners()
+
         return binding.root
     }
 
     private fun setupListeners() {
         binding.apply {
-            addFieldButton.setOnClickListener {
-                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToNewFieldFragment2())
+            continueBtn.setOnClickListener {
+                findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToVerificationCodeFragment())
             }
         }
     }

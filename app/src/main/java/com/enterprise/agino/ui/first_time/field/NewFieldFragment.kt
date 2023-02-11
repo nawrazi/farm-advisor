@@ -1,4 +1,4 @@
-package com.enterprise.agino.ui.home
+package com.enterprise.agino.ui.first_time.field
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,17 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.enterprise.agino.databinding.FragmentHomeBinding
+import com.enterprise.agino.databinding.FragmentNewFieldBinding
 
-class HomeFragment : Fragment() {
-    private var _binding: FragmentHomeBinding? = null
+class NewFieldFragment : Fragment() {
+    private var _binding: FragmentNewFieldBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentNewFieldBinding.inflate(inflater, container, false)
 
         setupListeners()
         return binding.root
@@ -24,8 +24,8 @@ class HomeFragment : Fragment() {
 
     private fun setupListeners() {
         binding.apply {
-            addFieldButton.setOnClickListener {
-                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToNewFieldFragment2())
+            createFieldButton.setOnClickListener {
+                findNavController().navigate(NewFieldFragmentDirections.actionNewFieldFragmentToAddFirstSensorFragment())
             }
         }
     }

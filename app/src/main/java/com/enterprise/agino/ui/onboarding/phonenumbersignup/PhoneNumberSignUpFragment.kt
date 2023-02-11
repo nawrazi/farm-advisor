@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.enterprise.agino.databinding.FragmentPhoneNumberSignupBinding
 
 class PhoneNumberSignUpFragment : Fragment() {
@@ -17,7 +18,16 @@ class PhoneNumberSignUpFragment : Fragment() {
     ): View {
         _binding = FragmentPhoneNumberSignupBinding.inflate(inflater, container, false)
 
+        setupListeners()
         return binding.root
+    }
+
+    private fun setupListeners() {
+        binding.apply {
+            continueBtn.setOnClickListener {
+                findNavController().navigate(PhoneNumberSignUpFragmentDirections.actionPhoneNumberSignUpFragmentToOnBoarding2Fragment())
+            }
+        }
     }
 
     override fun onDestroyView() {

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -19,10 +18,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/closeButton"
+        <ImageButton
+            android:id="@+id/imageButton3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             app:srcCompat="@drawable/ic_arrow_back"
             app:tint="?android:attr/textColorSecondary" />
 
@@ -32,10 +32,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="13dp"
             android:layout_weight="1"
-            android:text="@string/fragment_phone_number_title"
+            android:text="@string/fragment_signin_title"
             android:textAllCaps="true"
             android:textStyle="bold" />
     </LinearLayout>
+
 
     <TextView
         android:id="@+id/textView3"
@@ -43,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:text="@string/fragment_phone_number_signup_header"
+        android:text="@string/fragment_signin_header"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="?android:attr/textColorPrimary"
         android:textStyle="bold"
@@ -68,14 +69,14 @@
 
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
             android:id="@+id/chooseFarmName"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:clickable="true"
-            android:textColor="?android:attr/textColorPrimary"
             tools:ignore="KeyboardInaccessibleWidget"
             tools:layout_editor_absoluteX="133dp"
             tools:layout_editor_absoluteY="91dp"
-            tools:text="Norway (+47)" />
+            tools:text="Norway (+47)"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:textColor="?android:attr/textColorPrimary" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
