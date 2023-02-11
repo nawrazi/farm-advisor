@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_first_time_user" />
     <fragment
         android:id="@+id/newFarmFragment"
-        android:name="com.enterprise.agino.ui.first_time.NewFarmFragment"
+        android:name="com.enterprise.agino.ui.first_time.farm.NewFarmFragment"
         android:label="NewFarmFragment"
         tools:layout="@layout/fragment_new_farm" />
 </navigation>

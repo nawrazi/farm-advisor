@@ -1,4 +1,4 @@
-package com.enterprise.agino.ui.first_time
+package com.enterprise.agino.ui.first_time.farm
 
 import android.os.Bundle
 import android.view.LayoutInflater

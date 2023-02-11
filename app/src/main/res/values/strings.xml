@@ -19,4 +19,11 @@
     <string name="fragment_onboarding1_sign_up_with_agino">sign up with agino</string>
     <string name="fragment_onboarding1_already_have_an_account">Already have an account?</string>
     <string name="fragment_onboarding1_log_in">Log In</string>
+    <string name="add_a_field">Add a field</string>
+    <string name="add_my_first_field">Add my first field</string>
+    <string name="field_name">Field Name</string>
+    <string name="enter_field_name">Enter field name</string>
+    <string name="altitude_above_sea_level">Altitude Above Sea Level</string>
+    <string name="enter_in_meters">Enter in meters</string>
+    <string name="create_new_field">Create New Field</string>
 </resources>
