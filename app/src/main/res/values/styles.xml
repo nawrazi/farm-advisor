@@ -9,7 +9,7 @@
     </style>
 
     <style name="SolidButton" parent="@style/Widget.MaterialComponents.Button.UnelevatedButton">
-        <item name="android:height">52dp</item>
+        <item name="android:height">54dp</item>
         <item name="android:textAppearance">@style/ButtonTextAppearance</item>
         <item name="android:layout_width">match_parent</item>
     </style>
