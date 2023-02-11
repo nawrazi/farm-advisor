@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.enterprise.agino.databinding.FragmentNewFarmBinding
 
 class NewFarmFragment : Fragment() {
@@ -17,7 +18,12 @@ class NewFarmFragment : Fragment() {
     ): View {
         _binding = FragmentNewFarmBinding.inflate(inflater, container, false)
 
+        setupListeners()
         return binding.root
+    }
+
+    private fun setupListeners() {
+        findNavController().navigate(NewFarmFragmentDirections.actionNewFarmFragmentToAddFieldFragment())
     }
 
     override fun onDestroyView() {
