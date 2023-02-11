@@ -23,7 +23,11 @@ class NewFarmFragment : Fragment() {
     }
 
     private fun setupListeners() {
-        findNavController().navigate(NewFarmFragmentDirections.actionNewFarmFragmentToAddFieldFragment())
+        binding.apply {
+            createFarmButton.setOnClickListener {
+                findNavController().navigate(NewFarmFragmentDirections.actionNewFarmFragmentToAddFieldFragment())
+            }
+        }
     }
 
     override fun onDestroyView() {
