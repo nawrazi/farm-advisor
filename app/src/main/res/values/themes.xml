@@ -1,4 +1,4 @@
-<resources >
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.Agino" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
@@ -13,6 +13,9 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="materialButtonStyle">@style/SolidButton</item>
+        <item name="textInputStyle">@style/TextInputLayoutStyle</item>
+
         <item name="strokeColor">@color/light_grey</item>
+        <item name="android:windowBackground">@color/alabaster</item>
     </style>
 </resources>

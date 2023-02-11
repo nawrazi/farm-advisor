@@ -38,4 +38,15 @@
     <string name="fragment_add_first_sensor_header">Add a sensor</string>
     <string name="fragment_add_first_sensor_description">A field can have multiple sensors, but needs at least one to calculate the GDD and ideal cutting day. Add your first sensor to get started.</string>
     <string name="fragment_add_first_sensor_btn">ADD my first SENSOR</string>
+    <string name="fragment_add_new_sensor_btn_label">Add new Sensor</string>
+    <string name="fragment_add_new_sensor_serial_number_label">Serial Number</string>
+    <string name="fragment_add_new_sensor_serial_number_hint">Scan or enter serial number</string>
+    <string name="fragment_add_new_sensor_sensor_location_label">Sensor Location</string>
+    <string name="fragment_add_new_sensor_default_ggd_label">Default GGD</string>
+    <string name="fragment_add_new_sensor_default_ggd_hint">Enter default GGD</string>
+    <string name="fragment_add_new_sensor_sensor_installation_date_label">Sensor Installation Date</string>
+    <string name="fragment_add_new_sensor_select_installation_date_hint">Select installation date</string>
+    <string name="fragment_add_new_sensor_last_cutting_date_label">Last Cutting Date At This Field</string>
+    <string name="fragment_add_new_sensor_last_cutting_date_hint">Select last cutting date</string>
+    <string name="fragment_add_new_sensor_map_guide">Locate the sensor on the field by moving the pin around</string>
 </resources>
