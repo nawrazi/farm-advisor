@@ -78,4 +78,5 @@
     <string name="statistics">Statistics</string>
     <string name="period">Period</string>
     <string name="date_range">%1$s - %2$s</string>
+    <string name="choose_a_period">Choose a period</string>
 </resources>
