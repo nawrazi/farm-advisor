@@ -1,6 +1,7 @@
 package com.enterprise.agino.utils
 
 import android.view.View
+import com.google.android.material.snackbar.Snackbar
 
 
 fun View.hide() {
@@ -24,4 +25,28 @@ fun View.show() {
 fun View.showAndEnable() {
     visibility = View.VISIBLE
     isEnabled = true
+}
+
+fun showErrorSnackBar(message: String, rootView: View) {
+    Snackbar.make(
+        rootView,
+        message,
+        Snackbar.LENGTH_LONG
+    ).show()
+}
+
+fun showSnackBar(message: String, rootView: View) {
+    Snackbar.make(
+        rootView,
+        message,
+        Snackbar.LENGTH_LONG
+    ).show()
+}
+
+fun showSuccessSnackBar(message: String, rootView: View) {
+    Snackbar.make(
+        rootView,
+        message,
+        Snackbar.LENGTH_LONG
+    ).show()
 }
