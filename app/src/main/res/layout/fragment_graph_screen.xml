@@ -33,7 +33,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/landscape_icon" />
 
         <include
-            android:id="@+id/statistics_layout"
+            android:id="@+id/statistics_container"
             layout="@layout/statistics_component"
             android:layout_width="0dp"
             android:layout_height="98dp"
@@ -51,7 +51,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="6dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/statistics_layout" />
+            app:layout_constraintTop_toBottomOf="@id/statistics_container" />
 
         <View
             android:id="@+id/horizontal_divider_1"
@@ -148,7 +148,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginHorizontal="20dp"
-            android:hint="Choose a period"
+            android:hint="@string/choose_a_period"
             app:endIconMode="custom"
             app:endIconDrawable="@drawable/ic_calendar_today"
             app:layout_constraintTop_toBottomOf="@+id/period_label">
