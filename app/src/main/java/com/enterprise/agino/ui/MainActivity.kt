@@ -1,4 +1,4 @@
-package com.enterprise.agino
+package com.enterprise.agino.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +9,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.enterprise.agino.R
 import com.enterprise.agino.databinding.ActivityMainBinding
 import com.enterprise.agino.utils.gone
 import com.enterprise.agino.utils.show
