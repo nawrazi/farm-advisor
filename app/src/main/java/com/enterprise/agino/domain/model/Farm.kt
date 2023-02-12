@@ -6,7 +6,7 @@ data class Farm(
     val postcode: String,
     val city: String,
     val country: String,
-    val notifications: String? = null,
-    val fields: String? = null,
+    val notifications: String? = null,  // TODO: Change to List<Notification> as an object
+    val fields: List<Field>,
     val userID: String
 )
