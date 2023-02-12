@@ -11,5 +11,5 @@ data class UserResponse(
     @SerializedName("authId")
     val authID: String,
 
-    val farms: List<FarmResponse>
+    val farms: List<FarmResponse>? = null
 )
