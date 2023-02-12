@@ -1,6 +1,5 @@
 package com.enterprise.agino.domain.model
 
-import android.hardware.Sensor
 
 data class Field(
     val fieldID: String,
