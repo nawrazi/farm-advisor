@@ -5,6 +5,7 @@ plugins {
     id 'dagger.hilt.android.plugin'
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -73,7 +74,7 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:$hiltVersion"
 
     // Room
-    def roomVersion = "2.4.3"
+    def roomVersion = "2.5.0"
     implementation "androidx.room:room-runtime:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
     implementation "androidx.room:room-ktx:$roomVersion"
@@ -89,4 +90,8 @@ dependencies {
 
     // Third Party Library
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:31.2.0')
+    implementation 'com.google.firebase:firebase-auth-ktx'
 }
