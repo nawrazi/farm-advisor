@@ -5,5 +5,5 @@ import com.enterprise.agino.domain.model.Field
 import kotlinx.coroutines.flow.Flow
 
 interface IFieldRepository {
-    fun GetField(id: String): Flow<Resource<Field>>
+    fun getField(id: String): Flow<Resource<Field>>
 }

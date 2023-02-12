@@ -12,10 +12,10 @@ import javax.inject.Inject
 class FieldRepository @Inject constructor(
     private val fieldService: FieldService
 ) : IFieldRepository {
-    override fun GetField(id: String): Flow<Resource<Field>> {
+    override fun getField(id: String): Flow<Resource<Field>> {
         return networkBoundResource(
             fetch = {
-                fieldService.GetField(id).body()!!
+                fieldService.getField(id).body()!!
             },
             mapFetchedValue = {
                 it.toField()
