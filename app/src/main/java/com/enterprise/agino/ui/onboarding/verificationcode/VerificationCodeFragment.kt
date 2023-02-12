@@ -93,7 +93,17 @@ class VerificationCodeFragment : Fragment() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
-                    findNavController().navigate(VerificationCodeFragmentDirections.actionVerificationCodeFragmentToFirstTimeFragment())
+                    val userMetaData = Firebase.auth.currentUser!!.metadata!!
+                    if (userMetaData.creationTimestamp == userMetaData.lastSignInTimestamp) {
+                        // User is new
+                        Log.d(TAG, "User is new")
+                        findNavController().navigate(VerificationCodeFragmentDirections.actionVerificationCodeFragmentToFirstTimeFragment())
+                    } else {
+                        // User is old
+                        Log.d(TAG, "User is old")
+                        findNavController().navigate(VerificationCodeFragmentDirections.actionVerificationCodeFragmentToHomeFragment())
+                    }
+
                 } else {
                     // Sign in failed, display a message and update the UI
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
