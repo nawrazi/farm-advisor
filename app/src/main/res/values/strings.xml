@@ -44,6 +44,12 @@
     <string name="fragment_add_first_sensor_header">Add a sensor</string>
     <string name="fragment_add_first_sensor_description">A field can have multiple sensors, but needs at least one to calculate the GDD and ideal cutting day. Add your first sensor to get started.</string>
     <string name="fragment_add_first_sensor_btn">ADD my first SENSOR</string>
+
+
+    <string name="fragment_profile_title">Profile</string>
+    <string name="fragment_profile_phone">Phone</string>
+    <string name="fragment_profile_sample_phone">+ 47 384 943 38</string>
+
     <string name="fragment_add_new_sensor_btn_label">Add new Sensor</string>
     <string name="fragment_add_new_sensor_serial_number_label">Serial Number</string>
     <string name="fragment_add_new_sensor_serial_number_hint">Scan or enter serial number</string>
@@ -60,6 +66,7 @@
     <string name="fragment_help_title">Help</string>
     <string name="fragment_signin_title">Sign In</string>
     <string name="fragment_signin_header">Sign in with your phone number</string>
+
     <string name="_127m_above_sea_level">127m above sea level</string>
     <string name="to_cutting">To Cutting</string>
     <string name="goal_gdd">Goal GDD</string>
