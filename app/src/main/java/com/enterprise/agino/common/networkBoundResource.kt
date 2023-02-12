@@ -1,35 +1,21 @@
 package com.enterprise.agino.common
 
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
 
 inline fun <ResultType, RequestType> networkBoundResource(
-    crossinline query: () -> Flow<ResultType>,
     crossinline fetch: suspend () -> RequestType,
-    crossinline saveFetchResult: suspend (RequestType) -> Unit,
-    crossinline shouldFetch: (ResultType) -> Boolean = { true },
-    crossinline isEmpty: (ResultType) -> Boolean = { false },
+    crossinline mapFetchedValue: (RequestType) -> ResultType,
 ) = flow {
     emit(Resource.Loading())
-    val data = query().first()
 
-    if (!isEmpty(data))
-        emit(Resource.Success(data))
-
-    val response = if (shouldFetch(data)) {
-
-        val fetched = buildResource { fetch() }
-        if (fetched is Resource.Success) {
-            saveFetchResult(fetched.value!!)
-            query().map { res -> Resource.Success(res) }
-        } else {
-            query().map { res -> Resource.Error(fetched.message, res) }
-        }
+    val fetched = buildResource { fetch() }
+    val response = if (fetched is Resource.Success) {
+        val result = mapFetchedValue(fetched.value!!)
+        Resource.Success(result)
     } else {
-        query().map { res -> Resource.Success(res) }
+        val result = mapFetchedValue(fetched.value!!)
+        Resource.Error(fetched.message, result)
     }
 
-    emit(response.first())
+    emit(response)
 }
