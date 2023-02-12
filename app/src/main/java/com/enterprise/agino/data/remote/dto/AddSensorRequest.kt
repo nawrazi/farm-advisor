@@ -10,5 +10,5 @@ data class AddSensorResponse(
     @SerializedName("longt")
     val longitude: Number,
     @SerializedName("fieldId")
-    val sensorID: String
+    val fieldID: String
 )
