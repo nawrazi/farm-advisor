@@ -2,7 +2,7 @@ package com.enterprise.agino.data.remote.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class AddUserRequest(
+data class CreateUserRequest(
     val name: String,
     val email: String,
     val phone: String,
