@@ -1,7 +1,6 @@
 package com.enterprise.agino.di
 
 import com.enterprise.agino.common.Constants.BASE_URL
-import com.enterprise.agino.data.converters.ListToJsonConverter
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -18,10 +17,6 @@ object AppModule {
     @Provides
     @Singleton
     fun provideGson() = Gson()
-
-    @Provides
-    @Singleton
-    fun provideConverter(gson: Gson) = ListToJsonConverter(gson)
 
     @Provides
     @Singleton
