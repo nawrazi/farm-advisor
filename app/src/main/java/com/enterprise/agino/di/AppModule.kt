@@ -7,6 +7,7 @@ import com.enterprise.agino.common.interceptors.NetworkInterceptor
 import com.enterprise.agino.data.remote.api.FarmService
 import com.enterprise.agino.data.remote.api.FieldService
 import com.enterprise.agino.data.remote.api.SensorService
+import com.enterprise.agino.data.remote.api.UserService
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -41,6 +42,11 @@ object AppModule {
     @Singleton
     fun provideSensorService(retrofit: Retrofit): SensorService =
         retrofit.create(SensorService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideUserService(retrofit: Retrofit): UserService =
+        retrofit.create(UserService::class.java)
 
     @Provides
     @Singleton
