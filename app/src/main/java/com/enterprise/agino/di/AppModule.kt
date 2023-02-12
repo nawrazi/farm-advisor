@@ -5,6 +5,7 @@ import com.enterprise.agino.BuildConfig
 import com.enterprise.agino.common.Constants.BASE_URL
 import com.enterprise.agino.common.interceptors.NetworkInterceptor
 import com.enterprise.agino.data.remote.api.FarmService
+import com.enterprise.agino.data.remote.api.FieldService
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -28,6 +29,11 @@ object AppModule {
     @Singleton
     fun provideFarmService(retrofit: Retrofit): FarmService =
         retrofit.create(FarmService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideFieldService(retrofit: Retrofit): FieldService =
+        retrofit.create(FieldService::class.java)
 
     @Provides
     @Singleton
