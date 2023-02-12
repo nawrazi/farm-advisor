@@ -1,14 +1,13 @@
 package com.enterprise.agino.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.enterprise.agino.R
 import com.enterprise.agino.databinding.ActivityMainBinding
 import com.enterprise.agino.utils.gone
@@ -40,14 +39,6 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         val navController = navHostFragment.navController
-
-        setSupportActionBar(binding.toolbar)
-        appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.homeFragment
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
 
         val fragmentsWithoutAppbar = setOf(
             R.id.onBoarding2Fragment,
