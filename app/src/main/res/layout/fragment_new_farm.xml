@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/grey_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/grey_background">
 
     <TextView
         android:id="@+id/farm_name_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:text="@string/farm_name"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/farm_name_input_layout"
         style="@style/TextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@id/farm_name_label">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -37,46 +37,91 @@
         android:id="@+id/location_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:text="@string/location"
-        app:layout_constraintTop_toBottomOf="@id/farm_name_input_layout"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/farm_name_input_layout" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/location_input_layout"
-        style="@style/TextInputLayoutStyle"
+        style="@style/DropdownLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginHorizontal="20dp"
-        app:layout_constraintTop_toBottomOf="@id/location_label"
-        app:endIconDrawable="@drawable/ic_search">
+        android:layout_marginTop="8dp"
+        android:spinnerMode="dropdown"
+        app:endIconDrawable="@drawable/ic_search"
+        app:layout_constraintTop_toBottomOf="@id/location_label">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <AutoCompleteTextView
             android:id="@+id/location_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/search_location"
-            android:inputType="text" />
+            android:inputType="text"
+            app:simpleItemLayout="@layout/exposed_dropdown_item"  />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.enterprise.agino.ui.view.ScrollMapViewWrapper
+        android:id="@+id/frameLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/white"
+        android:padding="16dp"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/location_input_layout">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/map_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:elevation="2dp"
+            android:importantForAccessibility="no"
+            android:scaleType="centerInside"
+            android:scaleX="4"
+            android:scaleY="4"
+            app:srcCompat="@drawable/shape_default_slide_dot"
+            app:tint="@color/white" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:importantForAccessibility="no"
+            android:translationZ="3dp"
+            app:srcCompat="@drawable/ic_outline_location_on"
+            app:tint="?attr/colorSecondary" />
+
+    </com.enterprise.agino.ui.view.ScrollMapViewWrapper>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="1dp"
         android:outlineProvider="bounds"
-        app:layout_constraintBottom_toBottomOf="parent" >
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/create_farm_button"
             style="@style/SolidButton"
-            android:text="@string/create_new_farm"
             android:layout_width="match_parent"
             android:layout_height="54dp"
+            android:layout_marginHorizontal="30dp"
             android:layout_marginVertical="13dp"
-            android:layout_marginHorizontal="30dp" />
+            android:text="@string/create_new_farm" />
 
     </LinearLayout>
 
