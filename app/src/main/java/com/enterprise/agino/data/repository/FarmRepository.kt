@@ -17,7 +17,7 @@ class FarmRepository @Inject constructor(
     private val farmService: FarmService,
     private val geocodeService: GeocodeService,
     private val ioDispatcher: CoroutineDispatcher,
-) {
+) : IFarmRepository {
 
     suspend fun createBooking(addFarmRequest: AddFarmRequest): Flow<Resource<Unit>> =
         flow {
@@ -43,4 +43,14 @@ class FarmRepository @Inject constructor(
             emit(result)
         }.flowOn(ioDispatcher)
 
+    override fun GetFarm(id: String): Flow<Resource<Farm>> {
+        return networkBoundResource(
+            fetch = {
+                farmService.GetFarm(id).body()!!
+            },
+            mapFetchedValue = {
+                it.toFarm()
+            }
+        )
+    }
 }

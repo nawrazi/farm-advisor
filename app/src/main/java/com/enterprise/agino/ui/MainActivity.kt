@@ -1,18 +1,19 @@
 package com.enterprise.agino.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.enterprise.agino.R
 import com.enterprise.agino.databinding.ActivityMainBinding
 import com.enterprise.agino.utils.gone
 import com.enterprise.agino.utils.show
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,6 +31,20 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    override fun onStart() {
+        super.onStart()
+        val navController = findNavController(R.id.nav_host)
+
+        if (Firebase.auth.currentUser != null) {
+            navController.clearBackStack(R.id.navigation_graph)
+            // TODO: Check if user is first time user and navigate to FirstTimeUserFragment
+            navController.navigate(R.id.homeFragment)
+        } else {
+            navController.clearBackStack(R.id.navigation_graph)
+            navController.navigate(R.id.onBoarding1Fragment)
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
@@ -40,14 +55,6 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         val navController = navHostFragment.navController
-
-        setSupportActionBar(binding.toolbar)
-        appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.homeFragment
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
 
         val fragmentsWithoutAppbar = setOf(
             R.id.onBoarding2Fragment,

@@ -1,130 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:elevation="5dp"
-        android:gravity="start|center_vertical"
-        android:orientation="horizontal"
-        android:padding="22dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <data>
 
-        <ImageButton
-            android:id="@+id/imageButton3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            app:srcCompat="@drawable/ic_arrow_back"
-            app:tint="?android:attr/textColorSecondary" />
+        <variable
+            name="viewModel"
+            type="com.enterprise.agino.ui.signin.SignInViewModel" />
 
-        <TextView
-            android:id="@+id/titleText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="13dp"
-            android:layout_weight="1"
-            android:text="@string/fragment_signin_title"
-            android:textAllCaps="true"
-            android:textStyle="bold" />
-    </LinearLayout>
+    </data>
 
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/fragment_signin_header"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/customerSpinnerLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="20dp"
-        app:boxBackgroundColor="@android:color/transparent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
-
-        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
-            android:id="@+id/chooseFarmName"
-            tools:ignore="KeyboardInaccessibleWidget"
-            tools:layout_editor_absoluteX="133dp"
-            tools:layout_editor_absoluteY="91dp"
-            tools:text="Norway (+47)"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:clickable="true"
-            android:textColor="?android:attr/textColorPrimary" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        app:hintTextColor="?android:attr/textColorSecondary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customerSpinnerLayout">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/transparent"
-            android:hint="@string/fragment_phone_number_signup_phone_number_hint" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <LinearLayout
-        android:id="@+id/bottomLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-2dp"
-        android:elevation="2dp"
-        android:outlineProvider="bounds"
-        android:paddingTop="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:elevation="5dp"
             android:gravity="start|center_vertical"
             android:orientation="horizontal"
-            android:paddingHorizontal="26dp"
-            android:paddingVertical="8dp">
+            android:padding="22dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <Button
-                android:id="@+id/continueBtn"
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/ic_arrow_back"
+                app:tint="?android:attr/textColorSecondary" />
+
+            <TextView
+                android:id="@+id/titleText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
                 android:layout_weight="1"
-                android:text="@string/fragment_phone_number_signup_continue_btn" />
+                android:text="@string/fragment_signin_title"
+                android:textAllCaps="true"
+                android:textStyle="bold" />
         </LinearLayout>
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/fragment_signin_header"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            app:boxBackgroundMode="filled"
+            app:hintTextColor="?android:attr/textColorSecondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/countryCodePicker">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/transparent"
+                android:hint="@string/fragment_phone_number_signup_phone_number_hint"
+                android:text="@={viewModel.phoneNumber}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.hbb20.CountryCodePicker
+            android:id="@+id/countryCodePicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="20dp"
+            app:ccp_defaultPhoneCode="251"
+            app:ccp_showFlag="false"
+            app:ccp_showFullName="true"
+            app:ccp_showNameCode="false"
+            app:ccp_showPhoneCode="true"
+            app:ccp_textGravity="LEFT"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        <LinearLayout
+            android:id="@+id/bottomLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-2dp"
+            android:elevation="2dp"
+            android:outlineProvider="bounds"
+            android:paddingTop="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="start|center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="26dp"
+                android:paddingVertical="8dp">
+
+                <Button
+                    android:id="@+id/continueBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:enabled="@{viewModel.isContinueBtnEnabled}"
+                    android:text="@string/fragment_phone_number_signup_continue_btn" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
