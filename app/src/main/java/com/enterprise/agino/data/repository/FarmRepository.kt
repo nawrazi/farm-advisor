@@ -5,6 +5,7 @@ import com.enterprise.agino.common.buildResource
 import com.enterprise.agino.data.remote.api.FarmService
 import com.enterprise.agino.data.remote.api.GeocodeService
 import com.enterprise.agino.data.remote.dto.AddFarmRequest
+import com.enterprise.agino.data.remote.dto.ReverseGeocodeResponse
 import com.enterprise.agino.utils.toGeocodeUrl
 import com.tomtom.sdk.location.GeoPoint
 import kotlinx.coroutines.CoroutineDispatcher

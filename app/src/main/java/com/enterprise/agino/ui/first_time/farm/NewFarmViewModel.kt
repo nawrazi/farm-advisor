@@ -9,4 +9,5 @@ import javax.inject.Inject
 @HiltViewModel
 class NewFarmViewModel @Inject constructor() : ViewModel() {
     val searchResults = MutableLiveData<List<Pair<String, GeoPoint>>>()
+
 }

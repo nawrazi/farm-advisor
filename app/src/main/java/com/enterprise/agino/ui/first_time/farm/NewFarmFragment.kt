@@ -86,6 +86,9 @@ class NewFarmFragment : Fragment() {
     private fun setupListeners() {
         binding.apply {
             createFarmButton.setOnClickListener {
+                val pos = map.cameraPosition.position
+                Log.i("MAP", pos.toString())
+
                 findNavController().navigate(
                     NewFarmFragmentDirections.actionNewFarmFragmentToAddFieldFragment()
                 )
