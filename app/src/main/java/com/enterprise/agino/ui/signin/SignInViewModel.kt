@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignInViewModel @Inject constructor() : ViewModel() {
-    var countryCode: String = ""
+    var countryCode: String = "251"
     val phoneNumber = MutableLiveData<String>()
 
     val isContinueBtnEnabled = Transformations.map(phoneNumber) {

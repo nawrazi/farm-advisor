@@ -39,7 +39,7 @@ class SignInFragment : Fragment() {
             continueBtn.setOnClickListener {
                 findNavController().navigate(
                     SignInFragmentDirections.actionSignInFragmentToVerificationCodeFragment(
-                        viewModel!!.phoneNumber.value!!
+                        "+" + viewModel!!.countryCode + viewModel!!.phoneNumber.value!!
                     )
                 )
             }

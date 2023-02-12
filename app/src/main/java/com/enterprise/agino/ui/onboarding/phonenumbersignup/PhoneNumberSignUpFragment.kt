@@ -32,7 +32,7 @@ class PhoneNumberSignUpFragment : Fragment() {
         binding.continueBtn.setOnClickListener {
             findNavController().navigate(
                 PhoneNumberSignUpFragmentDirections.actionPhoneNumberSignUpFragmentToOnBoarding2Fragment(
-                    viewModel!!.countryCode + viewModel!!.phoneNumber
+                    "+"+viewModel!!.countryCode + viewModel!!.phoneNumber.value!!
                 )
             )
         }
