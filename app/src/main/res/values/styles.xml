@@ -52,4 +52,16 @@
         <item name="endIconMode">custom</item>
     </style>
 
+    <style name="DropdownLayoutStyle" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="hintTextColor">@color/silver</item>
+        <item name="android:textColorHint">@color/silver</item>
+        <item name="boxCornerRadiusBottomEnd">5dp</item>
+        <item name="boxCornerRadiusBottomStart">5dp</item>
+        <item name="boxCornerRadiusTopEnd">5dp</item>
+        <item name="boxCornerRadiusTopStart">5dp</item>
+        <item name="boxStrokeWidth">0.4dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+    </style>
+
 </resources>
