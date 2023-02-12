@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.enterprise.agino.R
+import com.enterprise.agino.common.Constants
 import com.enterprise.agino.databinding.FragmentAddNewSensorBinding
 import com.enterprise.agino.ui.view.OnScrollMapViewWrapperTouchListener
 import com.tomtom.quantity.Distance
@@ -78,7 +79,7 @@ class AddNewSensorFragment : Fragment(), OnScrollMapViewWrapperTouchListener {
 
     private fun setupMap() {
         val mapOptions = MapOptions(
-            mapKey = "QKG5sZdSQCFSitlPKDsIHZ9FV7ZGZg4g",
+            mapKey = Constants.MAP_KEY,
         )
         val mapFragment = MapFragment.newInstance(mapOptions)
 

@@ -13,7 +13,9 @@ import com.enterprise.agino.R
 import com.enterprise.agino.databinding.ActivityMainBinding
 import com.enterprise.agino.utils.gone
 import com.enterprise.agino.utils.show
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding: ActivityMainBinding get() = _binding!!
