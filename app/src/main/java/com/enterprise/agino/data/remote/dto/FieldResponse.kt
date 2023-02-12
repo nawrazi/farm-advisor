@@ -1,6 +1,5 @@
 package com.enterprise.agino.data.remote.dto
 
-import android.hardware.Sensor
 import com.google.gson.annotations.SerializedName
 
 data class FieldResponse(
@@ -14,5 +13,5 @@ data class FieldResponse(
     @SerializedName("farmId")
     val farmID: String,
 
-    val sensors: List<Sensor>
+    val sensors: List<SensorResponse>? = null
 )
