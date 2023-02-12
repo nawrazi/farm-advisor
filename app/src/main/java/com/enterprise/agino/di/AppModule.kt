@@ -4,6 +4,7 @@ import android.content.Context
 import com.enterprise.agino.BuildConfig
 import com.enterprise.agino.common.Constants.BASE_URL
 import com.enterprise.agino.common.interceptors.NetworkInterceptor
+import com.enterprise.agino.data.remote.api.FarmService
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -22,6 +23,11 @@ object AppModule {
     @Provides
     @Singleton
     fun provideGson() = Gson()
+
+    @Provides
+    @Singleton
+    fun provideFarmService(retrofit: Retrofit): FarmService =
+        retrofit.create(FarmService::class.java)
 
     @Provides
     @Singleton
