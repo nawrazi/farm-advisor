@@ -86,6 +86,7 @@ dependencies {
     implementation "com.tomtom.sdk.maps:map-display:0.3.1547"
     implementation "com.tomtom.sdk.location:provider-android:0.3.1547"
     implementation "com.tomtom.sdk.location:provider-gms:0.3.1547"
+    implementation "com.tomtom.sdk.search:search-online:0.3.1547"
 
     // Third Party Library
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
