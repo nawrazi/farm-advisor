@@ -1,4 +1,4 @@
-package com.enterprise.agino.ui.onboarding.onboarding1
+package com.enterprise.agino.ui.onboarding.onboarding
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

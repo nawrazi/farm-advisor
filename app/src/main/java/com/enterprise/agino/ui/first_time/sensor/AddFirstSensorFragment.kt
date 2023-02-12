@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.enterprise.agino.databinding.FragmentAddFirstSensorBinding
 
 class AddFirstSensorFragment : Fragment() {
@@ -17,7 +18,16 @@ class AddFirstSensorFragment : Fragment() {
     ): View {
         _binding = FragmentAddFirstSensorBinding.inflate(inflater, container, false)
 
+        setupListeners()
         return binding.root
+    }
+
+    private fun setupListeners() {
+        binding.apply {
+            addFirstSensorButton.setOnClickListener {
+                findNavController().navigate(AddFirstSensorFragmentDirections.actionAddFirstSensorFragmentToAddNewSensorFragment())
+            }
+        }
     }
 
     override fun onDestroyView() {

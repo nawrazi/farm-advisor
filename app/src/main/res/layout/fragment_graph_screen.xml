@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey_background">
+
+        <ImageView
+            android:id="@+id/landscape_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_landscape"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="22dp"
+            android:importantForAccessibility="no"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_127m_above_sea_level"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="14sp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toEndOf="@+id/landscape_icon"
+            app:layout_constraintTop_toTopOf="@+id/landscape_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/landscape_icon" />
+
+        <include
+            android:id="@+id/statistics_layout"
+            layout="@layout/statistics_component"
+            android:layout_width="0dp"
+            android:layout_height="98dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/landscape_icon" />
+
+        <TextView
+            android:id="@+id/last_sensor_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last sensor reset: 04/03/22 (auto reset)"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="6dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/statistics_layout" />
+
+        <View
+            android:id="@+id/horizontal_divider_1"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/silver"
+            android:layout_marginTop="24dp"
+            android:layout_marginHorizontal="20dp"
+            app:layout_constraintTop_toBottomOf="@id/last_sensor_reset" />
+
+        <TextView
+            android:id="@+id/sensors_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sensors"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_divider_1" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_add"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintTop_toTopOf="@id/sensors_label"
+            app:layout_constraintBottom_toBottomOf="@id/sensors_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="@string/add_new_sensor" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/sensors_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginHorizontal="13dp"
+            app:spanCount="2"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/sensors_label"
+            tools:itemCount="2"
+            tools:listitem="@layout/card_sensor" />
+
+        <View
+            android:id="@+id/horizontal_divider_2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/silver"
+            android:layout_marginTop="24dp"
+            android:layout_marginHorizontal="20dp"
+            app:layout_constraintTop_toBottomOf="@id/sensors_list" />
+
+        <TextView
+            android:id="@+id/weather_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/weather_forecast"
+            android:textSize="16sp"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_divider_2" />
+
+        <TextView
+            android:id="@+id/statistics_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/statistics"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintStart_toEndOf="@id/weather_label"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_divider_2" />
+
+        <TextView
+            android:id="@+id/period_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/period"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/weather_label" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/date_picker"
+            style="@style/TextInputLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:hint="Choose a period"
+            app:endIconMode="custom"
+            app:endIconDrawable="@drawable/ic_calendar_today"
+            app:layout_constraintTop_toBottomOf="@+id/period_label">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/date_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/chart1"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/date_picker"
+            android:background="@drawable/rigid_corners_with_stroke"
+            android:paddingTop="10dp" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/chart2"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chart1"
+            android:background="@drawable/rigid_corners_with_stroke"
+            android:paddingTop="10dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.enterprise.agino.databinding.FragmentVerficationCodeBinding
 
 class VerificationCodeFragment : Fragment() {
@@ -17,7 +18,16 @@ class VerificationCodeFragment : Fragment() {
     ): View {
         _binding = FragmentVerficationCodeBinding.inflate(inflater, container, false)
 
+        setupListeners()
         return binding.root
+    }
+
+    private fun setupListeners() {
+        binding.apply {
+            continueBtn.setOnClickListener {
+                findNavController().navigate(VerificationCodeFragmentDirections.actionVerificationCodeFragmentToFirstTimeFragment())
+            }
+        }
     }
 
     override fun onDestroyView() {
