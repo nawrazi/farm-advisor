@@ -28,10 +28,11 @@ class PhoneNumberSignUpFragment : Fragment() {
     }
 
     private fun setupListeners() {
+        binding.apply {
         binding.continueBtn.setOnClickListener {
             findNavController().navigate(
                 PhoneNumberSignUpFragmentDirections.actionPhoneNumberSignUpFragmentToOnBoarding2Fragment(
-                    viewModel.countryCode + viewModel.phoneNumber
+                    viewModel!!.countryCode + viewModel!!.phoneNumber
                 )
             )
         }
@@ -39,6 +40,10 @@ class PhoneNumberSignUpFragment : Fragment() {
         binding.backButton.setOnClickListener {
             findNavController().popBackStack()
         }
+
+        countryCodePicker.setOnCountryChangeListener {
+            viewModel!!.countryCode = binding.countryCodePicker.selectedCountryCode
+        } }
     }
 
 
