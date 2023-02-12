@@ -13,7 +13,7 @@ inline fun <ResultType, RequestType> networkBoundResource(
         val result = mapFetchedValue(fetched.value!!)
         Resource.Success(result)
     } else {
-        val result = mapFetchedValue(fetched.value!!)
+            val result = mapFetchedValue(fetched.value!!)
         Resource.Error(fetched.message, result)
     }
 
