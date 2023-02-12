@@ -2,7 +2,7 @@ package com.enterprise.agino.data.remote.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class AddSensorResponse(
+data class AddSensorRequest(
     val serialNumber: String,
 
     @SerializedName("lat")
