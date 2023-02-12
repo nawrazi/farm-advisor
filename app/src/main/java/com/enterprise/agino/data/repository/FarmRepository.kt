@@ -2,9 +2,13 @@ package com.enterprise.agino.data.repository
 
 import com.enterprise.agino.common.Resource
 import com.enterprise.agino.common.buildResource
+import com.enterprise.agino.common.networkBoundResource
+import com.enterprise.agino.data.mapper.toFarm
 import com.enterprise.agino.data.remote.api.FarmService
 import com.enterprise.agino.data.remote.api.GeocodeService
 import com.enterprise.agino.data.remote.dto.AddFarmRequest
+import com.enterprise.agino.domain.model.Farm
+import com.enterprise.agino.domain.repository.IFarmRepository
 import com.enterprise.agino.utils.toGeocodeUrl
 import com.tomtom.sdk.location.GeoPoint
 import kotlinx.coroutines.CoroutineDispatcher
