@@ -13,6 +13,8 @@ import com.enterprise.agino.R
 import com.enterprise.agino.databinding.ActivityMainBinding
 import com.enterprise.agino.utils.gone
 import com.enterprise.agino.utils.show
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,6 +31,20 @@ class MainActivity : AppCompatActivity() {
         setupNavigation()
     }
 
+
+    override fun onStart() {
+        super.onStart()
+        val navController = findNavController(R.id.nav_host)
+
+        if (Firebase.auth.currentUser != null) {
+            navController.clearBackStack(R.id.navigation_graph)
+            // TODO: Check if user is first time user and navigate to FirstTimeUserFragment
+            navController.navigate(R.id.homeFragment)
+        } else {
+            navController.clearBackStack(R.id.navigation_graph)
+            navController.navigate(R.id.onBoarding1Fragment)
+        }
+    }
 
     override fun onDestroy() {
         super.onDestroy()

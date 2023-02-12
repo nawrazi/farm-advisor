@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1087490994932",
+    "project_id": "agino-f59a7",
+    "storage_bucket": "agino-f59a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087490994932:android:9ca671d6aebf11c87464a1",
+        "android_client_info": {
+          "package_name": "com.enterprise.agino"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1087490994932-otpeu8o58one2khscplv7s5s2pj3vlj5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcnt_7m_dgKBxYxZTmR7vWW0OUS8uufno"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1087490994932-otpeu8o58one2khscplv7s5s2pj3vlj5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

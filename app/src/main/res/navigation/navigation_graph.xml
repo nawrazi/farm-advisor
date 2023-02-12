@@ -49,12 +49,14 @@
     </fragment>
     <fragment
         android:id="@+id/onBoarding2Fragment"
-        android:name="com.enterprise.agino.ui.onboarding.onboarding2.OnBoarding2Fragment"
+        android:name="com.enterprise.agino.ui.onboarding.termsandconditons.TermsAndConditionsFragment"
         android:label="OnBoarding2Fragment"
-        tools:layout="@layout/fragment_onboarding2">
+        tools:layout="@layout/fragment_terms_and_conditions">
         <action
             android:id="@+id/action_onBoarding2Fragment_to_verificationCodeFragment"
             app:destination="@id/verificationCodeFragment" />
+        <argument android:name="phoneNumber"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/phoneNumberSignUpFragment"
@@ -76,6 +78,9 @@
         <action
             android:id="@+id/action_verificationCodeFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="phoneNumber"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/addFieldFragment"
