@@ -17,8 +17,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.enterprise.agino.R
 import com.enterprise.agino.common.Constants
+import com.enterprise.agino.common.Resource
 import com.enterprise.agino.databinding.FragmentNewFarmBinding
 import com.enterprise.agino.utils.afterTextChanged
+import com.enterprise.agino.utils.showErrorSnackBar
+import com.enterprise.agino.utils.showSuccessSnackBar
 import com.tomtom.quantity.Distance
 import com.tomtom.sdk.location.GeoLocation
 import com.tomtom.sdk.location.LocationProvider
@@ -37,6 +40,7 @@ import com.tomtom.sdk.search.SearchResponse
 import com.tomtom.sdk.search.common.error.SearchFailure
 import com.tomtom.sdk.search.online.OnlineSearch
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds
 
 
@@ -48,14 +52,16 @@ class NewFarmFragment : Fragment() {
 
     private val viewModel by viewModels<NewFarmViewModel>()
 
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentNewFarmBinding.inflate(inflater, container, false)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
-        setupListeners()
         setupMap()
+        setupListeners()
         return binding.root
     }
 
@@ -75,27 +81,29 @@ class NewFarmFragment : Fragment() {
             }
             else -> {
                 Toast.makeText(
-                    context,
-                    "Agino was denied access to location",
-                    Toast.LENGTH_LONG
+                    context, "Agino was denied access to location", Toast.LENGTH_LONG
                 ).show()
             }
         }
     }
 
     private fun setupListeners() {
-        binding.apply {
-            createFarmButton.setOnClickListener {
-                findNavController().navigate(
-                    NewFarmFragmentDirections.actionNewFarmFragmentToAddFieldFragment()
-                )
-            }
-        }
-
         lifecycleScope.launchWhenCreated {
-            binding.locationInput.afterTextChanged {
-                if (it.isNotEmpty())
-                    searchLocation(it)
+            launch {
+                binding.locationInput.afterTextChanged {
+                    if (it.isNotEmpty()) searchLocation(it)
+                }
+            }
+
+            launch {
+                viewModel.formSubmissionResult.collect() {
+                    if (it is Resource.Success) {
+                        showSuccessSnackBar("Successfully added farm", binding.root)
+                        findNavController().navigate(NewFarmFragmentDirections.actionNewFarmFragmentToAddFieldFragment())
+                    } else if (it is Resource.Error) {
+                        showErrorSnackBar("Error adding farm: ${it.message}", binding.root)
+                    }
+                }
             }
         }
 
@@ -106,11 +114,9 @@ class NewFarmFragment : Fragment() {
         textView.setAdapter(adapter)
 
         viewModel.searchResults.observe(viewLifecycleOwner) {
-            (textView.adapter as ArrayAdapter<String>).clear()
-            (textView.adapter as ArrayAdapter<String>).addAll(
-                it.map { pair -> pair.first }
-            )
-            (textView.adapter as ArrayAdapter<String>).notifyDataSetChanged()
+            (textView.adapter as ArrayAdapter<*>).clear()
+            (textView.adapter as ArrayAdapter<String>).addAll(it.map { pair -> pair.first })
+            (textView.adapter as ArrayAdapter<*>).notifyDataSetChanged()
             textView.showDropDown()
 
             textView.setOnItemClickListener { _, _, idx, _ ->
@@ -125,36 +131,37 @@ class NewFarmFragment : Fragment() {
         val search = OnlineSearch.create(requireContext(), Constants.MAP_KEY)
 
         val searchOptions = SearchOptions(query = query, limit = 5)
-        search.search(
-            searchOptions,
-            object : SearchCallback {
-                override fun onSuccess(result: SearchResponse) {
-                    Log.i("TEXT Result", result.toString())
-                    viewModel.searchResults.value = result.results.map {
-                        val fallbackName =
-                            "${it.place.coordinate.latitude}, ${it.place.coordinate.longitude}"
-                        Pair(
-                            it.place.address?.freeformAddress ?: fallbackName,
-                            it.place.coordinate
-                        )
-                    }
-                }
-
-                override fun onFailure(failure: SearchFailure) {
-                    Log.i("TEXT RESULT", "ERROR: ${failure.message}")
+        search.search(searchOptions, object : SearchCallback {
+            override fun onSuccess(result: SearchResponse) {
+                Log.i("TEXT Result", result.toString())
+                viewModel.searchResults.value = result.results.map {
+                    val fallbackName =
+                        "${it.place.coordinate.latitude}, ${it.place.coordinate.longitude}"
+                    Pair(
+                        it.place.address?.freeformAddress ?: fallbackName, it.place.coordinate
+                    )
                 }
             }
-        )
+
+            override fun onFailure(failure: SearchFailure) {
+                Log.i("TEXT RESULT", "ERROR: ${failure.message}")
+            }
+        })
     }
 
     private fun setupMap() {
-        val mapOptions = MapOptions(
-            mapKey = Constants.MAP_KEY,
+        val mapFragment = MapFragment.newInstance(
+            mapOptions = MapOptions(
+                mapKey = Constants.MAP_KEY,
+            )
         )
-        val mapFragment = MapFragment.newInstance(mapOptions)
 
         mapFragment.getMapAsync { tomtomMap: TomTomMap ->
             map = tomtomMap
+            map.addCameraChangeListener {
+                viewModel.farmAddress.value = map.cameraPosition.position
+            }
+
             tomtomMap.loadStyle(StandardStyles.SATELLITE, object : StyleLoadingCallback {
                 override fun onSuccess() {
                     // TODO: handle success
@@ -168,19 +175,15 @@ class NewFarmFragment : Fragment() {
             setupLocationProvider(tomtomMap)
         }
 
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.map_container, mapFragment)
-            .commit()
+        parentFragmentManager.beginTransaction().replace(R.id.map_container, mapFragment).commit()
     }
 
     private fun setupLocationProvider(tomtomMap: TomTomMap) {
         val androidLocationProviderConfig = AndroidLocationProviderConfig(
-            minTimeInterval = 250L.milliseconds,
-            minDistance = Distance.meters(20.0)
+            minTimeInterval = 250L.milliseconds, minDistance = Distance.meters(20.0)
         )
         val locationProvider: LocationProvider = AndroidLocationProvider(
-            context = requireContext().applicationContext,
-            config = androidLocationProviderConfig
+            context = requireContext().applicationContext, config = androidLocationProviderConfig
         )
 
         tomtomMap.setLocationProvider(locationProvider)

@@ -5,12 +5,15 @@ import com.enterprise.agino.common.buildResource
 import com.enterprise.agino.common.networkBoundResource
 import com.enterprise.agino.data.mapper.toFarm
 import com.enterprise.agino.data.remote.api.FarmService
-import com.enterprise.agino.data.remote.api.GeocodeService
-import com.enterprise.agino.data.remote.dto.AddFarmRequest
+import com.enterprise.agino.data.remote.dto.AddFarmRequestDto
+import com.enterprise.agino.domain.AddFarmForm
 import com.enterprise.agino.domain.model.Farm
 import com.enterprise.agino.domain.repository.IFarmRepository
-import com.enterprise.agino.utils.toGeocodeUrl
-import com.tomtom.sdk.location.GeoPoint
+import com.tomtom.sdk.common.ifFailure
+import com.tomtom.sdk.common.ifSuccess
+import com.tomtom.sdk.search.reversegeocoder.ReverseGeocoder
+import com.tomtom.sdk.search.reversegeocoder.ReverseGeocoderOptions
+import com.tomtom.sdk.search.reversegeocoder.ReverseGeocoderResponse
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -19,28 +22,35 @@ import javax.inject.Inject
 
 class FarmRepository @Inject constructor(
     private val farmService: FarmService,
-    private val geocodeService: GeocodeService,
     private val ioDispatcher: CoroutineDispatcher,
+    private val reverseGeocoder: ReverseGeocoder,
 ) : IFarmRepository {
-
-    suspend fun createBooking(addFarmRequest: AddFarmRequest): Flow<Resource<Unit>> =
+    suspend fun createFarm(addFarmForm: AddFarmForm): Flow<Resource<Unit>> =
         flow {
             emit(Resource.Loading())
 
-            val result = buildResource {
-                farmService.addFarm(addFarmRequest)
-                return@buildResource
-            }
+            var reverseGeocoderResponse: ReverseGeocoderResponse? = null
 
-            emit(result)
-        }.flowOn(ioDispatcher)
-
-    suspend fun latLngToPlace(geoPoint: GeoPoint): Flow<Resource<Unit>> =
-        flow {
-            emit(Resource.Loading())
+            reverseGeocoder.reverseGeocode(ReverseGeocoderOptions(position = addFarmForm.geoPosition))
+                .ifFailure {
+                    emit(Resource.Error(it.message))
+                    return@flow
+                }.ifSuccess {
+                    reverseGeocoderResponse = it
+                }
 
             val result = buildResource {
-                geocodeService.latLngToPlace(toGeocodeUrl(geoPoint))
+                val address = reverseGeocoderResponse?.places?.get(0)?.place?.address
+
+                farmService.addFarm(
+                    AddFarmRequestDto(
+                        userId = "userId",
+                        name = addFarmForm.name,
+                        postcode = address?.postalCode ?: "",
+                        city = address?.municipality ?: "",
+                        country = address?.country ?: ""
+                    )
+                )
                 return@buildResource
             }
 
@@ -50,7 +60,7 @@ class FarmRepository @Inject constructor(
     override fun GetFarm(id: String): Flow<Resource<Farm>> {
         return networkBoundResource(
             fetch = {
-                farmService.GetFarm(id).body()!!
+                farmService.getFarm(id).body()!!
             },
             mapFetchedValue = {
                 it.toFarm()

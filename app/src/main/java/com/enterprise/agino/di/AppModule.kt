@@ -3,17 +3,21 @@ package com.enterprise.agino.di
 import android.content.Context
 import com.enterprise.agino.BuildConfig
 import com.enterprise.agino.common.Constants.BASE_URL
+import com.enterprise.agino.common.interceptors.ApiInterceptor
 import com.enterprise.agino.common.interceptors.NetworkInterceptor
 import com.enterprise.agino.data.remote.api.FarmService
 import com.enterprise.agino.data.remote.api.FieldService
 import com.enterprise.agino.data.remote.api.SensorService
 import com.enterprise.agino.data.remote.api.UserService
 import com.google.gson.Gson
+import com.tomtom.sdk.search.reversegeocoder.ReverseGeocoder
+import com.tomtom.sdk.search.reversegeocoder.online.OnlineReverseGeocoder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -26,6 +30,24 @@ object AppModule {
     @Provides
     @Singleton
     fun provideGson() = Gson()
+
+
+    @Provides
+    @Singleton
+    fun provideReverseDecoder(@ApplicationContext context: Context): ReverseGeocoder =
+        OnlineReverseGeocoder.create(context, com.enterprise.agino.common.Constants.MAP_KEY)
+
+    @Provides
+    @Singleton
+    fun provideFarmRepository(
+        farmService: FarmService,
+        reverseGeocoder: ReverseGeocoder
+    ) = com.enterprise.agino.data.repository.FarmRepository(
+        farmService,
+        Dispatchers.IO,
+        reverseGeocoder
+    )
+
 
     @Provides
     @Singleton
@@ -58,6 +80,7 @@ object AppModule {
 
         val builder = OkHttpClient.Builder()
             .addInterceptor(NetworkInterceptor(context))
+            .addInterceptor(ApiInterceptor())
 //            .addInterceptor(authTokenInterceptor)
 
         if (BuildConfig.DEBUG) {

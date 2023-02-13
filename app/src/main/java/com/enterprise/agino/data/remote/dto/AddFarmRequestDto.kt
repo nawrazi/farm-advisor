@@ -1,6 +1,6 @@
 package com.enterprise.agino.data.remote.dto
 
-data class AddFarmRequest(
+data class AddFarmRequestDto(
     val userId: String,
     val name: String,
     val postcode: String,
