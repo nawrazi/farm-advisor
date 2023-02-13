@@ -9,8 +9,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import com.enterprise.agino.BuildConfig
-import com.enterprise.agino.common.Constants.BASE_URL
-import com.enterprise.agino.common.Constants.USER_PREFERENCES_NAME
+import com.enterprise.agino.common.Constants
 import com.enterprise.agino.common.interceptors.ApiInterceptor
 import com.enterprise.agino.common.interceptors.NetworkInterceptor
 import com.enterprise.agino.data.local.LocalPrefStore
@@ -25,8 +24,8 @@ import com.tomtom.sdk.search.reversegeocoder.online.OnlineReverseGeocoder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.internal.managers.ApplicationComponentManager
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -37,7 +36,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ApplicationComponentManager::class)
 object TestAppModule {
     @Provides
     @Singleton
@@ -69,9 +68,9 @@ object TestAppModule {
             corruptionHandler = ReplaceFileCorruptionHandler(
                 produceNewData = { emptyPreferences() }
             ),
-            migrations = listOf(SharedPreferencesMigration(appContext, USER_PREFERENCES_NAME)),
+            migrations = listOf(SharedPreferencesMigration(appContext, Constants.USER_PREFERENCES_NAME)),
             scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
-            produceFile = { appContext.preferencesDataStoreFile(USER_PREFERENCES_NAME) }
+            produceFile = { appContext.preferencesDataStoreFile(Constants.USER_PREFERENCES_NAME) }
         )
     }
 
@@ -134,8 +133,9 @@ object TestAppModule {
     @Singleton
     fun provideRetrofit(gson: Gson, httpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(Constants.BASE_URL)
             .client(httpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
+
 }
