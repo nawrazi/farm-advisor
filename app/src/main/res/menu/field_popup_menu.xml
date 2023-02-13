@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/reset_gdd"
+        android:title="@string/reset_gdd_on_all_sensors" />
+    <item
+        android:id="@+id/edit_field"
+        android:title="@string/edit_field" />
+    <item
+        android:id="@+id/delete_field"
+        android:title="@string/delete_field" />
+</menu>

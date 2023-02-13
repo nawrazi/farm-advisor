@@ -5,6 +5,7 @@ import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.util.component1
 import androidx.core.util.component2
 import androidx.fragment.app.Fragment
@@ -43,13 +44,22 @@ class GraphFragment : Fragment() {
             setOnClickListener { showDatePicker(this) }
         }
 
+        setupPopupOptionsListner()
+
         setupTemperatureObserver()
         setupPrecipitationObserver()
         setupSnowDepthObserver()
         setupWindObserver()
-
         setupSensorAdapter()
         return binding.root
+    }
+
+    private fun setupPopupOptionsListner() {
+        binding.optionsField.setOnClickListener {
+            val popup = PopupMenu(requireContext(), it)
+            popup.menuInflater.inflate(R.menu.field_popup_menu, popup.menu)
+            popup.show()
+        }
     }
 
     private fun setupTemperatureObserver() {

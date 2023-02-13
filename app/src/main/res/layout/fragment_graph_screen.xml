@@ -15,27 +15,69 @@
             android:layout_height="wrap_content"
             android:background="@color/grey_background">
 
-            <ImageView
-                android:id="@+id/landscape_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="22dp"
-                android:layout_marginTop="22dp"
-                android:importantForAccessibility="no"
-                android:src="@drawable/ic_landscape"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:id="@+id/actionBarField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#f7f7f7"
+            android:elevation="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="25dp"
+            android:paddingVertical="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/textView14"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/backButtonField"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_arrow_back"
+                app:tint="?android:attr/textColorSecondary" />
 
             <TextView
+                android:id="@+id/fieldName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="@string/_127m_above_sea_level"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/landscape_icon"
-                app:layout_constraintStart_toEndOf="@+id/landscape_icon"
-                app:layout_constraintTop_toTopOf="@+id/landscape_icon" />
+                android:layout_marginLeft="12dp"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                tools:text="Field Name" />
+
+            <ImageButton
+                android:id="@+id/optionsField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/ic_more_vert"
+                app:tint="?android:attr/textColorSecondary" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/landscape_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_landscape"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="22dp"
+            android:importantForAccessibility="no"
+            app:layout_constraintTop_toBottomOf="@id/actionBarField"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/_127m_above_sea_level"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/landscape_icon"
+            app:layout_constraintStart_toEndOf="@+id/landscape_icon"
+            app:layout_constraintTop_toTopOf="@+id/landscape_icon" />
 
             <include
                 android:id="@+id/statistics_container"
