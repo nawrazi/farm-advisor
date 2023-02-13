@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         if (Firebase.auth.currentUser != null) {
             navController.clearBackStack(R.id.navigation_graph)
             // TODO: Check if user is first time user and navigate to FirstTimeUserFragment
-            navController.navigate(R.id.homeFragment)
+            navController.navigate(R.id.firstTimeFragment)
         } else {
             navController.clearBackStack(R.id.navigation_graph)
             navController.navigate(R.id.onBoarding1Fragment)
