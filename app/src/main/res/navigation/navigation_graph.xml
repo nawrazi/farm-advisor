@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_newFieldFragment2"
             app:destination="@id/newFieldFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_newFarmFragment"
+            app:destination="@id/newFarmFragment" />
     </fragment>
     <fragment
         android:id="@+id/onBoarding1Fragment"
@@ -28,15 +31,6 @@
         <action
             android:id="@+id/action_onBoardingFragment_to_phoneNumberSignUpFragment"
             app:destination="@id/phoneNumberSignUpFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/firstTimeFragment"
-        android:name="com.enterprise.agino.ui.first_time.FirstTimeFragment"
-        android:label="FirstTimeFragment"
-        tools:layout="@layout/fragment_first_time_user">
-        <action
-            android:id="@+id/action_firstTimeFragment_to_newFarmFragment"
-            app:destination="@id/newFarmFragment" />
     </fragment>
     <fragment
         android:id="@+id/newFarmFragment"
@@ -72,9 +66,6 @@
         android:name="com.enterprise.agino.ui.onboarding.verificationcode.VerificationCodeFragment"
         android:label="VerificationCodeFragment"
         tools:layout="@layout/fragment_verfication_code">
-        <action
-            android:id="@+id/action_verificationCodeFragment_to_firstTimeFragment"
-            app:destination="@id/firstTimeFragment" />
         <action
             android:id="@+id/action_verificationCodeFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
