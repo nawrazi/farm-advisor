@@ -96,10 +96,10 @@ class NewFarmFragment : Fragment() {
             }
 
             launch {
-                viewModel.formSubmissionResult.collect() {
+                viewModel.formSubmissionResult.collect {
                     if (it is Resource.Success) {
                         showSuccessSnackBar("Successfully added farm", binding.root)
-                        findNavController().navigate(NewFarmFragmentDirections.actionNewFarmFragmentToAddFieldFragment())
+                        findNavController().popBackStack()
                     } else if (it is Resource.Error) {
                         showErrorSnackBar("Error adding farm: ${it.message}", binding.root)
                     }

@@ -19,6 +19,7 @@ import com.enterprise.agino.data.remote.api.FieldService
 import com.enterprise.agino.data.remote.api.SensorService
 import com.enterprise.agino.data.remote.api.UserService
 import com.enterprise.agino.domain.repository.IFarmRepository
+import com.enterprise.agino.domain.repository.ISensorRepository
 import com.google.gson.Gson
 import com.tomtom.sdk.search.reversegeocoder.ReverseGeocoder
 import com.tomtom.sdk.search.reversegeocoder.online.OnlineReverseGeocoder
@@ -59,6 +60,15 @@ object AppModule {
         farmService,
         reverseGeocoder,
         localPrefStore
+    )
+
+    @Provides
+    @Singleton
+    fun provideSensorRepository(
+        sensorService: SensorService,
+    ): ISensorRepository = com.enterprise.agino.data.repository.SensorRepository(
+        sensorService = sensorService,
+        Dispatchers.IO
     )
 
 

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.enterprise.agino.databinding.FragmentNewFieldBinding
 
 class NewFieldFragment : Fragment() {
@@ -25,7 +24,6 @@ class NewFieldFragment : Fragment() {
     private fun setupListeners() {
         binding.apply {
             createFieldButton.setOnClickListener {
-                findNavController().navigate(NewFieldFragmentDirections.actionNewFieldFragmentToAddFirstSensorFragment())
             }
         }
     }

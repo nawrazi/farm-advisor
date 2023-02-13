@@ -25,7 +25,7 @@ class AddFieldFragment : Fragment() {
     private fun setupListeners() {
         binding.apply {
             addFieldButton.setOnClickListener {
-                findNavController().navigate(AddFieldFragmentDirections.actionAddFieldFragmentToNewFieldFragment())
+                findNavController().popBackStack()
             }
         }
     }

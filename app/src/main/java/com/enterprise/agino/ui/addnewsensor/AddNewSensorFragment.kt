@@ -5,6 +5,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,11 +13,19 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.enterprise.agino.R
 import com.enterprise.agino.common.Constants
+import com.enterprise.agino.common.Resource
 import com.enterprise.agino.databinding.FragmentAddNewSensorBinding
 import com.enterprise.agino.ui.view.OnScrollMapViewWrapperTouchListener
+import com.enterprise.agino.utils.showErrorSnackBar
+import com.enterprise.agino.utils.showSuccessSnackBar
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.DateValidatorPointBackward
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.tomtom.quantity.Distance
 import com.tomtom.sdk.location.GeoLocation
 import com.tomtom.sdk.location.LocationProvider
@@ -27,11 +36,15 @@ import com.tomtom.sdk.map.display.TomTomMap
 import com.tomtom.sdk.map.display.camera.CameraOptions
 import com.tomtom.sdk.map.display.style.*
 import com.tomtom.sdk.map.display.ui.MapFragment
+import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 import kotlin.time.Duration.Companion.milliseconds
 
+@AndroidEntryPoint
 class AddNewSensorFragment : Fragment(), OnScrollMapViewWrapperTouchListener {
     private var _binding: FragmentAddNewSensorBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: AddNewSensorViewModel by viewModels()
 
     private val locationPermissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -62,19 +75,85 @@ class AddNewSensorFragment : Fragment(), OnScrollMapViewWrapperTouchListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAddNewSensorBinding.inflate(inflater, container, false)
+        _binding = FragmentAddNewSensorBinding.inflate(
+            inflater,
+            container,
+            false
+        )
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         setupMap()
-        setupListeners()
+        setupFlowListeners()
+        setupCalendarInputs()
         return binding.root
     }
 
-    private fun setupListeners() {
-        binding.apply {
-            addNewSensorButton.setOnClickListener {
-                findNavController().navigate(AddNewSensorFragmentDirections.actionAddNewSensorFragmentToHomeFragment())
+    private fun setupFlowListeners() {
+        lifecycleScope.launchWhenCreated {
+            viewModel.formSubmissionResult.collect { formResult ->
+                if (formResult is Resource.Success) {
+                    showSuccessSnackBar("Successfully added sensor", binding.root)
+                    findNavController().popBackStack()
+                } else if (formResult is Resource.Error) {
+                    showErrorSnackBar(
+                        "Error while adding sensor: ${formResult.message}",
+                        binding.root
+                    )
+                }
             }
         }
+    }
+
+    private fun setupCalendarInputs() {
+        binding.apply {
+            installationDateInput.setOnClickListener {
+                showInstallationDatePicker()
+            }
+
+            lastCuttingDateInput.setOnClickListener {
+                showLastCuttingDatePicker()
+            }
+
+            installationDateInput.inputType = InputType.TYPE_NULL
+            lastCuttingDateInput.inputType = InputType.TYPE_NULL
+        }
+    }
+
+    private fun showLastCuttingDatePicker() {
+        val constraintsBuilder =
+            CalendarConstraints.Builder()
+                .setValidator(DateValidatorPointBackward.now()).build()
+
+        val datePicker =
+            MaterialDatePicker.Builder.datePicker()
+                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                .setCalendarConstraints(constraintsBuilder)
+                .build()
+
+        datePicker.addOnPositiveButtonClickListener {
+            viewModel.lastFieldCuttingDate.value = Date(it)
+        }
+
+        datePicker.show(requireActivity().supportFragmentManager, null)
+    }
+
+    private fun showInstallationDatePicker() {
+        val constraintsBuilder =
+            CalendarConstraints.Builder()
+                .setValidator(DateValidatorPointBackward.now()).build()
+
+        val datePicker =
+            MaterialDatePicker.Builder.datePicker()
+                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                .setCalendarConstraints(constraintsBuilder)
+                .build()
+
+        datePicker.addOnPositiveButtonClickListener {
+            viewModel.sensorInstallationDate.value = Date(it)
+        }
+
+        datePicker.show(requireActivity().supportFragmentManager, null)
     }
 
     private fun setupMap() {
@@ -84,12 +163,17 @@ class AddNewSensorFragment : Fragment(), OnScrollMapViewWrapperTouchListener {
         val mapFragment = MapFragment.newInstance(mapOptions)
 
         mapFragment.getMapAsync { tomtomMap: TomTomMap ->
+            tomtomMap.addCameraChangeListener {
+                viewModel.location.value = tomtomMap.cameraPosition.position
+            }
+
+
             tomtomMap.loadStyle(StandardStyles.SATELLITE, object : StyleLoadingCallback {
                 override fun onSuccess() {
                     // TODO: handle success
                 }
 
-                override fun onFailure(error: LoadingStyleFailure) {
+                override fun onFailure(failure: LoadingStyleFailure) {
                     // TODO: handle error
                 }
             })
@@ -122,7 +206,7 @@ class AddNewSensorFragment : Fragment(), OnScrollMapViewWrapperTouchListener {
             tomtomMap.moveCamera(
                 CameraOptions(
                     position = it.position,
-                    zoom = 10.0,
+                    zoom = 15.0,
                 )
             )
         }
