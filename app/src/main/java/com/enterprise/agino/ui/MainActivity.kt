@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding: ActivityMainBinding get() = _binding!!
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private var startDestination: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +29,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupNavigation()
+        if (savedInstanceState == null)
+            startDestination = if (Firebase.auth.currentUser != null) {
+                R.id.homeFragment
+            } else {
+                R.id.onBoarding1Fragment
+            }
     }
 
 
