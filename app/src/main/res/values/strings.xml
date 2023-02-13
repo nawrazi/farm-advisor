@@ -83,4 +83,7 @@
     <string name="reset_gdd_on_all_sensors">Reset GDD on all sensors</string>
     <string name="edit_field">Edit field</string>
     <string name="delete_field">Delete field</string>
+    <string name="reset_gdd">Reset GDD</string>
+    <string name="edit_sensor">Edit sensor</string>
+    <string name="delete_sensor">Delete Sensor</string>
 </resources>

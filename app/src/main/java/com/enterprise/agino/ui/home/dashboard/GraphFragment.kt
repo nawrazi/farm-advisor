@@ -27,7 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 @AndroidEntryPoint
-class GraphFragment : Fragment() {
+class GraphFragment : Fragment(), SensorsAdapter.OnSensorOptionsClickListener {
     private var _binding: FragmentGraphScreenBinding? = null
     private val binding get() = _binding!!
     private val viewModel: GraphViewModel by viewModels()
@@ -44,7 +44,7 @@ class GraphFragment : Fragment() {
             setOnClickListener { showDatePicker(this) }
         }
 
-        setupPopupOptionsListner()
+        setupFieldPopupOptionsListener()
 
         setupTemperatureObserver()
         setupPrecipitationObserver()
@@ -54,7 +54,7 @@ class GraphFragment : Fragment() {
         return binding.root
     }
 
-    private fun setupPopupOptionsListner() {
+    private fun setupFieldPopupOptionsListener() {
         binding.optionsField.setOnClickListener {
             val popup = PopupMenu(requireContext(), it)
             popup.menuInflater.inflate(R.menu.field_popup_menu, popup.menu)
@@ -131,7 +131,7 @@ class GraphFragment : Fragment() {
     }
 
     private fun setupSensorAdapter() {
-        adapter = SensorsAdapter()
+        adapter = SensorsAdapter(this)
         binding.sensorsList.adapter = adapter
 
         val data = listOf(
@@ -241,5 +241,13 @@ class GraphFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onSensorOptionsClick(holder: SensorsAdapter.ViewHolder) {
+        holder.options.setOnClickListener {
+            val popup = PopupMenu(requireContext(), it)
+            popup.menuInflater.inflate(R.menu.sensor_popup_menu, popup.menu)
+            popup.show()
+        }
     }
 }
