@@ -10,9 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.enterprise.agino.common.Resource
 import com.enterprise.agino.databinding.FragmentNewFieldBinding
-import com.enterprise.agino.ui.first_time.farm.NewFarmFragmentDirections
-import com.enterprise.agino.ui.first_time.farm.NewFarmViewModel
-import com.enterprise.agino.utils.afterTextChanged
 import com.enterprise.agino.utils.showErrorSnackBar
 import com.enterprise.agino.utils.showSuccessSnackBar
 import kotlinx.coroutines.launch
@@ -40,7 +37,7 @@ class NewFieldFragment : Fragment() {
                 viewModel.formSubmissionResult.collect() {
                     if (it is Resource.Success) {
                         showSuccessSnackBar("Successfully added field", binding.root)
-                        findNavController().navigate(NewFarmFragmentDirections.actionNewFarmFragmentToAddFieldFragment())
+                        findNavController().popBackStack()
                     } else if (it is Resource.Error) {
                         showErrorSnackBar("Error adding field: ${it.message}", binding.root)
                     }
@@ -50,9 +47,6 @@ class NewFieldFragment : Fragment() {
 
         binding.apply {
             createFieldButton.setOnClickListener {
-                findNavController().navigate(
-                    NewFieldFragmentDirections.actionNewFieldFragmentToAddFirstSensorFragment()
-                )
             }
         }
     }
