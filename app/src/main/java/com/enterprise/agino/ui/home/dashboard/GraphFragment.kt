@@ -43,8 +43,18 @@ class GraphFragment : Fragment() {
             setOnClickListener { showDatePicker(this) }
         }
 
+        setupTemperatureObserver()
+        setupPrecipitationObserver()
+        setupSnowDepthObserver()
+        setupWindObserver()
+
+        setupSensorAdapter()
+        return binding.root
+    }
+
+    private fun setupTemperatureObserver() {
         viewModel.temperatureGraphDataSet.observe(viewLifecycleOwner) {
-            binding.chart1.apply {
+            binding.temperatureChart.apply {
                 data = LineData(it)
                 it.setColors(
                     resources.getColor(R.color.royal_orange, null)
@@ -57,9 +67,46 @@ class GraphFragment : Fragment() {
                 invalidate()
             }
         }
+    }
 
+
+    private fun setupPrecipitationObserver() {
+        viewModel.precipitationGraphDataSet.observe(viewLifecycleOwner) {
+            binding.precipitationChart.apply {
+                data = BarData(it)
+                it.color = resources.getColor(R.color.navy_blue, null)
+                data.setDrawValues(false)
+                styleBarGraph(this)
+                invalidate()
+            }
+        }
+    }
+
+    private fun setupWindObserver() {
+        viewModel.windGraphDataSet.observe(viewLifecycleOwner) {
+            binding.windChart.apply {
+                val maxGust = it.component1()
+                val avgWindSpeed = it.component2()
+                maxGust.color = resources.getColor(R.color.royal_orange, null)
+                avgWindSpeed.color = resources.getColor(R.color.forest_green, null)
+
+                data = LineData(listOf(maxGust, avgWindSpeed))
+                data.setDrawValues(false)
+                maxGust.setDrawCircles(false)
+                maxGust.lineWidth = 3f
+                maxGust.mode = LineDataSet.Mode.CUBIC_BEZIER
+                avgWindSpeed.setDrawCircles(false)
+                avgWindSpeed.lineWidth = 3f
+                avgWindSpeed.mode = LineDataSet.Mode.CUBIC_BEZIER
+                styleLineGraph(this)
+                invalidate()
+            }
+        }
+    }
+
+    private fun setupSnowDepthObserver() {
         viewModel.snowDepthGraphDataSet.observe(viewLifecycleOwner) {
-            binding.chart2.apply {
+            binding.snowDepthChart.apply {
                 val snowDepth = it.component1()
                 val missingData = it.component2()
                 snowDepth.color = resources.getColor(R.color.navy_blue, null)
@@ -71,9 +118,6 @@ class GraphFragment : Fragment() {
                 invalidate()
             }
         }
-
-        setupSensorAdapter()
-        return binding.root
     }
 
     private fun setupSensorAdapter() {
