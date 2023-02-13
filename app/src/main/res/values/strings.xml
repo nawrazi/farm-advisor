@@ -80,4 +80,7 @@
     <string name="date_range">%1$s - %2$s</string>
     <string name="choose_a_period">Choose a period</string>
     <string name="fragment_verification_code_resend_btn_label">Resend Code</string>
+    <string name="reset_gdd_on_all_sensors">Reset GDD on all sensors</string>
+    <string name="edit_field">Edit field</string>
+    <string name="delete_field">Delete field</string>
 </resources>
