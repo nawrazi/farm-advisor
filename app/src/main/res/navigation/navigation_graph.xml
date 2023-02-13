@@ -95,11 +95,7 @@
         android:id="@+id/newFieldFragment"
         android:name="com.enterprise.agino.ui.first_time.field.NewFieldFragment"
         android:label="NewFieldFragment"
-        tools:layout="@layout/fragment_new_field">
-        <action
-            android:id="@+id/action_newFieldFragment_to_fieldDetailsScreen"
-            app:destination="@id/fieldDetailsScreen" />
-    </fragment>
+        tools:layout="@layout/fragment_new_field"/>
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.enterprise.agino.ui.signin.SignInFragment"
