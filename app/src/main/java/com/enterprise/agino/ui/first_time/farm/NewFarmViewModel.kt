@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.enterprise.agino.common.Resource
 import com.enterprise.agino.data.repository.FarmRepository
-import com.enterprise.agino.domain.AddFarmForm
+import com.enterprise.agino.domain.model.form.AddFarmForm
 import com.tomtom.sdk.location.GeoPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*

@@ -7,7 +7,7 @@ import com.enterprise.agino.data.local.LocalPrefStore
 import com.enterprise.agino.data.mapper.toFarm
 import com.enterprise.agino.data.remote.api.FarmService
 import com.enterprise.agino.data.remote.dto.AddFarmRequestDto
-import com.enterprise.agino.domain.AddFarmForm
+import com.enterprise.agino.domain.model.form.AddFarmForm
 import com.enterprise.agino.domain.model.Farm
 import com.enterprise.agino.domain.repository.IFarmRepository
 import com.tomtom.sdk.common.ifFailure
@@ -61,7 +61,7 @@ class FarmRepository @Inject constructor(
             emit(result)
         }.flowOn(Dispatchers.IO)
 
-    override fun getFarm(id: String): Flow<Resource<Farm>> {
+    override fun fetchFarm(id: String): Flow<Resource<Farm>> {
         return networkBoundResource(
             fetch = {
                 farmService.getFarm(id).body()!!

@@ -43,7 +43,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds
 
-
 @AndroidEntryPoint
 class NewFarmFragment : Fragment() {
     private var _binding: FragmentNewFarmBinding? = null
