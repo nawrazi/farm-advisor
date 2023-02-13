@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/grey_background">
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/grey_background">
 
         <LinearLayout
             android:id="@+id/actionBarField"
@@ -74,228 +79,240 @@
             app:layout_constraintStart_toEndOf="@+id/landscape_icon"
             app:layout_constraintTop_toTopOf="@+id/landscape_icon" />
 
-        <include
-            android:id="@+id/statistics_container"
-            layout="@layout/statistics_component"
-            android:layout_width="0dp"
-            android:layout_height="98dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginHorizontal="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/landscape_icon" />
+            <include
+                android:id="@+id/statistics_container"
+                layout="@layout/statistics_component"
+                android:layout_width="0dp"
+                android:layout_height="98dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/landscape_icon" />
 
-        <TextView
-            android:id="@+id/last_sensor_reset"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Last sensor reset: 04/03/22 (auto reset)"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="6dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/statistics_container" />
+            <TextView
+                android:id="@+id/last_sensor_reset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="6dp"
+                android:text="Last sensor reset: 04/03/22 (auto reset)"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/statistics_container" />
 
-        <View
-            android:id="@+id/horizontal_divider_1"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/silver"
-            android:layout_marginTop="24dp"
-            android:layout_marginHorizontal="20dp"
-            app:layout_constraintTop_toBottomOf="@id/last_sensor_reset" />
+            <View
+                android:id="@+id/horizontal_divider_1"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/silver"
+                app:layout_constraintTop_toBottomOf="@id/last_sensor_reset" />
 
-        <TextView
-            android:id="@+id/sensors_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sensors"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="24dp"
-            android:layout_marginStart="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/horizontal_divider_1" />
+            <TextView
+                android:id="@+id/sensors_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/sensors"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_divider_1" />
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_add"
-            android:layout_marginEnd="20dp"
-            app:layout_constraintTop_toTopOf="@id/sensors_label"
-            app:layout_constraintBottom_toBottomOf="@id/sensors_label"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:contentDescription="@string/add_new_sensor" />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/add_new_sensor"
+                android:src="@drawable/ic_add"
+                app:layout_constraintBottom_toBottomOf="@id/sensors_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/sensors_label" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/sensors_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginHorizontal="13dp"
-            android:overScrollMode="never"
-            app:spanCount="2"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/sensors_label"
-            tools:itemCount="2"
-            tools:listitem="@layout/card_sensor" />
-
-        <View
-            android:id="@+id/horizontal_divider_2"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/silver"
-            android:layout_marginTop="24dp"
-            android:layout_marginHorizontal="20dp"
-            app:layout_constraintTop_toBottomOf="@id/sensors_list" />
-
-        <TextView
-            android:id="@+id/weather_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/weather_forecast"
-            android:textSize="16sp"
-            android:layout_marginTop="24dp"
-            android:layout_marginStart="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/horizontal_divider_2" />
-
-        <TextView
-            android:id="@+id/statistics_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/statistics"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="24dp"
-            android:layout_marginStart="20dp"
-            app:layout_constraintStart_toEndOf="@id/weather_label"
-            app:layout_constraintTop_toBottomOf="@id/horizontal_divider_2" />
-
-        <TextView
-            android:id="@+id/period_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/period"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="12dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/weather_label" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/date_picker"
-            style="@style/TextInputLayoutStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginHorizontal="20dp"
-            android:hint="@string/choose_a_period"
-            app:endIconMode="custom"
-            app:endIconDrawable="@drawable/ic_calendar_today"
-            app:layout_constraintTop_toBottomOf="@+id/period_label">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/date_input"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/sensors_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="none" />
+                android:layout_marginHorizontal="13dp"
+                android:layout_marginTop="12dp"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/sensors_label"
+                app:spanCount="2"
+                tools:itemCount="2"
+                tools:listitem="@layout/card_sensor" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <View
+                android:id="@+id/horizontal_divider_2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/silver"
+                app:layout_constraintTop_toBottomOf="@id/sensors_list" />
 
-        <TextView
-            android:id="@+id/temperatureLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="25dp"
-            android:text="Temperature"
-            android:textAppearance="?attr/textAppearanceBody1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/date_picker"
-            tools:text="Temperature" />
+            <TextView
+                android:id="@+id/weather_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/weather_forecast"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_divider_2" />
 
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/temperatureChart"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginTop="14dp"
-            android:background="@drawable/rigid_corners_with_stroke"
-            android:paddingTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/temperatureLabel" />
+            <TextView
+                android:id="@+id/statistics_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/statistics"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/weather_label"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_divider_2" />
 
-        <TextView
-            android:id="@+id/snowDepthLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="25dp"
-            android:text="Snow Depth"
-            android:textAppearance="?attr/textAppearanceBody1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/temperatureChart"
-            tools:text="Snow Depth" />
+            <TextView
+                android:id="@+id/period_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="12dp"
+                android:text="@string/period"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weather_label" />
 
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/snowDepthChart"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginTop="14dp"
-            android:background="@drawable/rigid_corners_with_stroke"
-            android:paddingTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/snowDepthLabel" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/date_picker"
+                style="@style/TextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:hint="@string/choose_a_period"
+                app:endIconDrawable="@drawable/ic_calendar_today"
+                app:endIconMode="custom"
+                app:layout_constraintTop_toBottomOf="@+id/period_label">
 
-        <TextView
-            android:id="@+id/precipitationLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="25dp"
-            android:text="Precipitation"
-            android:textAppearance="?attr/textAppearanceBody1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/snowDepthChart"
-            tools:text="Precipitation" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/date_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none" />
 
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/precipitationChart"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginTop="14dp"
-            android:background="@drawable/rigid_corners_with_stroke"
-            android:paddingTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/precipitationLabel" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/windLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="25dp"
-            android:text="Wind"
-            android:textAppearance="?attr/textAppearanceBody1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/precipitationChart"
-            tools:text="Wind" />
+            <TextView
+                android:id="@+id/temperatureLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="25dp"
+                android:text="Temperature"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/date_picker"
+                tools:text="Temperature" />
 
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/windChart"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginTop="14dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/windLabel"
-            android:background="@drawable/rigid_corners_with_stroke"
-            android:paddingTop="10dp" />
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/temperatureChart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/rigid_corners_with_stroke"
+                android:paddingTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/temperatureLabel" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/snowDepthLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="25dp"
+                android:text="Snow Depth"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/temperatureChart"
+                tools:text="Snow Depth" />
 
-</ScrollView>
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/snowDepthChart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/rigid_corners_with_stroke"
+                android:paddingTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/snowDepthLabel" />
+
+            <TextView
+                android:id="@+id/precipitationLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="25dp"
+                android:text="Precipitation"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/snowDepthChart"
+                tools:text="Precipitation" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/precipitationChart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/rigid_corners_with_stroke"
+                android:paddingTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/precipitationLabel" />
+
+            <TextView
+                android:id="@+id/windLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="25dp"
+                android:text="Wind"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/precipitationChart"
+                tools:text="Wind" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/windChart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/rigid_corners_with_stroke"
+                android:paddingTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/windLabel" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <include
+        android:id="@+id/add_first_sensor_overlay"
+        layout="@layout/overlay_add_first_sensor"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
