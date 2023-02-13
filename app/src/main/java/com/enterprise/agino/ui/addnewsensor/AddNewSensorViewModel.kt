@@ -73,8 +73,8 @@ class AddNewSensorViewModel @Inject constructor(
                 location = location.value!!,
                 fieldId = fieldId,
                 defaultGDD = defaultGDD.value!!.toInt(),
-                sensorInstallationDate = sensorInstallationDate.value!!.toInstant(),
-                lastFieldCuttingDate = lastFieldCuttingDate.value!!.toInstant()
+                sensorInstallationDate = sensorInstallationDate.value!!,
+                lastFieldCuttingDate = lastFieldCuttingDate.value!!,
             )
         ).reEmit(this@flow).collect()
     }
