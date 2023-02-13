@@ -11,6 +11,7 @@ import androidx.core.util.component2
 import androidx.fragment.app.Fragment
 import com.enterprise.agino.R
 import com.enterprise.agino.databinding.FragmentGraphScreenBinding
+import com.enterprise.agino.domain.model.Sensor
 import com.enterprise.agino.utils.millisToDateString
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.LineChart
@@ -26,6 +27,7 @@ import java.util.*
 class GraphFragment : Fragment() {
     private var _binding: FragmentGraphScreenBinding? = null
     private val binding get() = _binding!!
+    private lateinit var adapter: SensorsAdapter
     
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,9 +40,36 @@ class GraphFragment : Fragment() {
             setOnClickListener { showDatePicker(this) }
         }
 
+        setupSensorAdapter()
         setGraphData(binding.chart1)
         setGraphData(binding.chart2)
         return binding.root
+    }
+
+    private fun setupSensorAdapter() {
+        adapter = SensorsAdapter()
+        binding.sensorsList.adapter = adapter
+
+        val data = listOf(
+            Sensor(
+                "45678987654", null, "", 0, 97,
+                "","", 0.0, 0.0, 0, ""
+            ),
+            Sensor(
+                "98765445678", null, "", 0, 87,
+                "","", 0.0, 0.0, 0, ""
+            ),
+            Sensor(
+                "76544898567", null, "", 0, 57,
+                "","", 0.0, 0.0, 0, ""
+            ),
+//            Sensor(
+//                "67898575446", null, "", 0, 57,
+//                "","", 0.0, 0.0, 0, ""
+//            )
+        )
+
+        adapter.setItems(data)
     }
 
     private fun setGraphData(chartLayout: Any) {
