@@ -58,7 +58,7 @@ class GraphFragment : Fragment() {
             }
         }
 
-        viewModel.precipitationGraphDataSet.observe(viewLifecycleOwner) {
+        viewModel.snowDepthGraphDataSet.observe(viewLifecycleOwner) {
             binding.chart2.apply {
                 val snowDepth = it.component1()
                 val missingData = it.component2()

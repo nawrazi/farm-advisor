@@ -17,47 +17,47 @@ class GraphViewModel() : ViewModel() {
         MutableLiveData(LineDataSet(temperatureEntries, "Measured Temperature"))
     val temperatureGraphDataSet: LiveData<LineDataSet> = _tempratureGraphDataSet
 
-    // precipitation graph dataset
-    private val precipitationEntriesSnow = mutableListOf<BarEntry>()
-    private val precipitationEntriesMissing = mutableListOf<BarEntry>()
-    val _precipitationGraphDataSet = MutableLiveData(
+    // snow depth graph dataset
+    private val snowDepthEntriesSnow = mutableListOf<BarEntry>()
+    private val snowDepthEntriesMissing = mutableListOf<BarEntry>()
+    val _snowDepthGraphDataSet = MutableLiveData(
         Pair(
-            BarDataSet(precipitationEntriesSnow, "Snow Depth"),
-            BarDataSet(precipitationEntriesMissing, "Missing Data")
+            BarDataSet(snowDepthEntriesSnow, "Snow Depth"),
+            BarDataSet(snowDepthEntriesMissing, "Missing Data")
         )
     )
-    val precipitationGraphDataSet: LiveData<Pair<BarDataSet, BarDataSet>> =
-        _precipitationGraphDataSet
+    val snowDepthGraphDataSet: LiveData<Pair<BarDataSet, BarDataSet>> =
+        _snowDepthGraphDataSet
     val days = mutableListOf<String>()
     val daysOfWeek = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
 
     init {
-        setupPrecipitationGraphData()
+        setupSnowDepthGraphData()
         setupTemperatureGraphData()
     }
 
-    private fun setupPrecipitationGraphData() {
+    private fun setupSnowDepthGraphData() {
 
         // create a dummy list of entries for each day of the week
         var odd = true
         for (i in 0..100) {
             days.add(daysOfWeek[i % 7])
             if (odd) {
-                precipitationEntriesSnow.add(
+                snowDepthEntriesSnow.add(
                     BarEntry(i.toFloat(), (Math.random() * 100).toFloat(), R.drawable.ic_add)
                 )
                 odd = false
             } else {
-                precipitationEntriesMissing.add(
+                snowDepthEntriesMissing.add(
                     BarEntry(i.toFloat(), (Math.random() * 100).toFloat(), R.drawable.ic_add)
                 )
                 odd = true
             }
         }
 
-        _precipitationGraphDataSet.value = Pair(
-            BarDataSet(precipitationEntriesSnow, "Snow Depthz"),
-            BarDataSet(precipitationEntriesMissing, "Missing Data")
+        _snowDepthGraphDataSet.value = Pair(
+            BarDataSet(snowDepthEntriesSnow, "Snow Depthz"),
+            BarDataSet(snowDepthEntriesMissing, "Missing Data")
         )
     }
 
