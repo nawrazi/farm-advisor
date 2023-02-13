@@ -193,7 +193,7 @@ class NewFarmFragment : Fragment() {
             tomtomMap.moveCamera(
                 CameraOptions(
                     position = it.position,
-                    zoom = 15.0,
+                    zoom = 10.0,
                 )
             )
         }
