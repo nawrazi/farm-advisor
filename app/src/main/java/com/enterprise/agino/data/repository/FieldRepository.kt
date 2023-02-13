@@ -7,8 +7,9 @@ import com.enterprise.agino.data.mapper.toField
 import com.enterprise.agino.data.remote.api.FieldService
 import com.enterprise.agino.data.remote.dto.AddFieldRequest
 import com.enterprise.agino.domain.model.Field
+import com.enterprise.agino.domain.model.form.AddFieldForm
 import com.enterprise.agino.domain.repository.IFieldRepository
-import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -16,7 +17,6 @@ import javax.inject.Inject
 
 class FieldRepository @Inject constructor(
     private val fieldService: FieldService,
-    private val ioDispatcher: CoroutineDispatcher
 ) : IFieldRepository {
     override fun getField(id: String): Flow<Resource<Field>> {
         return networkBoundResource(
@@ -29,16 +29,23 @@ class FieldRepository @Inject constructor(
         )
     }
 
-    override fun addField(request: AddFieldRequest): Flow<Resource<Unit>> =
+    override fun addField(addFieldForm: AddFieldForm): Flow<Resource<Unit>> =
         flow {
             emit(Resource.Loading())
 
             val result = buildResource {
-                fieldService.addField(request)
+                fieldService.addField(
+                    AddFieldRequest(
+                        farmId = addFieldForm.farmId,
+                        name = addFieldForm.name,
+                        altitude = addFieldForm.altitude,
+                        polygon = "rectangle"
+                    )
+                )
                 return@buildResource
             }
 
             emit(result)
-        }.flowOn(ioDispatcher)
+        }.flowOn(Dispatchers.IO)
 
 }
