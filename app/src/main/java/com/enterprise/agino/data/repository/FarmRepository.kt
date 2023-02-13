@@ -3,6 +3,7 @@ package com.enterprise.agino.data.repository
 import com.enterprise.agino.common.Resource
 import com.enterprise.agino.common.buildResource
 import com.enterprise.agino.common.networkBoundResource
+import com.enterprise.agino.data.local.LocalPrefStore
 import com.enterprise.agino.data.mapper.toFarm
 import com.enterprise.agino.data.remote.api.FarmService
 import com.enterprise.agino.data.remote.dto.AddFarmRequestDto
@@ -14,7 +15,7 @@ import com.tomtom.sdk.common.ifSuccess
 import com.tomtom.sdk.search.reversegeocoder.ReverseGeocoder
 import com.tomtom.sdk.search.reversegeocoder.ReverseGeocoderOptions
 import com.tomtom.sdk.search.reversegeocoder.ReverseGeocoderResponse
-import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -22,10 +23,13 @@ import javax.inject.Inject
 
 class FarmRepository @Inject constructor(
     private val farmService: FarmService,
-    private val ioDispatcher: CoroutineDispatcher,
     private val reverseGeocoder: ReverseGeocoder,
+    private val localPrefStore: LocalPrefStore
 ) : IFarmRepository {
-    suspend fun createFarm(addFarmForm: AddFarmForm): Flow<Resource<Unit>> =
+
+    override fun getFarm(): Flow<Farm?> = localPrefStore.getFarm()
+
+    override suspend fun createFarm(addFarmForm: AddFarmForm): Flow<Resource<Unit>> =
         flow {
             emit(Resource.Loading())
 
@@ -55,9 +59,9 @@ class FarmRepository @Inject constructor(
             }
 
             emit(result)
-        }.flowOn(ioDispatcher)
+        }.flowOn(Dispatchers.IO)
 
-    override fun GetFarm(id: String): Flow<Resource<Farm>> {
+    override fun getFarm(id: String): Flow<Resource<Farm>> {
         return networkBoundResource(
             fetch = {
                 farmService.getFarm(id).body()!!
