@@ -13,14 +13,22 @@ class GraphViewModel() : ViewModel() {
 
     // temperature graph dataset
     private val temperatureEntries = mutableListOf<Entry>()
-    val _tempratureGraphDataSet =
+    private val _tempratureGraphDataSet =
         MutableLiveData(LineDataSet(temperatureEntries, "Measured Temperature"))
     val temperatureGraphDataSet: LiveData<LineDataSet> = _tempratureGraphDataSet
+
+
+    // precipitation graph dataset
+    private val precipitationEntries = mutableListOf<BarEntry>()
+    private val _precipitationGraphDataSet =
+        MutableLiveData(BarDataSet(precipitationEntries, "Precipitation"))
+    val precipitationGraphDataSet: LiveData<BarDataSet> = _precipitationGraphDataSet
+
 
     // snow depth graph dataset
     private val snowDepthEntriesSnow = mutableListOf<BarEntry>()
     private val snowDepthEntriesMissing = mutableListOf<BarEntry>()
-    val _snowDepthGraphDataSet = MutableLiveData(
+    private val _snowDepthGraphDataSet = MutableLiveData(
         Pair(
             BarDataSet(snowDepthEntriesSnow, "Snow Depth"),
             BarDataSet(snowDepthEntriesMissing, "Missing Data")
@@ -28,12 +36,29 @@ class GraphViewModel() : ViewModel() {
     )
     val snowDepthGraphDataSet: LiveData<Pair<BarDataSet, BarDataSet>> =
         _snowDepthGraphDataSet
+
+
+    // wind graph dataset
+    private val windEntriesMaxGust = mutableListOf<Entry>()
+    private val windEntriesAvgWindSpeed = mutableListOf<Entry>()
+    private val _windDepthGraphDataSet = MutableLiveData(
+        Pair(
+            LineDataSet(windEntriesMaxGust, "Max Gust"),
+            LineDataSet(windEntriesAvgWindSpeed, "Average Wind Speed")
+        )
+    )
+    val windGraphDataSet: LiveData<Pair<LineDataSet, LineDataSet>> = _windDepthGraphDataSet
+
+
+    // common x-axis data
     val days = mutableListOf<String>()
-    val daysOfWeek = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+    private val daysOfWeek = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
 
     init {
-        setupSnowDepthGraphData()
         setupTemperatureGraphData()
+        setupSnowDepthGraphData()
+        setupPrecipitationGraphData()
+        setupWindGraphData()
     }
 
     private fun setupSnowDepthGraphData() {
@@ -71,5 +96,34 @@ class GraphViewModel() : ViewModel() {
         }
 
         _tempratureGraphDataSet.value = LineDataSet(temperatureEntries, "Measured Temperature")
+    }
+
+    private fun setupPrecipitationGraphData() {
+
+        for (i in 0..100) {
+            days.add(daysOfWeek[i % 7])
+            precipitationEntries.add(
+                BarEntry(i.toFloat(), (Math.random() * 100).toFloat(), R.drawable.ic_add)
+            )
+        }
+
+        _precipitationGraphDataSet.value = BarDataSet(precipitationEntries, "Precipitation")
+    }
+
+    private fun setupWindGraphData() {
+        for (i in 0..100) {
+            days.add(daysOfWeek[i % 7])
+            windEntriesMaxGust.add(
+                Entry(i.toFloat(), (Math.random() * 100).toFloat(), R.drawable.ic_add)
+            )
+            windEntriesAvgWindSpeed.add(
+                Entry(i.toFloat(), (Math.random() * 100).toFloat(), R.drawable.ic_add)
+            )
+        }
+
+        _windDepthGraphDataSet.value = Pair(
+            LineDataSet(windEntriesMaxGust, "Max Gust"),
+            LineDataSet(windEntriesAvgWindSpeed, "Average Wind Speed")
+        )
     }
 }
