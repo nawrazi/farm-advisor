@@ -3,14 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="4dp"
+    android:padding="4dp"
     android:layout_width="168dp"
-    android:layout_height="112dp"
-    android:background="@drawable/round_corner_with_stroke">
+    android:layout_height="120dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/round_corner_with_stroke">
 
         <ImageView
             android:id="@+id/sensorImage"
@@ -49,10 +49,14 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="11sp"
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:text="GDD 375" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </LinearLayout>
