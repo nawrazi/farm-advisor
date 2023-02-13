@@ -1,7 +1,6 @@
 package com.enterprise.agino.data.remote.api
 
 import com.enterprise.agino.data.remote.dto.AddFarmRequestDto
-import com.enterprise.agino.data.remote.dto.AddFarmResponse
 import com.enterprise.agino.data.remote.dto.FarmResponse
 import retrofit2.Response
 import retrofit2.http.Body
@@ -12,10 +11,7 @@ import retrofit2.http.Path
 interface FarmService {
 
     @POST("api/AddFarmEndpoint")
-    suspend fun addFarm(@Body addFarmRequestDto: AddFarmRequestDto): Response<AddFarmResponse>
-
-//    @GET("api/AddFieldEndpoint")  // TODO: check the endpoints
-//    suspend fun AddFarm(): Response<CreateFarmRequest>
+    suspend fun addFarm(@Body addFarmRequestDto: AddFarmRequestDto): Response<FarmResponse>
 
     @GET("api/FarmApi/{id}")
     suspend fun getFarm(
