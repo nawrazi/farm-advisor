@@ -28,13 +28,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
     buildFeatures {
         viewBinding true
         dataBinding true
@@ -57,7 +60,6 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
     implementation "androidx.datastore:datastore-preferences:1.0.0"
-    implementation 'com.hbb20:ccp:2.7.0'
 
     // Tests
     testImplementation 'junit:junit:4.13.2'
@@ -65,8 +67,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     // Retrofit
-    implementation "com.squareup.retrofit2:retrofit:2.9.0"
-    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    def retrofitVersion = "2.9.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"
 
     // Hilt
@@ -81,22 +84,26 @@ dependencies {
     implementation "androidx.room:room-ktx:$roomVersion"
 
     // Glide
-    implementation 'com.github.bumptech.glide:glide:4.14.2'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
+    def glideVersion = "4.14.2"
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
 
     // Maps
-    implementation "com.tomtom.sdk.maps:map-display:0.3.1547"
-    implementation "com.tomtom.sdk.location:provider-android:0.3.1547"
-    implementation "com.tomtom.sdk.location:provider-gms:0.3.1547"
-    implementation "com.tomtom.sdk.search:search-online:0.3.1547"
-    implementation "com.tomtom.sdk.search:reverse-geocoder:0.3.1547"
-    implementation "com.tomtom.sdk.search:reverse-geocoder-online:0.3.1547"
+    def mapsVersion = "0.3.1547"
+    implementation "com.tomtom.sdk.maps:map-display:$mapsVersion"
+    implementation "com.tomtom.sdk.location:provider-android:$mapsVersion"
+    implementation "com.tomtom.sdk.location:provider-gms:$mapsVersion"
+    implementation "com.tomtom.sdk.search:search-online:$mapsVersion"
+    implementation "com.tomtom.sdk.search:reverse-geocoder:$mapsVersion"
+    implementation "com.tomtom.sdk.search:reverse-geocoder-online:$mapsVersion"
 
-    // Third Party Library
+    // Third Party Libraries
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.hbb20:ccp:2.7.0'
 
     // Firebase
     implementation platform('com.google.firebase:firebase-bom:31.2.0')
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-appcheck-safetynet:'
+
 }
