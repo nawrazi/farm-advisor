@@ -3,13 +3,17 @@ package com.enterprise.agino.ui.home.dashboard
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.enterprise.agino.R
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineDataSet
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 
-class GraphViewModel() : ViewModel() {
+@HiltViewModel
+class GraphViewModel : ViewModel() {
 
     // temperature graph dataset
     private val temperatureEntries = mutableListOf<Entry>()
@@ -81,18 +85,15 @@ class GraphViewModel() : ViewModel() {
         }
 
         _snowDepthGraphDataSet.value = Pair(
-            BarDataSet(snowDepthEntriesSnow, "Snow Depthz"),
+            BarDataSet(snowDepthEntriesSnow, "Snow Depth"),
             BarDataSet(snowDepthEntriesMissing, "Missing Data")
         )
     }
 
     private fun setupTemperatureGraphData() {
 
-        for (i in 0..100) {
-            days.add(daysOfWeek[i % 7])
-            temperatureEntries.add(
-                Entry(i.toFloat(), (Math.random() * 100).toFloat(), R.drawable.ic_add)
-            )
+        viewModelScope.launch {
+
         }
 
         _tempratureGraphDataSet.value = LineDataSet(temperatureEntries, "Measured Temperature")
