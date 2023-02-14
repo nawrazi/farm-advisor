@@ -6,9 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.enterprise.agino.databinding.FragmentHomeBinding
+import com.enterprise.agino.ui.home.adapters.HomeAlertAdapter
+import com.enterprise.agino.ui.home.adapters.HomeFieldAdapter
+import com.enterprise.agino.utils.showErrorSnackBar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -16,6 +22,9 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: HomeViewModel by viewModels()
+
+    private lateinit var fieldsAdapter: HomeFieldAdapter
+    private lateinit var alertsAdapter: HomeAlertAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,12 +40,42 @@ class HomeFragment : Fragment() {
 
     private fun setupListeners() {
         binding.apply {
+            fieldsAdapter = HomeFieldAdapter(listOf()) {
+                findNavController().navigate(
+                    HomeFragmentDirections.actionHomeFragmentToGraphFragment(it.fieldID)
+                )
+            }
+            alertsAdapter = HomeAlertAdapter(listOf())
+
+            binding.alertRv.adapter = alertsAdapter
+            binding.alertRv.layoutManager = LinearLayoutManager(context)
+
+            binding.fieldRv.adapter = fieldsAdapter
+            binding.fieldRv.layoutManager = LinearLayoutManager(context)
+
             addFieldButton.setOnClickListener {
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToNewFieldFragment2())
             }
 
             firstTimeOverlay.createFarmButton.setOnClickListener {
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToNewFarmFragment())
+            }
+        }
+
+        lifecycleScope.launchWhenCreated {
+            launch {
+                viewModel.errorMessage.collect {
+                    showErrorSnackBar(it, binding.root)
+                }
+            }
+            launch {
+                viewModel.farm.collect {
+                    if (it != null) {
+                        binding.chooseFarmName.setText(it.name)
+                        alertsAdapter.setAlerts(it.notifications)
+                        fieldsAdapter.setFields(it.fields)
+                    }
+                }
             }
         }
     }

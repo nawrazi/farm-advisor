@@ -39,40 +39,14 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/alertLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="50dp"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/farmPicture"
-            tools:text="Alerts" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/alertRv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:paddingStart="20dp"
-            android:paddingTop="10dp"
-            android:paddingEnd="20dp"
-            android:paddingBottom="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/alertLabel"
-            tools:itemCount="2"
-            tools:listitem="@layout/card_alert" />
-
-        <TextView
             android:id="@+id/fieldLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp"
             android:textAppearance="?attr/textAppearanceHeadline6"
+            app:layout_constraintBottom_toTopOf="@+id/fieldRv"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/alertRv"
             tools:text="Fields" />
 
         <ImageView
@@ -90,6 +64,7 @@
             android:id="@+id/fieldRv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
             android:clipToPadding="false"
             android:paddingStart="20dp"
             android:paddingTop="10dp"
@@ -97,7 +72,7 @@
             android:paddingBottom="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fieldLabel"
+            app:layout_constraintTop_toBottomOf="@+id/alert_section"
             tools:listitem="@layout/card_field">
 
         </androidx.recyclerview.widget.RecyclerView>
@@ -106,7 +81,7 @@
             layout="@layout/overlay_first_add_field"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:visibility="gone"
+            android:visibility="@{(viewModel.farm != null &amp;&amp; (viewModel.farm.fields.size() == 0)) ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -143,13 +118,48 @@
             layout="@layout/overlay_add_first_farm"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:visibility="gone"
+            android:visibility="@{viewModel.farm == null ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
+
+        <LinearLayout
+            android:id="@+id/alert_section"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:gravity="start"
+            android:orientation="vertical"
+            android:visibility="@{(viewModel.farm != null &amp;&amp; !viewModel.farm.notifications.empty) ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/farmPicture">
+
+            <TextView
+                android:id="@+id/alertLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="20dp"
+                android:text="Alerts"
+                android:textAppearance="?attr/textAppearanceHeadline6" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/alertRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/alabaster"
+                android:clipToPadding="false"
+                android:paddingStart="20dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="10dp"
+                tools:itemCount="2"
+                tools:listitem="@layout/card_alert" />
+        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

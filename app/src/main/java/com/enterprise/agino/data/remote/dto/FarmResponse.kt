@@ -10,7 +10,7 @@ data class FarmResponse(
     val postcode: String,
     val city: String,
     val country: String,
-    val notifications: String? = null,
+    val notifications: List<NotificationDto>? = null,
     val fields: List<FieldResponse>? = null,
 
     @SerializedName("userId")

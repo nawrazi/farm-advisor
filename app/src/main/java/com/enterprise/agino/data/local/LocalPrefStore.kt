@@ -1,6 +1,5 @@
 package com.enterprise.agino.data.local
 
-import android.provider.ContactsContract
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -16,11 +15,12 @@ import java.lang.reflect.Type
 
 class LocalPrefStore(private val prefsDataStore: DataStore<Preferences>) {
 
-    private val farmGsonType: Type = object : TypeToken<ContactsContract.Profile>() {}.type
+    private val farmGsonType: Type = object : TypeToken<Farm>() {}.type
 
-    fun getFarm(): Flow<Farm?> = prefsDataStore.data.map<Preferences, Farm?> {
+    fun getFarm(): Flow<Farm?> = prefsDataStore.data.map {
         it[Constants.FARM_PREF_KEY]?.let { json ->
-            return@map Gson().fromJson(json, farmGsonType)
+            val res = Gson().fromJson<Farm>(json, farmGsonType)
+            return@map res
         }
 
         return@map null

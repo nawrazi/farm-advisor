@@ -10,7 +10,7 @@ fun FarmResponse.toFarm() =
         postcode = postcode,
         city = city,
         country = country,
-        notifications = notifications,
+        notifications = notifications?.map { it.toNotification() }?.toList() ?: listOf(),
         fields = fields?.map { it.toField() } ?: emptyList(),
         userID = userID
     )

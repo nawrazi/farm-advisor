@@ -115,5 +115,7 @@
         <action
             android:id="@+id/action_graphFragment_to_resetSensorFragment"
             app:destination="@id/resetSensorFragment" />
+        <argument android:name="fieldId"
+            app:argType="string" />
     </fragment>
 </navigation>
