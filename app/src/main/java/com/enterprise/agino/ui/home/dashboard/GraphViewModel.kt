@@ -1,25 +1,35 @@
 package com.enterprise.agino.ui.home.dashboard
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.enterprise.agino.R
+import androidx.lifecycle.*
+import com.enterprise.agino.data.repository.GraphRepository
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineDataSet
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class GraphViewModel() : ViewModel() {
+@HiltViewModel
+class GraphViewModel @Inject constructor(
+    private val repository: GraphRepository
+) : ViewModel() {
+
+    private var _graphDataSignal = MutableLiveData<Unit>()
+    var graphData = Transformations.switchMap(_graphDataSignal) {
+        repository.fetchGraphData().asLiveData()
+    }
 
     // temperature graph dataset
     private val temperatureEntries = mutableListOf<Entry>()
-    private val _tempratureGraphDataSet =
+    val temperatureDays = mutableListOf<String>()
+    private val _temperatureGraphDataSet =
         MutableLiveData(LineDataSet(temperatureEntries, "Measured Temperature"))
-    val temperatureGraphDataSet: LiveData<LineDataSet> = _tempratureGraphDataSet
+    val temperatureGraphDataSet: LiveData<LineDataSet> = _temperatureGraphDataSet
 
 
     // precipitation graph dataset
     private val precipitationEntries = mutableListOf<BarEntry>()
+    val precipitationDays = mutableListOf<String>()
     private val _precipitationGraphDataSet =
         MutableLiveData(BarDataSet(precipitationEntries, "Precipitation"))
     val precipitationGraphDataSet: LiveData<BarDataSet> = _precipitationGraphDataSet
@@ -28,6 +38,7 @@ class GraphViewModel() : ViewModel() {
     // snow depth graph dataset
     private val snowDepthEntriesSnow = mutableListOf<BarEntry>()
     private val snowDepthEntriesMissing = mutableListOf<BarEntry>()
+    val snowDepthDays = mutableListOf<String>()
     private val _snowDepthGraphDataSet = MutableLiveData(
         Pair(
             BarDataSet(snowDepthEntriesSnow, "Snow Depth"),
@@ -41,6 +52,7 @@ class GraphViewModel() : ViewModel() {
     // wind graph dataset
     private val windEntriesMaxGust = mutableListOf<Entry>()
     private val windEntriesAvgWindSpeed = mutableListOf<Entry>()
+    val windDays = mutableListOf<String>()
     private val _windDepthGraphDataSet = MutableLiveData(
         Pair(
             LineDataSet(windEntriesMaxGust, "Max Gust"),
@@ -49,81 +61,91 @@ class GraphViewModel() : ViewModel() {
     )
     val windGraphDataSet: LiveData<Pair<LineDataSet, LineDataSet>> = _windDepthGraphDataSet
 
-
-    // common x-axis data
-    val days = mutableListOf<String>()
-    private val daysOfWeek = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
-
     init {
-        setupTemperatureGraphData()
-        setupSnowDepthGraphData()
-        setupPrecipitationGraphData()
-        setupWindGraphData()
+        _graphDataSignal.value = Unit
     }
 
     private fun setupSnowDepthGraphData() {
 
-        // create a dummy list of entries for each day of the week
-        var odd = true
-        for (i in 0..100) {
-            days.add(daysOfWeek[i % 7])
-            if (odd) {
+        val data = graphData.value?.value?.timeStamps
+        data?.let {
+            for (i in data.indices) {
+                snowDepthDays.add(data[i].time)
                 snowDepthEntriesSnow.add(
-                    BarEntry(i.toFloat(), (Math.random() * 100).toFloat(), R.drawable.ic_add)
+                    BarEntry(i.toFloat(), data[i].humidity.toFloat())
                 )
-                odd = false
-            } else {
                 snowDepthEntriesMissing.add(
-                    BarEntry(i.toFloat(), (Math.random() * 100).toFloat(), R.drawable.ic_add)
+                    BarEntry(i.toFloat(), data[i].dewTemperature.toFloat())
                 )
-                odd = true
             }
         }
 
         _snowDepthGraphDataSet.value = Pair(
-            BarDataSet(snowDepthEntriesSnow, "Snow Depthz"),
+            BarDataSet(snowDepthEntriesSnow, "Snow Depth"),
             BarDataSet(snowDepthEntriesMissing, "Missing Data")
         )
     }
 
     private fun setupTemperatureGraphData() {
 
-        for (i in 0..100) {
-            days.add(daysOfWeek[i % 7])
-            temperatureEntries.add(
-                Entry(i.toFloat(), (Math.random() * 100).toFloat(), R.drawable.ic_add)
-            )
+        val data = graphData.value?.value?.timeStamps
+        data?.let {
+            for (i in data.indices) {
+                temperatureDays.add(data[i].time)
+                temperatureEntries.add(
+                    Entry(i.toFloat(), data[i].temperature.toFloat())
+                )
+            }
         }
 
-        _tempratureGraphDataSet.value = LineDataSet(temperatureEntries, "Measured Temperature")
+        _temperatureGraphDataSet.value = LineDataSet(temperatureEntries, "Measured Temperature")
     }
 
     private fun setupPrecipitationGraphData() {
 
-        for (i in 0..100) {
-            days.add(daysOfWeek[i % 7])
-            precipitationEntries.add(
-                BarEntry(i.toFloat(), (Math.random() * 100).toFloat(), R.drawable.ic_add)
-            )
+        val data = graphData.value?.value?.timeStamps
+        data?.let {
+            for (i in data.indices) {
+                precipitationDays.add(data[i].time)
+                precipitationEntries.add(
+                    BarEntry(i.toFloat(), data[i].pressure.toFloat())
+                )
+            }
         }
 
         _precipitationGraphDataSet.value = BarDataSet(precipitationEntries, "Precipitation")
     }
 
     private fun setupWindGraphData() {
-        for (i in 0..100) {
-            days.add(daysOfWeek[i % 7])
-            windEntriesMaxGust.add(
-                Entry(i.toFloat(), (Math.random() * 100).toFloat(), R.drawable.ic_add)
-            )
-            windEntriesAvgWindSpeed.add(
-                Entry(i.toFloat(), (Math.random() * 100).toFloat(), R.drawable.ic_add)
-            )
+
+        val data = graphData.value?.value?.timeStamps
+        data?.let {
+            for (i in data.indices) {
+                windDays.add(data[i].time)
+                windEntriesMaxGust.add(
+                    Entry(i.toFloat(), data[i].wind.toFloat())
+                )
+                windEntriesAvgWindSpeed.add(
+                    Entry(i.toFloat(), data[i].wind.toFloat())
+                )
+            }
         }
 
         _windDepthGraphDataSet.value = Pair(
             LineDataSet(windEntriesMaxGust, "Max Gust"),
             LineDataSet(windEntriesAvgWindSpeed, "Average Wind Speed")
         )
+    }
+
+    fun populateGraphData() {
+        setupTemperatureGraphData()
+        setupSnowDepthGraphData()
+        setupPrecipitationGraphData()
+        setupWindGraphData()
+    }
+
+
+    fun retry() {
+        _graphDataSignal.value = Unit
     }
 }

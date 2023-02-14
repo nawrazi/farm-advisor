@@ -9,7 +9,7 @@ class ApiInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val builder = chain.request().newBuilder()
         val result = chain.proceed(builder.build())
-
+        builder.addHeader("User-Agent", "")
         if (!result.isSuccessful) {
             if (result.code >= 500)
                 throw ServerError("Server Error")

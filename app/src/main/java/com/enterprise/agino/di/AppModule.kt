@@ -13,11 +13,9 @@ import com.enterprise.agino.common.Constants.BASE_URL
 import com.enterprise.agino.common.Constants.USER_PREFERENCES_NAME
 import com.enterprise.agino.common.interceptors.ApiInterceptor
 import com.enterprise.agino.common.interceptors.NetworkInterceptor
+import com.enterprise.agino.common.interceptors.UserAgentInterceptor
 import com.enterprise.agino.data.local.LocalPrefStore
-import com.enterprise.agino.data.remote.api.FarmService
-import com.enterprise.agino.data.remote.api.FieldService
-import com.enterprise.agino.data.remote.api.SensorService
-import com.enterprise.agino.data.remote.api.UserService
+import com.enterprise.agino.data.remote.api.*
 import com.enterprise.agino.domain.repository.IFarmRepository
 import com.enterprise.agino.domain.repository.ISensorRepository
 import com.google.gson.Gson
@@ -115,6 +113,11 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideGraphService(retrofit: Retrofit): GraphService =
+        retrofit.create(GraphService::class.java)
+
+    @Provides
+    @Singleton
     fun providesHttpClient(
         @ApplicationContext context: Context,
         // TODO: uncomment this once you have implemented the interceptor
@@ -124,6 +127,7 @@ object AppModule {
         val builder = OkHttpClient.Builder()
             .addInterceptor(NetworkInterceptor(context))
             .addInterceptor(ApiInterceptor())
+            .addInterceptor(UserAgentInterceptor())
 //            .addInterceptor(authTokenInterceptor)
 
         if (BuildConfig.DEBUG) {
