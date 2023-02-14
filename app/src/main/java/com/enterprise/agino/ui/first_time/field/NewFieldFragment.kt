@@ -36,7 +36,7 @@ class NewFieldFragment : Fragment() {
     private fun setupListeners() {
         lifecycleScope.launchWhenResumed {
             launch {
-                viewModel.formSubmissionResult.collect() {
+                viewModel.formSubmissionResult.collect {
                     if (it is Resource.Success) {
                         showSuccessSnackBar("Successfully added field", binding.root)
                         findNavController().popBackStack()

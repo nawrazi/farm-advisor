@@ -2,7 +2,6 @@ package com.enterprise.agino.ui.first_time.field
 
 import androidx.lifecycle.*
 import com.enterprise.agino.common.Resource
-import com.enterprise.agino.data.repository.FarmRepository
 import com.enterprise.agino.data.repository.FieldRepository
 import com.enterprise.agino.domain.model.form.AddFieldForm
 import com.enterprise.agino.utils.reEmit
