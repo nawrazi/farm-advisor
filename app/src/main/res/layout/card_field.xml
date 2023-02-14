@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/round_corner_with_stroke"
     android:layout_marginTop="5dp"
     android:layout_marginBottom="5dp"
+    android:background="@drawable/round_corner_with_stroke"
     android:clipToPadding="false">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +15,7 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/fieldPicture"
-            android:layout_width="90dp"
+            android:layout_width="66dp"
             android:layout_height="0dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
@@ -27,53 +27,61 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/roundedFieldPictureShapeOverlay"
-            app:strokeColor="?attr/colorSecondary"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:srcCompat="@drawable/new_field_img"
+            app:strokeColor="?attr/colorSecondary" />
 
         <TextView
             android:id="@+id/fieldName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="22dp"
             android:textAppearance="?attr/textAppearanceHeadline6"
             android:textColor="?android:attr/textColorPrimary"
             app:layout_constraintStart_toEndOf="@+id/fieldPicture"
-            app:layout_constraintTop_toTopOf="@+id/fieldPicture"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Field Name One" />
 
         <TextView
             android:id="@+id/gddField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="?android:attr/textColorSecondary"
             android:layout_marginTop="4dp"
-            tools:text="Current GDD - 379"
-            app:layout_constraintStart_toStartOf="@+id/fieldName"
-            app:layout_constraintTop_toBottomOf="@+id/fieldName" />
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintStart_toEndOf="@+id/textView16"
+            app:layout_constraintTop_toBottomOf="@+id/fieldName"
+            tools:text="Current GDD - 379" />
 
         <TextView
             android:id="@+id/reapPeriod"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="14dp"
             android:layout_marginBottom="20dp"
             android:textAppearance="?attr/textAppearanceBody1"
             android:textColor="?android:attr/textColorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/fieldPicture"
-            app:layout_constraintTop_toBottomOf="@+id/gddField"
+            app:layout_constraintTop_toBottomOf="@+id/fieldPicture"
             tools:text="Your Optimal cutting date is in 3 days" />
 
         <ImageButton
             android:id="@+id/viewDetail"
-            android:padding="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
+            android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/fieldName"
             app:srcCompat="@drawable/ic_right_arrow" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Current GDD - "
+            app:layout_constraintStart_toStartOf="@+id/fieldName"
+            app:layout_constraintTop_toTopOf="@+id/gddField" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.appcompat.widget.LinearLayoutCompat>

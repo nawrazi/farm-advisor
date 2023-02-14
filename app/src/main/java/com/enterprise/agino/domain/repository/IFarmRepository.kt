@@ -6,7 +6,7 @@ import com.enterprise.agino.domain.model.Farm
 import kotlinx.coroutines.flow.Flow
 
 interface IFarmRepository {
-    fun fetchFarm(id: String): Flow<Resource<Farm>>
+    suspend fun fetchFarm(): Flow<Resource<Unit>>
     fun getFarm(): Flow<Farm?>
     suspend fun createFarm(addFarmForm: AddFarmForm): Flow<Resource<Unit>>
 }

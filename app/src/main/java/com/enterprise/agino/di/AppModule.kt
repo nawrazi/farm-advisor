@@ -55,9 +55,11 @@ object AppModule {
     fun provideFarmRepository(
         farmService: FarmService,
         reverseGeocoder: ReverseGeocoder,
-        localPrefStore: LocalPrefStore
+        localPrefStore: LocalPrefStore,
+        userService: UserService
     ): IFarmRepository = com.enterprise.agino.data.repository.FarmRepository(
         farmService,
+        userService,
         reverseGeocoder,
         localPrefStore
     )
