@@ -6,9 +6,10 @@ import com.enterprise.agino.data.remote.dto.FieldResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 
 interface FieldService {
-    @GET("api/AddFieldEndpoint")
+    @POST("api/AddFieldEndpoint")
     suspend fun addField(@Body request: AddFieldRequest): Response<AddFieldResponse>
 
     @GET("api/FieldApi")

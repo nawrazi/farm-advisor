@@ -78,6 +78,7 @@
         </androidx.recyclerview.widget.RecyclerView>
 
         <include
+            android:id="@+id/overlay_first_add_field"
             layout="@layout/overlay_first_add_field"
             android:layout_width="0dp"
             android:layout_height="0dp"
