@@ -54,7 +54,19 @@ class HomeFragment : Fragment() {
             binding.fieldRv.layoutManager = LinearLayoutManager(context)
 
             addFieldButton.setOnClickListener {
-                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToNewFieldFragment2())
+                findNavController().navigate(
+                    HomeFragmentDirections.actionHomeFragmentToNewFieldFragment2(
+                        viewModel!!.farm.value!!.farmID
+                    )
+                )
+            }
+
+            overlayFirstAddField.addFieldButton.setOnClickListener {
+                findNavController().navigate(
+                    HomeFragmentDirections.actionHomeFragmentToNewFieldFragment2(
+                        viewModel!!.farm.value!!.farmID
+                    )
+                )
             }
 
             firstTimeOverlay.createFarmButton.setOnClickListener {

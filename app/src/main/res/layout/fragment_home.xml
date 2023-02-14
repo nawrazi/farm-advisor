@@ -20,9 +20,11 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/customerSpinnerLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/moreButton"
             app:layout_constraintStart_toEndOf="@+id/farmPicture"
             app:layout_constraintTop_toTopOf="@+id/farmPicture">
 
@@ -78,6 +80,7 @@
         </androidx.recyclerview.widget.RecyclerView>
 
         <include
+            android:id="@+id/overlay_first_add_field"
             layout="@layout/overlay_first_add_field"
             android:layout_width="0dp"
             android:layout_height="0dp"

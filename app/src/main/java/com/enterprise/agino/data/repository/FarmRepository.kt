@@ -100,7 +100,7 @@ class FarmRepository @Inject constructor(
             if (userResult.value!!.farms == null || userResult.value.farms!!.isEmpty()) {
                 return@buildResource null
             }
-            return@buildResource farmService.getFarm(userResult.value.farms!![0].farmID).body()!!
+            return@buildResource farmService.getFarm(userResult.value.farms[0].farmID).body()!!
         }
 
         if (farmResult is Resource.Error) {

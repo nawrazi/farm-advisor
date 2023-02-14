@@ -95,7 +95,11 @@
         android:id="@+id/newFieldFragment"
         android:name="com.enterprise.agino.ui.first_time.field.NewFieldFragment"
         android:label="NewFieldFragment"
-        tools:layout="@layout/fragment_new_field"/>
+        tools:layout="@layout/fragment_new_field">
+        <argument
+            android:name="farmId"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.enterprise.agino.ui.signin.SignInFragment"
