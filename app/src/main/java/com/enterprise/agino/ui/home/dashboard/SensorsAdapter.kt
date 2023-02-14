@@ -23,7 +23,7 @@ class SensorsAdapter(private val onSensorOptionsClickListener: OnSensorOptionsCl
         )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.idText.text = items[position].sensorID
+        holder.idText.text = items[position].serialNumber
         holder.ggdText.text = items[position].optimalGDD.toString()
 
         holder.options.setOnClickListener {

@@ -11,7 +11,9 @@ import androidx.core.util.component2
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
 import com.enterprise.agino.R
 import com.enterprise.agino.common.Resource
 import com.enterprise.agino.databinding.FragmentGraphScreenBinding
@@ -50,11 +52,36 @@ class GraphFragment : Fragment(), SensorsAdapter.OnSensorOptionsClickListener {
             setOnClickListener { showDatePicker(this) }
         }
 
+        binding.addSensorButton.setOnClickListener {
+            findNavController().navigate(
+                GraphFragmentDirections.actionGraphFragmentToAddNewSensorFragment(
+                    navArgs.fieldId
+                )
+            )
+        }
+
+        binding.backButtonField.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
         viewModel.viewModelScope.launch {
             viewModel.graphData.observe(viewLifecycleOwner) {
                 viewModel.populateGraphData()
             }
         }
+
+
+        adapter =
+            SensorsAdapter(object : SensorsAdapter.OnSensorOptionsClickListener {
+                override fun onSensorOptionsClick(holder: SensorsAdapter.ViewHolder) {
+                    val popup = PopupMenu(requireContext(), holder.options)
+                    popup.menuInflater.inflate(R.menu.sensor_popup_menu, popup.menu)
+                    popup.show()
+                }
+            })
+
+        binding.sensorsList.adapter = adapter
+        binding.sensorsList.layoutManager = GridLayoutManager(requireContext(), 2)
 
         setupFieldPopupOptionsListener()
         setupTemperatureObserver()
