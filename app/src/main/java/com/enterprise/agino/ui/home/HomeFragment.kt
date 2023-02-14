@@ -62,7 +62,7 @@ class HomeFragment : Fragment() {
             }
         }
 
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launchWhenResumed {
             launch {
                 viewModel.errorMessage.collect {
                     showErrorSnackBar(it, binding.root)
