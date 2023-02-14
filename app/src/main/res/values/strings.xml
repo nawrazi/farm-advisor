@@ -86,4 +86,5 @@
     <string name="reset_gdd">Reset GDD</string>
     <string name="edit_sensor">Edit sensor</string>
     <string name="delete_sensor">Delete Sensor</string>
+    <string name="no_sensors_yet">No Sensors Yet</string>
 </resources>

@@ -1,6 +1,9 @@
 package com.enterprise.agino.ui.home.dashboard
 
 import androidx.lifecycle.*
+import com.enterprise.agino.common.Resource
+import com.enterprise.agino.data.repository.SensorRepository
+import com.enterprise.agino.domain.model.Sensor
 import com.enterprise.agino.data.repository.GraphRepository
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
@@ -11,6 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GraphViewModel @Inject constructor(
+    private val sensorRepository: SensorRepository,
     private val repository: GraphRepository
 ) : ViewModel() {
 
@@ -137,6 +141,11 @@ class GraphViewModel @Inject constructor(
         )
     }
 
+    fun getSensors(): LiveData<Resource<List<Sensor>>> {
+//        TODO: Get real field ID
+        return sensorRepository.getSensors("FAKE ID").asLiveData()
+    }
+
     fun populateGraphData() {
         setupTemperatureGraphData()
         setupSnowDepthGraphData()
@@ -144,8 +153,8 @@ class GraphViewModel @Inject constructor(
         setupWindGraphData()
     }
 
-
     fun retry() {
         _graphDataSignal.value = Unit
     }
+
 }

@@ -10,3 +10,8 @@ fun millisToDateString(millis: Long): String {
     }
     return formatter.format(calendar.time)
 }
+
+fun utcToDateString(date: String): String {
+    val result = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US).parse(date)
+    return SimpleDateFormat("E", Locale.US).format(result!!)
+}

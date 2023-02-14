@@ -12,9 +12,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import com.enterprise.agino.R
+import com.enterprise.agino.common.Resource
 import com.enterprise.agino.databinding.FragmentGraphScreenBinding
-import com.enterprise.agino.domain.model.Sensor
+import com.enterprise.agino.utils.gone
 import com.enterprise.agino.utils.millisToDateString
+import com.enterprise.agino.utils.show
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend
@@ -53,12 +55,12 @@ class GraphFragment : Fragment(), SensorsAdapter.OnSensorOptionsClickListener {
         }
 
         setupFieldPopupOptionsListener()
-
         setupTemperatureObserver()
         setupPrecipitationObserver()
         setupSnowDepthObserver()
         setupWindObserver()
-        setupSensorAdapter()
+        setupSensorsList()
+
         return binding.root
     }
 
@@ -86,7 +88,6 @@ class GraphFragment : Fragment(), SensorsAdapter.OnSensorOptionsClickListener {
             }
         }
     }
-
 
     private fun setupPrecipitationObserver() {
         viewModel.precipitationGraphDataSet.observe(viewLifecycleOwner) {
@@ -136,32 +137,6 @@ class GraphFragment : Fragment(), SensorsAdapter.OnSensorOptionsClickListener {
                 invalidate()
             }
         }
-    }
-
-    private fun setupSensorAdapter() {
-        adapter = SensorsAdapter(this)
-        binding.sensorsList.adapter = adapter
-
-        val data = listOf(
-            Sensor(
-                "45678987654", null, "", 0, 97,
-                "", "", 0.0, 0.0, 0, ""
-            ),
-            Sensor(
-                "98765445678", null, "", 0, 87,
-                "", "", 0.0, 0.0, 0, ""
-            ),
-            Sensor(
-                "76544898567", null, "", 0, 57,
-                "", "", 0.0, 0.0, 0, ""
-            ),
-            Sensor(
-                "67898575446", null, "", 0, 77,
-                "", "", 0.0, 0.0, 0, ""
-            )
-        )
-
-        adapter.setItems(data)
     }
 
     private fun styleBarGraph(chart: BarChart, days: List<String>) {
@@ -258,4 +233,32 @@ class GraphFragment : Fragment(), SensorsAdapter.OnSensorOptionsClickListener {
             popup.show()
         }
     }
+
+    private fun setupSensorsList() {
+        viewModel.viewModelScope.launch {
+            viewModel.getSensors().observe(viewLifecycleOwner) { sensors ->
+                when (sensors) {
+                    is Resource.Success -> {
+                        if (sensors.value!!.isEmpty()) {
+                            binding.noSensorsText.show()
+                            binding.sensorProgressBar.gone()
+                        } else {
+                            binding.noSensorsText.gone()
+                            binding.sensorProgressBar.gone()
+                            adapter.setItems(sensors.value)
+                        }
+                    }
+                    is Resource.Loading -> {
+                        binding.noSensorsText.gone()
+                        binding.sensorProgressBar.show()
+                    }
+                    else -> {
+                        binding.noSensorsText.gone()
+                        binding.sensorProgressBar.gone()
+                    }
+                }
+            }
+        }
+    }
+
 }
