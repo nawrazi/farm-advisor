@@ -40,7 +40,7 @@ class HomeFragmentTest {
         onView(withId(R.id.addFieldButton)).perform(click())
 
         verify(navController).navigate(
-            HomeFragmentDirections.actionHomeFragmentToNewFieldFragment2()
+            HomeFragmentDirections.actionHomeFragmentToNewFieldFragment2("")
         )
     }
 }
