@@ -7,13 +7,15 @@
 
     <TextView
         android:id="@+id/titleText3"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
         android:padding="8dp"
         android:text="@string/lorem_ipsum"
-        android:textAllCaps="true"
-        android:textSize="8dp"
-        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
@@ -22,11 +24,11 @@
         android:id="@+id/titleText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="8dp"
-        android:padding="8dp"
+        android:layout_marginTop="20dp"
         android:layout_weight="1"
+        android:padding="8dp"
         android:text="@string/fragment_profile_phone"
-        android:textAllCaps="true"
+        android:textAllCaps="false"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -63,25 +65,30 @@
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/terms_and_condtions"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/round_corner_with_stroke"
+        android:focusable="auto"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/titleText3">
+        app:layout_constraintTop_toBottomOf="@+id/divider2">
 
         <TextView
             android:id="@+id/fieldName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:layout_marginStart="20dp"
+            android:text="@string/fragment_onboarding2_terms_and_conditions"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/viewDetail"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/fragment_onboarding2_terms_and_conditions" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/viewDetail"
@@ -101,7 +108,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/round_corner_with_stroke"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -109,11 +118,16 @@
 
         <TextView
             android:id="@+id/tvPhoneNo"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            android:textSize="12dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="12dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/fragment_profile_sample_phone" />
@@ -126,6 +140,30 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="16dp" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="20dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/titleText3" />
+
+    <Button
+        android:id="@+id/delete_account_button"
+        style="@style/TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:text="Delete Account"
+        android:textAllCaps="false"
+        android:textColor="@color/design_default_color_error"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

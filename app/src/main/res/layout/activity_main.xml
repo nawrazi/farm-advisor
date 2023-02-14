@@ -58,7 +58,7 @@
             android:layout_height="wrap_content" />
 
         <ImageButton
-            android:id="@+id/imageButton5"
+            android:id="@+id/user_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"

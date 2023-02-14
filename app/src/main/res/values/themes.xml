@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.Agino" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Agino" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/forest_green</item>
         <item name="colorPrimaryVariant">@color/forest_green</item>

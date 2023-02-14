@@ -1,16 +1,21 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
-    <style name="Theme.Agino" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Agino" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/forest_green</item>
         <item name="colorPrimaryVariant">@color/forest_green</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/forest_green</item>
-        <item name="colorSecondaryVariant">@color/forest_green</item>
+        <item name="colorSecondary">@color/neon_green</item>
+        <item name="colorSecondaryVariant">@color/neon_green</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="materialButtonStyle">@style/SolidButton</item>
+        <item name="textInputStyle">@style/TextInputLayoutStyle</item>
+
+        <item name="strokeColor">@color/light_grey</item>
+        <item name="android:windowBackground">@color/alabaster</item>
     </style>
 </resources>
