@@ -71,11 +71,21 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
     implementation "androidx.datastore:datastore-preferences:1.0.0"
+    debugImplementation 'androidx.fragment:fragment-testing:1.5.5'
 
     // Tests
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation "androidx.test:runner:1.5.2"
+    androidTestImplementation "androidx.test:rules:1.5.0"
+    testImplementation 'com.google.dagger:hilt-android-testing:2.44'
+    kaptTest 'com.google.dagger:hilt-android-compiler:2.44'
+    testAnnotationProcessor 'com.google.dagger:hilt-android-compiler:2.44'
+    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.44'
+    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.44'
+    androidTestAnnotationProcessor 'com.google.dagger:hilt-android-compiler:2.44'
+    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
 
     // Retrofit
     def retrofitVersion = "2.9.0"
