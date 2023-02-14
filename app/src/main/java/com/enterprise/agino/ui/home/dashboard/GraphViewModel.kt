@@ -141,9 +141,8 @@ class GraphViewModel @Inject constructor(
         )
     }
 
-    fun getSensors(): LiveData<Resource<List<Sensor>>> {
-//        TODO: Get real field ID
-        return sensorRepository.getSensors("FAKE ID").asLiveData()
+    fun getSensors(fieldId: String): LiveData<Resource<List<Sensor>>> {
+        return sensorRepository.getSensors(fieldId).asLiveData()
     }
 
     fun populateGraphData() {
