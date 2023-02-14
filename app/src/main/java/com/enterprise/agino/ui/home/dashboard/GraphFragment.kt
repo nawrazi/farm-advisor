@@ -11,6 +11,7 @@ import androidx.core.util.component2
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.navArgs
 import com.enterprise.agino.R
 import com.enterprise.agino.common.Resource
 import com.enterprise.agino.databinding.FragmentGraphScreenBinding
@@ -35,6 +36,7 @@ class GraphFragment : Fragment(), SensorsAdapter.OnSensorOptionsClickListener {
     private var _binding: FragmentGraphScreenBinding? = null
     private val binding get() = _binding!!
     private val viewModel: GraphViewModel by viewModels()
+    private val navArgs: GraphFragmentArgs by navArgs()
     private lateinit var adapter: SensorsAdapter
 
     override fun onCreateView(
@@ -236,7 +238,7 @@ class GraphFragment : Fragment(), SensorsAdapter.OnSensorOptionsClickListener {
 
     private fun setupSensorsList() {
         viewModel.viewModelScope.launch {
-            viewModel.getSensors().observe(viewLifecycleOwner) { sensors ->
+            viewModel.getSensors(navArgs.fieldId).observe(viewLifecycleOwner) { sensors ->
                 when (sensors) {
                     is Resource.Success -> {
                         if (sensors.value!!.isEmpty()) {
