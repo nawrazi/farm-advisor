@@ -1,15 +1,10 @@
 package com.enterprise.agino.ui.first_time.field
 
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.enterprise.agino.common.Resource
-import com.enterprise.agino.data.repository.FarmRepository
 import com.enterprise.agino.data.repository.FieldRepository
-import com.enterprise.agino.domain.model.form.AddFarmForm
 import com.enterprise.agino.domain.model.form.AddFieldForm
-import com.tomtom.sdk.search.reversegeocoder.ReverseGeocoderResponse
+import com.enterprise.agino.utils.reEmit
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -18,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class NewFieldViewModel @Inject constructor(
     private val fieldRepository: FieldRepository,
-    private val farmRepository: FarmRepository,
+    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     val fieldName = MutableLiveData<String>()
     val altitude = MutableLiveData<String>()
@@ -56,18 +51,10 @@ class NewFieldViewModel @Inject constructor(
     }
 
     private fun submit(): Flow<Resource<Unit>> = flow {
-
-        var farmId = farmRepository.getFarm().first()?.farmID ?: ""
+        val farmId = savedStateHandle.get<String>("farmId")!!
 
         fieldRepository.addField(AddFieldForm(fieldName.value!!, altitude.value!!.toInt(), farmId))
-            .transform<Resource<Unit>, Resource<Unit>> { resource ->
-                when (resource) {
-                    is Resource.Loading -> this@flow.emit(Resource.Loading())
-                    is Resource.Success -> this@flow.emit(Resource.Success(data = Unit))
-                    is Resource.Error ->
-                        this@flow.emit(Resource.Error(resource.message ?: "Unknown error"))
-                }
-            }.collect()
+            .reEmit(this).collect()
     }
 
     fun submitForm() {

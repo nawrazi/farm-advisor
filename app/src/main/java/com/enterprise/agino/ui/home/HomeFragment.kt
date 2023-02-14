@@ -54,7 +54,19 @@ class HomeFragment : Fragment() {
             binding.fieldRv.layoutManager = LinearLayoutManager(context)
 
             addFieldButton.setOnClickListener {
-                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToNewFieldFragment2())
+                findNavController().navigate(
+                    HomeFragmentDirections.actionHomeFragmentToNewFieldFragment2(
+                        viewModel!!.farm.value!!.farmID
+                    )
+                )
+            }
+
+            overlayFirstAddField.addFieldButton.setOnClickListener {
+                findNavController().navigate(
+                    HomeFragmentDirections.actionHomeFragmentToNewFieldFragment2(
+                        viewModel!!.farm.value!!.farmID
+                    )
+                )
             }
 
             firstTimeOverlay.createFarmButton.setOnClickListener {
@@ -62,7 +74,7 @@ class HomeFragment : Fragment() {
             }
         }
 
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launchWhenResumed {
             launch {
                 viewModel.errorMessage.collect {
                     showErrorSnackBar(it, binding.root)

@@ -46,12 +46,22 @@ class FarmRepository @Inject constructor(
                     reverseGeocoderResponse = it
                 }
 
+            val userResult = buildResource {
+                return@buildResource userService.getUser(Firebase.auth.currentUser!!.uid).body()!!
+            }
+
+            if (userResult is Resource.Error) {
+                emit(Resource.Error(userResult.message))
+                return@flow
+            }
+
+            val userId = userResult.value!!.userID
             val result = buildResource {
                 val address = reverseGeocoderResponse?.places?.get(0)?.place?.address
 
                 val response = farmService.addFarm(
                     AddFarmRequestDto(
-                        userId = "userId",
+                        userId = userId,
                         name = addFarmForm.name,
                         postcode = address?.postalCode ?: "",
                         city = address?.municipality ?: "",
@@ -81,6 +91,7 @@ class FarmRepository @Inject constructor(
         }
 
         if (userResult is Resource.Success && userResult.value!!.farms == null) {
+            localPrefStore.setFarm(null)
             emit(Resource.Success(Unit))
             return@flow
         }
@@ -89,7 +100,7 @@ class FarmRepository @Inject constructor(
             if (userResult.value!!.farms == null || userResult.value.farms!!.isEmpty()) {
                 return@buildResource null
             }
-            return@buildResource farmService.getFarm(userResult.value.farms!![0].farmID).body()!!
+            return@buildResource farmService.getFarm(userResult.value.farms[0].farmID).body()!!
         }
 
         if (farmResult is Resource.Error) {

@@ -34,9 +34,9 @@ class NewFieldFragment : Fragment() {
     }
 
     private fun setupListeners() {
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launchWhenResumed {
             launch {
-                viewModel.formSubmissionResult.collect() {
+                viewModel.formSubmissionResult.collect {
                     if (it is Resource.Success) {
                         showSuccessSnackBar("Successfully added field", binding.root)
                         findNavController().popBackStack()
@@ -44,11 +44,6 @@ class NewFieldFragment : Fragment() {
                         showErrorSnackBar("Error adding field: ${it.message}", binding.root)
                     }
                 }
-            }
-        }
-
-        binding.apply {
-            createFieldButton.setOnClickListener {
             }
         }
     }

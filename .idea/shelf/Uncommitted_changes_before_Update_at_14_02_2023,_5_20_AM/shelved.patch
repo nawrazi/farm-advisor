@@ -1,0 +1,19 @@
+Index: app/src/main/java/com/enterprise/agino/common/Constants.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.enterprise.agino.common\n\nimport androidx.datastore.preferences.core.stringPreferencesKey\n\nobject Constants {\n    const val BASE_URL = \"http://192.167.4:7071/\"\n    const val MAP_KEY = \"QKG5sZdSQCFSitlPKDsIHZ9FV7ZGZg4g\"\n    const val GRAPH_API = \"https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=05&lon=10&altitude=100\"\n\n    val FARM_PREF_KEY by lazy { stringPreferencesKey(\"farm\") }\n    const val USER_PREFERENCES_NAME = \"user_prefs\"\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/enterprise/agino/common/Constants.kt b/app/src/main/java/com/enterprise/agino/common/Constants.kt
+--- a/app/src/main/java/com/enterprise/agino/common/Constants.kt	(revision d24753af45e6b78331343d24c027494460d1ae9c)
++++ b/app/src/main/java/com/enterprise/agino/common/Constants.kt	(date 1676340060515)
+@@ -3,7 +3,7 @@
+ import androidx.datastore.preferences.core.stringPreferencesKey
+ 
+ object Constants {
+-    const val BASE_URL = "http://192.167.4:7071/"
++    const val BASE_URL = "http://10.0.2.2:7071/"
+     const val MAP_KEY = "QKG5sZdSQCFSitlPKDsIHZ9FV7ZGZg4g"
+     const val GRAPH_API = "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=05&lon=10&altitude=100"
+ 

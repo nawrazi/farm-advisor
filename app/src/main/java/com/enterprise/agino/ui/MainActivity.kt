@@ -29,6 +29,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupNavigation()
+
+        binding.userButton.setOnClickListener {
+            findNavController(R.id.nav_host).navigate(R.id.profileFragment)
+        }
+
         if (savedInstanceState == null)
             startDestination = if (Firebase.auth.currentUser != null) {
                 R.id.homeFragment
@@ -64,7 +69,8 @@ class MainActivity : AppCompatActivity() {
             R.id.phoneNumberSignUpFragment,
             R.id.verificationCodeFragment,
             R.id.addNewSensorFragment,
-            R.id.helpFragment
+            R.id.helpFragment,
+            R.id.profileFragment,
         )
         navController.addOnDestinationChangedListener { _: NavController, destination: NavDestination, _: Bundle? ->
             if (fragmentsWithoutAppbar.contains(destination.id)) binding.toolbar.gone()

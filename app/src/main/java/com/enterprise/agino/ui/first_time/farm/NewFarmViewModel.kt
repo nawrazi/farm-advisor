@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.enterprise.agino.common.Resource
 import com.enterprise.agino.data.repository.FarmRepository
 import com.enterprise.agino.domain.model.form.AddFarmForm
+import com.enterprise.agino.utils.reEmit
 import com.tomtom.sdk.location.GeoPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -53,14 +54,7 @@ class NewFarmViewModel @Inject constructor(private val farmRepository: FarmRepos
 
     private fun submit(): Flow<Resource<Unit>> = flow {
         farmRepository.createFarm(AddFarmForm(farmName.value!!, farmAddress.value!!))
-            .transform<Resource<Unit>, Resource<Unit>> { resource ->
-                when (resource) {
-                    is Resource.Loading -> this@flow.emit(Resource.Loading())
-                    is Resource.Success -> this@flow.emit(Resource.Success(data = Unit))
-                    is Resource.Error ->
-                        this@flow.emit(Resource.Error(resource.message ?: "Unknown error"))
-                }
-            }.collect()
+            .reEmit(this).collect()
     }
 
     fun submitForm() {
