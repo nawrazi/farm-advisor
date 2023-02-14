@@ -2,9 +2,9 @@ package com.enterprise.agino.ui.home.dashboard
 
 import androidx.lifecycle.*
 import com.enterprise.agino.common.Resource
+import com.enterprise.agino.data.repository.GraphRepository
 import com.enterprise.agino.data.repository.SensorRepository
 import com.enterprise.agino.domain.model.Sensor
-import com.enterprise.agino.data.repository.GraphRepository
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.data.Entry
@@ -73,7 +73,7 @@ class GraphViewModel @Inject constructor(
 
         val data = graphData.value?.value?.timeStamps
         data?.let {
-            for (i in data.indices) {
+            for (i in 0..7) {
                 snowDepthDays.add(data[i].time)
                 snowDepthEntriesSnow.add(
                     BarEntry(i.toFloat(), data[i].humidity.toFloat())
@@ -94,7 +94,7 @@ class GraphViewModel @Inject constructor(
 
         val data = graphData.value?.value?.timeStamps
         data?.let {
-            for (i in data.indices) {
+            for (i in 0..7) {
                 temperatureDays.add(data[i].time)
                 temperatureEntries.add(
                     Entry(i.toFloat(), data[i].temperature.toFloat())
@@ -109,7 +109,7 @@ class GraphViewModel @Inject constructor(
 
         val data = graphData.value?.value?.timeStamps
         data?.let {
-            for (i in data.indices) {
+            for (i in 0..7) {
                 precipitationDays.add(data[i].time)
                 precipitationEntries.add(
                     BarEntry(i.toFloat(), data[i].pressure.toFloat())
@@ -124,7 +124,7 @@ class GraphViewModel @Inject constructor(
 
         val data = graphData.value?.value?.timeStamps
         data?.let {
-            for (i in data.indices) {
+            for (i in 0..7) {
                 windDays.add(data[i].time)
                 windEntriesMaxGust.add(
                     Entry(i.toFloat(), data[i].wind.toFloat())
