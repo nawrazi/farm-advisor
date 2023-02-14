@@ -12,13 +12,13 @@ data class AddSensorRequest(
     val fieldId: String,
     @SerializedName("optimalGDD")
     val defaultGDD: Int,
-    val sensorInstallationDate: Instant,
-    val lastFieldCuttingDate: Instant,
+    val sensorInstallationDate: Date,
+    val lastFieldCuttingDate: Date,
 
     // NOTICE: These fields are required but not present in the form
-    val lastCommunication: String = "",
+    val lastCommunication: Date = Date(Instant.now().toEpochMilli()),
     val batteryStatus: Int = 100,
-    val cuttingDateTimeCalculated: String = "",
-    val lastForecastData: String = "",
-    val state: String = "working"
+    val cuttingDateTimeCalculated: Date = Date(Instant.now().toEpochMilli()),
+    val lastForecastData: Date = Date(Instant.now().toEpochMilli()),
+    val state: String = "Working"
 )

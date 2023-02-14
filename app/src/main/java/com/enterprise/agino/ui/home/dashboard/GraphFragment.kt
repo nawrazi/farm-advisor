@@ -2,7 +2,6 @@ package com.enterprise.agino.ui.home.dashboard
 
 import android.os.Bundle
 import android.text.InputType
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,7 @@ import androidx.core.util.component1
 import androidx.core.util.component2
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import com.enterprise.agino.R
 import com.enterprise.agino.common.Resource
 import com.enterprise.agino.databinding.FragmentGraphScreenBinding
@@ -50,6 +49,12 @@ class GraphFragment : Fragment(), SensorsAdapter.OnSensorOptionsClickListener {
             setOnClickListener { showDatePicker(this) }
         }
 
+        viewModel.viewModelScope.launch {
+            viewModel.graphData.observe(viewLifecycleOwner) {
+                viewModel.populateGraphData()
+            }
+        }
+
         setupFieldPopupOptionsListener()
 
         setupTemperatureObserver()
@@ -81,12 +86,11 @@ class GraphFragment : Fragment(), SensorsAdapter.OnSensorOptionsClickListener {
                 it.setDrawCircles(false)
                 it.lineWidth = 3f
                 it.mode = LineDataSet.Mode.CUBIC_BEZIER
-                styleLineGraph(this)
+                styleLineGraph(this, viewModel.temperatureDays)
                 invalidate()
             }
         }
     }
-
 
     private fun setupPrecipitationObserver() {
         viewModel.precipitationGraphDataSet.observe(viewLifecycleOwner) {
@@ -94,7 +98,7 @@ class GraphFragment : Fragment(), SensorsAdapter.OnSensorOptionsClickListener {
                 data = BarData(it)
                 it.color = resources.getColor(R.color.navy_blue, null)
                 data.setDrawValues(false)
-                styleBarGraph(this)
+                styleBarGraph(this, viewModel.precipitationDays)
                 invalidate()
             }
         }
@@ -116,7 +120,7 @@ class GraphFragment : Fragment(), SensorsAdapter.OnSensorOptionsClickListener {
                 avgWindSpeed.setDrawCircles(false)
                 avgWindSpeed.lineWidth = 3f
                 avgWindSpeed.mode = LineDataSet.Mode.CUBIC_BEZIER
-                styleLineGraph(this)
+                styleLineGraph(this, viewModel.windDays)
                 invalidate()
             }
         }
@@ -132,7 +136,7 @@ class GraphFragment : Fragment(), SensorsAdapter.OnSensorOptionsClickListener {
                 data = BarData(listOf(snowDepth, missingData))
 
                 data.setDrawValues(false)
-                styleBarGraph(this)
+                styleBarGraph(this, viewModel.snowDepthDays)
                 invalidate()
             }
         }
@@ -164,9 +168,9 @@ class GraphFragment : Fragment(), SensorsAdapter.OnSensorOptionsClickListener {
         adapter.setItems(data)
     }
 
-    private fun styleBarGraph(chart: BarChart) {
+    private fun styleBarGraph(chart: BarChart, days: List<String>) {
         // add the name of the days on top of x-axis
-        chart.xAxis.valueFormatter = IndexAxisValueFormatter(viewModel.days)
+        chart.xAxis.valueFormatter = IndexAxisValueFormatter(days)
 
         chart.apply {
             xAxis.setDrawGridLines(false)
@@ -184,14 +188,14 @@ class GraphFragment : Fragment(), SensorsAdapter.OnSensorOptionsClickListener {
             xAxis.granularity = 1f  // set the minimum distance between labels
             legend.yOffset = 10f  // move the legend up a bit
             setFitBars(true)
-            setVisibleXRangeMaximum(7f)
+//            setVisibleXRangeMaximum(7f)
 
         }
     }
 
-    private fun styleLineGraph(chart: LineChart) {
+    private fun styleLineGraph(chart: LineChart, days: List<String>) {
         // add the name of the days on top of x-axis
-        chart.xAxis.valueFormatter = IndexAxisValueFormatter(viewModel.days)
+        chart.xAxis.valueFormatter = IndexAxisValueFormatter(days)
 
         chart.apply {
             xAxis.setDrawGridLines(false)
@@ -208,7 +212,7 @@ class GraphFragment : Fragment(), SensorsAdapter.OnSensorOptionsClickListener {
             legend.form = Legend.LegendForm.CIRCLE
             xAxis.granularity = 1f  // set the minimum distance between labels
             legend.yOffset = 10f  // move the legend up a bit
-            setVisibleXRangeMaximum(7f)
+//            setVisibleXRangeMaximum(7f)
 
         }
     }
@@ -260,7 +264,7 @@ class GraphFragment : Fragment(), SensorsAdapter.OnSensorOptionsClickListener {
     }
 
     private fun setupSensorsList() {
-        lifecycleScope.launch {
+        viewModel.viewModelScope.launch {
             viewModel.getSensors().observe(viewLifecycleOwner) { sensors ->
                 when (sensors) {
                     is Resource.Success -> {
