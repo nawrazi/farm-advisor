@@ -15,8 +15,8 @@ import javax.inject.Inject
 @HiltViewModel
 class AddNewSensorViewModel @Inject constructor(
     private val sensorRepository: ISensorRepository, state: SavedStateHandle
-) :
-    ViewModel() {
+) : ViewModel() {
+    val searchResults = MutableLiveData<List<Pair<String, GeoPoint>>>()
     val serialNumber = MutableLiveData<String>()
     val location = MutableLiveData<GeoPoint>()
     val fieldId: String = state.get<String>("fieldId")!!

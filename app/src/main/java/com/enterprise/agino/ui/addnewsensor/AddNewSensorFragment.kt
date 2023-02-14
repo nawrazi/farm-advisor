@@ -6,9 +6,11 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -21,6 +23,7 @@ import com.enterprise.agino.common.Constants
 import com.enterprise.agino.common.Resource
 import com.enterprise.agino.databinding.FragmentAddNewSensorBinding
 import com.enterprise.agino.ui.view.OnScrollMapViewWrapperTouchListener
+import com.enterprise.agino.utils.afterTextChanged
 import com.enterprise.agino.utils.showErrorSnackBar
 import com.enterprise.agino.utils.showSuccessSnackBar
 import com.google.android.material.datepicker.CalendarConstraints
@@ -36,7 +39,13 @@ import com.tomtom.sdk.map.display.TomTomMap
 import com.tomtom.sdk.map.display.camera.CameraOptions
 import com.tomtom.sdk.map.display.style.*
 import com.tomtom.sdk.map.display.ui.MapFragment
+import com.tomtom.sdk.search.SearchCallback
+import com.tomtom.sdk.search.SearchOptions
+import com.tomtom.sdk.search.SearchResponse
+import com.tomtom.sdk.search.common.error.SearchFailure
+import com.tomtom.sdk.search.online.OnlineSearch
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.time.Duration.Companion.milliseconds
 
@@ -45,6 +54,7 @@ class AddNewSensorFragment : Fragment(), OnScrollMapViewWrapperTouchListener {
     private var _binding: FragmentAddNewSensorBinding? = null
     private val binding get() = _binding!!
     private val viewModel: AddNewSensorViewModel by viewModels()
+    private lateinit var map: TomTomMap
 
     private val locationPermissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -91,6 +101,12 @@ class AddNewSensorFragment : Fragment(), OnScrollMapViewWrapperTouchListener {
 
     private fun setupFlowListeners() {
         lifecycleScope.launchWhenCreated {
+            launch {
+                binding.locationInput.afterTextChanged {
+                    if (it.isNotEmpty()) searchLocation(it)
+                }
+            }
+
             viewModel.formSubmissionResult.collect { formResult ->
                 if (formResult is Resource.Success) {
                     showSuccessSnackBar("Successfully added sensor", binding.root)
@@ -103,6 +119,46 @@ class AddNewSensorFragment : Fragment(), OnScrollMapViewWrapperTouchListener {
                 }
             }
         }
+
+        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
+            requireContext(), R.layout.exposed_dropdown_item, arrayOf()
+        )
+        val textView = binding.locationInput
+        textView.setAdapter(adapter)
+
+        viewModel.searchResults.observe(viewLifecycleOwner) {
+            (textView.adapter as ArrayAdapter<*>).clear()
+            (textView.adapter as ArrayAdapter<String>).addAll(it.map { pair -> pair.first })
+            (textView.adapter as ArrayAdapter<*>).notifyDataSetChanged()
+            textView.showDropDown()
+
+            textView.setOnItemClickListener { _, _, idx, _ ->
+                textView.setText(viewModel.searchResults.value!![idx].first)
+                map.moveCamera(options = CameraOptions(position = viewModel.searchResults.value!![idx].second))
+            }
+        }
+    }
+
+    private fun searchLocation(query: String) {
+        val search = OnlineSearch.create(requireContext(), Constants.MAP_KEY)
+
+        val searchOptions = SearchOptions(query = query, limit = 5)
+        search.search(searchOptions, object : SearchCallback {
+            override fun onSuccess(result: SearchResponse) {
+                Log.i("TEXT Result", result.toString())
+                viewModel.searchResults.value = result.results.map {
+                    val fallbackName =
+                        "${it.place.coordinate.latitude}, ${it.place.coordinate.longitude}"
+                    Pair(
+                        it.place.address?.freeformAddress ?: fallbackName, it.place.coordinate
+                    )
+                }
+            }
+
+            override fun onFailure(failure: SearchFailure) {
+                Log.i("TEXT RESULT", "ERROR: ${failure.message}")
+            }
+        })
     }
 
     private fun setupCalendarInputs() {
@@ -163,6 +219,7 @@ class AddNewSensorFragment : Fragment(), OnScrollMapViewWrapperTouchListener {
         val mapFragment = MapFragment.newInstance(mapOptions)
 
         mapFragment.getMapAsync { tomtomMap: TomTomMap ->
+            map = tomtomMap
             tomtomMap.addCameraChangeListener {
                 viewModel.location.value = tomtomMap.cameraPosition.position
             }
@@ -237,8 +294,6 @@ class AddNewSensorFragment : Fragment(), OnScrollMapViewWrapperTouchListener {
                 )
             }
         }
-
-
     }
 
     override fun onDestroyView() {
