@@ -67,8 +67,7 @@ object AppModule {
     fun provideSensorRepository(
         sensorService: SensorService,
     ): ISensorRepository = com.enterprise.agino.data.repository.SensorRepository(
-        sensorService = sensorService,
-        Dispatchers.IO
+        sensorService = sensorService
     )
 
 

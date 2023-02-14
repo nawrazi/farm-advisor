@@ -10,14 +10,14 @@ import com.enterprise.agino.domain.model.AddSensorForm
 import com.enterprise.agino.domain.model.Sensor
 import com.enterprise.agino.domain.repository.ISensorRepository
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class SensorRepository @Inject constructor(
-    private val sensorService: SensorService,
-    private val ioDispatcher: CoroutineDispatcher
+    private val sensorService: SensorService
 ) : ISensorRepository {
 
     override fun addSensor(addSensorForm: AddSensorForm): Flow<Resource<Unit>> =
@@ -40,7 +40,7 @@ class SensorRepository @Inject constructor(
             }
 
             emit(result)
-        }.flowOn(ioDispatcher)
+        }.flowOn(Dispatchers.IO)
 
     override fun getSensors(id: String): Flow<Resource<List<Sensor>>> =
         networkBoundResource(
