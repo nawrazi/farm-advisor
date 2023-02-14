@@ -14,7 +14,6 @@ import androidx.lifecycle.viewModelScope
 import com.enterprise.agino.R
 import com.enterprise.agino.common.Resource
 import com.enterprise.agino.databinding.FragmentGraphScreenBinding
-import com.enterprise.agino.domain.model.Sensor
 import com.enterprise.agino.utils.gone
 import com.enterprise.agino.utils.millisToDateString
 import com.enterprise.agino.utils.show
@@ -56,14 +55,12 @@ class GraphFragment : Fragment(), SensorsAdapter.OnSensorOptionsClickListener {
         }
 
         setupFieldPopupOptionsListener()
-
         setupTemperatureObserver()
         setupPrecipitationObserver()
         setupSnowDepthObserver()
         setupWindObserver()
-        setupSensorAdapter()
-
         setupSensorsList()
+
         return binding.root
     }
 
@@ -140,32 +137,6 @@ class GraphFragment : Fragment(), SensorsAdapter.OnSensorOptionsClickListener {
                 invalidate()
             }
         }
-    }
-
-    private fun setupSensorAdapter() {
-        adapter = SensorsAdapter(this)
-        binding.sensorsList.adapter = adapter
-
-        val data = listOf(
-            Sensor(
-                "45678987654", null, "", 0, 97,
-                "", "", 0.0, 0.0, 0, ""
-            ),
-            Sensor(
-                "98765445678", null, "", 0, 87,
-                "", "", 0.0, 0.0, 0, ""
-            ),
-            Sensor(
-                "76544898567", null, "", 0, 57,
-                "", "", 0.0, 0.0, 0, ""
-            ),
-            Sensor(
-                "67898575446", null, "", 0, 77,
-                "", "", 0.0, 0.0, 0, ""
-            )
-        )
-
-        adapter.setItems(data)
     }
 
     private fun styleBarGraph(chart: BarChart, days: List<String>) {
