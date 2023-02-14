@@ -42,12 +42,9 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         val navController = findNavController(R.id.nav_host)
 
-        if (Firebase.auth.currentUser != null) {
-            navController.clearBackStack(R.id.navigation_graph)
-            navController.navigate(R.id.homeFragment)
-        } else {
-            navController.clearBackStack(R.id.navigation_graph)
-            navController.navigate(R.id.onBoarding1Fragment)
+        startDestination?.let {
+            navController.popBackStack(R.id.navigation_graph, true)
+            navController.navigate(it)
         }
     }
 
@@ -66,7 +63,8 @@ class MainActivity : AppCompatActivity() {
             R.id.onBoarding2Fragment,
             R.id.phoneNumberSignUpFragment,
             R.id.verificationCodeFragment,
-            R.id.addNewSensorFragment
+            R.id.addNewSensorFragment,
+            R.id.helpFragment
         )
         navController.addOnDestinationChangedListener { _: NavController, destination: NavDestination, _: Bundle? ->
             if (fragmentsWithoutAppbar.contains(destination.id)) binding.toolbar.gone()

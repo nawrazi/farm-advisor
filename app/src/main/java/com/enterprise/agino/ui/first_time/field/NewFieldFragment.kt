@@ -12,8 +12,10 @@ import com.enterprise.agino.common.Resource
 import com.enterprise.agino.databinding.FragmentNewFieldBinding
 import com.enterprise.agino.utils.showErrorSnackBar
 import com.enterprise.agino.utils.showSuccessSnackBar
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class NewFieldFragment : Fragment() {
     private var _binding: FragmentNewFieldBinding? = null
     private val binding get() = _binding!!

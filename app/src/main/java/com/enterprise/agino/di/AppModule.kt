@@ -19,6 +19,7 @@ import com.enterprise.agino.data.remote.api.*
 import com.enterprise.agino.domain.repository.IFarmRepository
 import com.enterprise.agino.domain.repository.ISensorRepository
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.tomtom.sdk.search.reversegeocoder.ReverseGeocoder
 import com.tomtom.sdk.search.reversegeocoder.online.OnlineReverseGeocoder
 import dagger.Module
@@ -35,12 +36,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
+
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
     @Provides
     @Singleton
-    fun provideGson() = Gson()
+    fun provideGson(): Gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
 
 
     @Provides

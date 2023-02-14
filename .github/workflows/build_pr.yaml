@@ -26,7 +26,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Create empty local.properties
-        run: echo  > ./local.properties
+        run: echo "storeFile=keystore/agino_key.jks \nstorePassword=${{ secrets.SIGNING_PASSWORD }} \nkeyAlias=${{ secrets.SIGNING_PASSWORD }} \nkeyPassword=${{ secrets.SIGNING_PASSWORD }}" > ./local.properties
 
       - name: Run Debug Tests
         run: ./gradlew testDebugUnitTest --continue

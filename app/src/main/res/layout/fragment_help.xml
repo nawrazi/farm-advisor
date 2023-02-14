@@ -42,8 +42,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="FAQ"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
@@ -58,9 +59,10 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvFaq"
-        tools:layout_editor_absoluteX="-16dp">
+        tools:listitem="@layout/question_item">
 
     </androidx.recyclerview.widget.RecyclerView>
 

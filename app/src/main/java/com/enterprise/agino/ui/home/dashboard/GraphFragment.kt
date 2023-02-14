@@ -5,6 +5,7 @@ import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.util.component1
 import androidx.core.util.component2
 import androidx.fragment.app.Fragment
@@ -28,7 +29,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 @AndroidEntryPoint
-class GraphFragment : Fragment() {
+class GraphFragment : Fragment(), SensorsAdapter.OnSensorOptionsClickListener {
     private var _binding: FragmentGraphScreenBinding? = null
     private val binding get() = _binding!!
     private val viewModel: GraphViewModel by viewModels()
@@ -51,13 +52,22 @@ class GraphFragment : Fragment() {
             }
         }
 
+        setupFieldPopupOptionsListener()
+
         setupTemperatureObserver()
         setupPrecipitationObserver()
         setupSnowDepthObserver()
         setupWindObserver()
-
         setupSensorAdapter()
         return binding.root
+    }
+
+    private fun setupFieldPopupOptionsListener() {
+        binding.optionsField.setOnClickListener {
+            val popup = PopupMenu(requireContext(), it)
+            popup.menuInflater.inflate(R.menu.field_popup_menu, popup.menu)
+            popup.show()
+        }
     }
 
     private fun setupTemperatureObserver() {
@@ -129,7 +139,7 @@ class GraphFragment : Fragment() {
     }
 
     private fun setupSensorAdapter() {
-        adapter = SensorsAdapter()
+        adapter = SensorsAdapter(this)
         binding.sensorsList.adapter = adapter
 
         val data = listOf(
@@ -239,5 +249,13 @@ class GraphFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onSensorOptionsClick(holder: SensorsAdapter.ViewHolder) {
+        holder.options.setOnClickListener {
+            val popup = PopupMenu(requireContext(), it)
+            popup.menuInflater.inflate(R.menu.sensor_popup_menu, popup.menu)
+            popup.show()
+        }
     }
 }
