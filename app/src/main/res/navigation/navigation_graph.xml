@@ -47,6 +47,10 @@
             app:destination="@id/verificationCodeFragment" />
         <argument android:name="phoneNumber"
             app:argType="string" />
+        <argument
+            android:name="showOnly"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/phoneNumberSignUpFragment"
@@ -87,11 +91,6 @@
         android:label="ResetSensorFragment"
         tools:layout="@layout/fragment_reset_sensor" />
     <fragment
-        android:id="@+id/helpFragment"
-        android:name="com.enterprise.agino.ui.help.HelpFragment"
-        android:label="HelpFragment"
-        tools:layout="@layout/fragment_help" />
-    <fragment
         android:id="@+id/newFieldFragment"
         android:name="com.enterprise.agino.ui.first_time.field.NewFieldFragment"
         android:label="NewFieldFragment"
@@ -122,4 +121,20 @@
         <argument android:name="fieldId"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.enterprise.agino.ui.profile.ProfileFragment"
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_onBoarding1Fragment"
+            app:destination="@id/onBoarding1Fragment"
+            app:popUpTo="@id/navigation_graph" />
+        <action
+            android:id="@+id/action_profileFragment_to_onBoarding2Fragment"
+            app:destination="@id/onBoarding2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="com.enterprise.agino.ui.help.HelpFragment"
+        android:label="HelpFragment" />
 </navigation>

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.enterprise.agino.databinding.FragmentTermsAndConditionsBinding
+import com.enterprise.agino.utils.gone
 
 class TermsAndConditionsFragment : Fragment() {
     private var _binding: FragmentTermsAndConditionsBinding? = null
@@ -18,6 +19,10 @@ class TermsAndConditionsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentTermsAndConditionsBinding.inflate(inflater, container, false)
+
+        if (args.showOnly) {
+            binding.bottomLayout.gone()
+        }
 
         setupListeners()
         return binding.root
