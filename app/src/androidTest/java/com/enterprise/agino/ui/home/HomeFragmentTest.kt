@@ -43,4 +43,20 @@ class HomeFragmentTest {
             HomeFragmentDirections.actionHomeFragmentToNewFieldFragment2("")
         )
     }
+
+
+    @Test
+    fun clickAddFieldButton_navigateToFarmFragment() {
+        val navController = mock(NavController::class.java)
+
+        launchFragmentInHiltContainer<HomeFragment> {
+            Navigation.setViewNavController(requireView(), navController)
+        }
+
+        onView(withId(R.id.create_farm_button)).perform(click())
+
+        verify(navController).navigate(
+            HomeFragmentDirections.actionHomeFragmentToNewFarmFragment()
+        )
+    }
 }
