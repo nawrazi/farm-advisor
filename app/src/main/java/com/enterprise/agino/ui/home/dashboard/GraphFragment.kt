@@ -2,6 +2,7 @@ package com.enterprise.agino.ui.home.dashboard
 
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +11,14 @@ import androidx.core.util.component1
 import androidx.core.util.component2
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.enterprise.agino.R
+import com.enterprise.agino.common.Resource
 import com.enterprise.agino.databinding.FragmentGraphScreenBinding
 import com.enterprise.agino.domain.model.Sensor
+import com.enterprise.agino.utils.gone
 import com.enterprise.agino.utils.millisToDateString
+import com.enterprise.agino.utils.show
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend
@@ -24,6 +29,7 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.google.android.material.datepicker.*
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.util.*
 
 @AndroidEntryPoint
@@ -51,6 +57,8 @@ class GraphFragment : Fragment(), SensorsAdapter.OnSensorOptionsClickListener {
         setupSnowDepthObserver()
         setupWindObserver()
         setupSensorAdapter()
+
+        setupSensorsList()
         return binding.root
     }
 
@@ -250,4 +258,32 @@ class GraphFragment : Fragment(), SensorsAdapter.OnSensorOptionsClickListener {
             popup.show()
         }
     }
+
+    private fun setupSensorsList() {
+        lifecycleScope.launch {
+            viewModel.getSensors().observe(viewLifecycleOwner) { sensors ->
+                when (sensors) {
+                    is Resource.Success -> {
+                        if (sensors.value!!.isEmpty()) {
+                            binding.noSensorsText.show()
+                            binding.sensorProgressBar.gone()
+                        } else {
+                            binding.noSensorsText.gone()
+                            binding.sensorProgressBar.gone()
+                            adapter.setItems(sensors.value)
+                        }
+                    }
+                    is Resource.Loading -> {
+                        binding.noSensorsText.gone()
+                        binding.sensorProgressBar.show()
+                    }
+                    else -> {
+                        binding.noSensorsText.gone()
+                        binding.sensorProgressBar.gone()
+                    }
+                }
+            }
+        }
+    }
+
 }

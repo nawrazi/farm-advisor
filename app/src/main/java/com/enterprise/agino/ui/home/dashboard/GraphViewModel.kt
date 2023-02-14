@@ -3,13 +3,22 @@ package com.enterprise.agino.ui.home.dashboard
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import com.enterprise.agino.R
+import com.enterprise.agino.common.Resource
+import com.enterprise.agino.data.repository.SensorRepository
+import com.enterprise.agino.domain.model.Sensor
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineDataSet
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class GraphViewModel() : ViewModel() {
+@HiltViewModel
+class GraphViewModel @Inject constructor(
+    private val sensorRepository: SensorRepository
+) : ViewModel() {
 
     // temperature graph dataset
     private val temperatureEntries = mutableListOf<Entry>()
@@ -126,4 +135,10 @@ class GraphViewModel() : ViewModel() {
             LineDataSet(windEntriesAvgWindSpeed, "Average Wind Speed")
         )
     }
+
+    fun getSensors(): LiveData<Resource<List<Sensor>>> {
+//        TODO: Get real field ID
+        return sensorRepository.getSensors("FAKE ID").asLiveData()
+    }
+
 }
