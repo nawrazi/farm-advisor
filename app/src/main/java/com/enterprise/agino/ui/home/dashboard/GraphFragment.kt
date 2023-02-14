@@ -9,6 +9,7 @@ import androidx.core.util.component1
 import androidx.core.util.component2
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import com.enterprise.agino.R
 import com.enterprise.agino.databinding.FragmentGraphScreenBinding
 import com.enterprise.agino.domain.model.Sensor
@@ -23,6 +24,7 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.google.android.material.datepicker.*
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.util.*
 
 @AndroidEntryPoint
@@ -41,6 +43,12 @@ class GraphFragment : Fragment() {
         binding.dateInput.apply {
             inputType = InputType.TYPE_NULL
             setOnClickListener { showDatePicker(this) }
+        }
+
+        viewModel.viewModelScope.launch {
+            viewModel.graphData.observe(viewLifecycleOwner) {
+                viewModel.populateGraphData()
+            }
         }
 
         setupTemperatureObserver()
@@ -63,7 +71,7 @@ class GraphFragment : Fragment() {
                 it.setDrawCircles(false)
                 it.lineWidth = 3f
                 it.mode = LineDataSet.Mode.CUBIC_BEZIER
-                styleLineGraph(this)
+                styleLineGraph(this, viewModel.temperatureDays)
                 invalidate()
             }
         }
@@ -76,7 +84,7 @@ class GraphFragment : Fragment() {
                 data = BarData(it)
                 it.color = resources.getColor(R.color.navy_blue, null)
                 data.setDrawValues(false)
-                styleBarGraph(this)
+                styleBarGraph(this, viewModel.precipitationDays)
                 invalidate()
             }
         }
@@ -98,7 +106,7 @@ class GraphFragment : Fragment() {
                 avgWindSpeed.setDrawCircles(false)
                 avgWindSpeed.lineWidth = 3f
                 avgWindSpeed.mode = LineDataSet.Mode.CUBIC_BEZIER
-                styleLineGraph(this)
+                styleLineGraph(this, viewModel.windDays)
                 invalidate()
             }
         }
@@ -114,7 +122,7 @@ class GraphFragment : Fragment() {
                 data = BarData(listOf(snowDepth, missingData))
 
                 data.setDrawValues(false)
-                styleBarGraph(this)
+                styleBarGraph(this, viewModel.snowDepthDays)
                 invalidate()
             }
         }
@@ -146,9 +154,9 @@ class GraphFragment : Fragment() {
         adapter.setItems(data)
     }
 
-    private fun styleBarGraph(chart: BarChart) {
+    private fun styleBarGraph(chart: BarChart, days: List<String>) {
         // add the name of the days on top of x-axis
-        chart.xAxis.valueFormatter = IndexAxisValueFormatter(viewModel.days)
+        chart.xAxis.valueFormatter = IndexAxisValueFormatter(days)
 
         chart.apply {
             xAxis.setDrawGridLines(false)
@@ -166,14 +174,14 @@ class GraphFragment : Fragment() {
             xAxis.granularity = 1f  // set the minimum distance between labels
             legend.yOffset = 10f  // move the legend up a bit
             setFitBars(true)
-            setVisibleXRangeMaximum(7f)
+//            setVisibleXRangeMaximum(7f)
 
         }
     }
 
-    private fun styleLineGraph(chart: LineChart) {
+    private fun styleLineGraph(chart: LineChart, days: List<String>) {
         // add the name of the days on top of x-axis
-        chart.xAxis.valueFormatter = IndexAxisValueFormatter(viewModel.days)
+        chart.xAxis.valueFormatter = IndexAxisValueFormatter(days)
 
         chart.apply {
             xAxis.setDrawGridLines(false)
@@ -190,7 +198,7 @@ class GraphFragment : Fragment() {
             legend.form = Legend.LegendForm.CIRCLE
             xAxis.granularity = 1f  // set the minimum distance between labels
             legend.yOffset = 10f  // move the legend up a bit
-            setVisibleXRangeMaximum(7f)
+//            setVisibleXRangeMaximum(7f)
 
         }
     }
